@@ -1519,21 +1519,26 @@ nav,
 }
 
 .hero {
-  min-height: 92vh;
+  min-height: 70vh;
   align-items: center;
-  padding-top: 110px;
+  padding-top: 120px;
 }
 .hero-bg {
+  position: absolute;
+  inset: 0;
   background:
-    linear-gradient(120deg, rgba(251,250,246,0.92) 0%, rgba(242,239,231,0.72) 42%, rgba(111,127,104,0.22) 100%),
-    url("https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=1800&q=85") center/cover;
+    linear-gradient(120deg, rgba(251,250,246,0.3) 0%, rgba(251,250,246,0.1) 50%, rgba(23,19,18,0.05) 100%),
+    url("../assets/heroghc.jpg") center/cover no-repeat;
+  z-index: -1;
 }
 .hero-bg::before {
-  background: linear-gradient(90deg, rgba(251,250,246,0.92), rgba(251,250,246,0.58) 48%, rgba(23,19,18,0.2));
+  background: linear-gradient(90deg, rgba(251,250,246,0.4), transparent);
+  display: block; content: ''; position: absolute; inset: 0;
 }
 .hero-grid {
-  min-height: calc(92vh - 130px);
+  min-height: calc(70vh - 130px);
   align-items: center;
+  grid-template-columns: 1fr;
 }
 .hero-text {
   max-width: 620px;
@@ -1995,9 +2000,7 @@ select.form-control { appearance: auto; }
 /* ── Customize Your Candle Suite ── */
 .custom-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  max-width: 800px;
-  margin-inline: auto;
+  grid-template-columns: 1fr; /* Single column now */
   gap: 60px;
   align-items: start;
   margin-top: 40px;
@@ -2090,43 +2093,4 @@ select.form-control { appearance: auto; }
   margin-top: 32px;
   padding-top: 32px;
   border-top: 1px solid var(--border);
-}
-
-.preview-card {
-  position: sticky;
-  top: 112px;
-  background: var(--ivory);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-}
-.preview-header {
-  padding: 24px;
-  background: var(--cream);
-  border-bottom: 1px solid var(--border);
-  text-align: center;
-}
-.preview-content { padding: 24px; }
-.preview-img-box {
-  aspect-ratio: 1;
-  background: var(--cashmere);
-  border-radius: 6px;
-  overflow: hidden;
-  margin-bottom: 24px;
-  box-shadow: var(--shadow-sm);
-}
-.preview-list { display: flex; flex-direction: column; gap: 14px; }
-.preview-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 8px;
-}
-.preview-item span { color: var(--muted); text-transform: uppercase; font-size: 9px; letter-spacing: 0.12em; }
-.preview-item strong { color: var(--espresso); font-size: 14px; font-weight: 400; }
-
-@media (max-width: 1024px) {
-  .custom-grid { grid-template-columns: 1fr; }
-  .preview-card { position: static; margin-top: 48px; max-width: 500px; margin-inline: auto; }
 }
