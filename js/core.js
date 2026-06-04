@@ -349,7 +349,7 @@ const CartDrawer = {
           </div>
           <h3>Your cart is empty</h3>
           <p class="body-sm">Discover our luxury collection</p>
-          <a href="pages/shop.html" class="btn btn-outline btn-sm" style="margin-top:16px"><span>Explore Collection</span></a>
+          <a href="${getShopPageUrl()}" class="btn btn-outline btn-sm" style="margin-top:16px"><span>Explore Collection</span></a>
         </div>`;
       if (footer) footer.style.display = 'none';
       return;
@@ -461,8 +461,8 @@ const MobileNav = {
     const toggle = document.getElementById('mobile-nav-toggle');
     const close  = document.getElementById('mobile-nav-close');
     if (!nav) return;
-    const open  = () => { nav.classList.add('open'); document.body.style.overflow = 'hidden'; if(toggle) toggle.setAttribute('aria-expanded','true'); };
-    const shut  = () => { nav.classList.remove('open'); document.body.style.overflow = ''; if(toggle) toggle.setAttribute('aria-expanded','false'); };
+    const open  = () => { nav.classList.add('open'); nav.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; if(toggle) toggle.setAttribute('aria-expanded','true'); };
+    const shut  = () => { nav.classList.remove('open'); nav.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; if(toggle) toggle.setAttribute('aria-expanded','false'); };
     if (toggle) toggle.addEventListener('click', open);
     if (close)  close.addEventListener('click', shut);
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
@@ -636,6 +636,10 @@ const Checkout = {
 
 /* ── FORMAT HELPERS ────────────────────────────────────────── */
 function formatINR(n) { return `₹${Number(n).toLocaleString('en-IN')}`; }
+
+function getShopPageUrl() {
+  return window.location.pathname.includes('/pages/') ? 'shop.html' : 'pages/shop.html';
+}
 
 /* ── INIT ──────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {

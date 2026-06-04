@@ -168,7 +168,7 @@ function renderProductCard(product, index = 0) {
     <article class="product-card reveal reveal-delay-${(index % 4) + 1}"
       data-product-id="${product.id}"
       style="cursor:pointer"
-      onclick="if(!event.target.closest('button'))window.location.href='product.html?id=${product.id}'">
+      onclick="if(!event.target.closest('button'))window.location.href=getProductPageUrl('${product.id}')">
       <div class="product-image-wrap">
         <img src="${product.image || ''}" alt="${product.name}" loading="lazy"
           onerror="this.src='https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=400&q=60'">
@@ -212,9 +212,14 @@ ProductStore.quickAdd = function(productId) {
     });
   } else {
     // Multiple variants — go to product page to choose
-    window.location.href = `product.html?id=${productId}`;
+    window.location.href = getProductPageUrl(productId);
   }
 };
+
+function getProductPageUrl(productId) {
+  const prefix = window.location.pathname.includes('/pages/') ? '' : 'pages/';
+  return `${prefix}product.html?id=${encodeURIComponent(productId)}`;
+}
 
 /* ── Variant Selector UI (used on product detail page) ────── */
 function renderVariantSelector(product, containerId) {
