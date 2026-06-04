@@ -352,23 +352,6 @@ Object.assign(Admin, {
     };
 
     try {
-      if (ADMIN_CONFIG.SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
-        await DB.upsert('products', payload);
-        // Save variants
-        const varRows = this.collectVariants(id);
-        for (const v of varRows) {
-          if (v._delete && v.id && !v.id.startsWith('new-')) {
-            await DB.delete('product_variants', v.id);
-          } else if (!v._delete) {
-            if (v.id && !v.id.startsWith('new-')) {
-              await DB.patchById('product_variants', v.id, v);
-            } else {
-              await DB.insert('product_variants', { ...v, id: undefined, product_id: id });
-            }
-          }
-        }
-      }
-
       // Update local allProducts
       const existing = this.allProducts.findIndex(p => p.id === id);
       if (existing >= 0) this.allProducts[existing] = { ...this.allProducts[existing], ...payload };
@@ -404,9 +387,6 @@ Object.assign(Admin, {
   async deleteProduct(productId) {
     if (!confirm(`Delete product "${productId}"? This cannot be undone.`)) return;
     try {
-      if (ADMIN_CONFIG.SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
-        await DB.delete('products', productId);
-      }
       this.allProducts = this.allProducts.filter(p => p.id !== productId);
       this.renderProducts();
       this.closeModal();
@@ -416,9 +396,6 @@ Object.assign(Admin, {
 
   async toggleProductActive(productId, newState) {
     try {
-      if (ADMIN_CONFIG.SUPABASE_URL !== 'YOUR_SUPABASE_URL') {
-        await DB.patch(`products?id=eq.${encodeURIComponent(productId)}`, { is_active: newState, updated_at: new Date().toISOString() });
-      }
       const p = this.allProducts.find(x => x.id === productId);
       if (p) p.is_active = newState;
       this.renderProducts();
@@ -429,49 +406,7 @@ Object.assign(Admin, {
 });
 
 /* ── DB helpers for admin ─────────────────────────────────── */
-Object.assign(DB, {
-  async upsert(table, body) {
-    const res = await fetch(`${ADMIN_CONFIG.SUPABASE_URL}/rest/v1/${table}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': ADMIN_CONFIG.SUPABASE_KEY,
-        'Authorization': `Bearer ${ADMIN_CONFIG.SUPABASE_KEY}`,
-        'Prefer': 'resolution=merge-duplicates,return=representation'
-      },
-      body: JSON.stringify(body)
-    });
-    if (!res.ok) throw new Error(await res.text());
-    return res.json();
-  },
-  async insert(table, body) {
-    const res = await fetch(`${ADMIN_CONFIG.SUPABASE_URL}/rest/v1/${table}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': ADMIN_CONFIG.SUPABASE_KEY,
-        'Authorization': `Bearer ${ADMIN_CONFIG.SUPABASE_KEY}`,
-        'Prefer': 'return=representation'
-      },
-      body: JSON.stringify(body)
-    });
-    if (!res.ok) throw new Error(await res.text());
-    return res.json();
-  },
-  async patchById(table, id, body) {
-    return this.patch(`${table}?id=eq.${encodeURIComponent(id)}`, body);
-  },
-  async delete(table, id) {
-    const res = await fetch(`${ADMIN_CONFIG.SUPABASE_URL}/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, {
-      method: 'DELETE',
-      headers: {
-        'apikey': ADMIN_CONFIG.SUPABASE_KEY,
-        'Authorization': `Bearer ${ADMIN_CONFIG.SUPABASE_KEY}`
-      }
-    });
-    if (!res.ok) throw new Error(await res.text());
-  }
-});
+/* DB operations are now stubbed out in admin.html for static mode */
 
 /* ── Variant row HTML ─────────────────────────────────────── */
 function pmVariantRow(v, idx) {

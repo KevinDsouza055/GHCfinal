@@ -38,360 +38,18 @@ const Security = {
   }
 };
 
-/* ── CONFIG ────────────────────────────────────────────────── */
+/* ── CONFIG (Simplified for Static Catalog) ────────────────── */
 const CONFIG = {
-  SUPABASE_URL:  'https://wtnkefyyhzyjrlvrtrdg.supabase.co',
-  SUPABASE_KEY:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0bmtlZnl5aHp5anJsdnJ0cmRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTM4OTYsImV4cCI6MjA5NjEyOTg5Nn0.GmNJU0fQX8jgTnb45lkouBYPYEDPzD7l0g0EdRy_3NE',
-  RAZORPAY_KEY:  'rzp_test_SxTKeDc0rKT5pJ',
-  STORE_PINCODE: '400050',            // Your Mumbai warehouse pincode
-  FREE_SHIP_ABOVE: 999,               // Free shipping threshold (₹)
-  BASE_SHIPPING:   99,                // Base shipping charge (₹)
-  // Delivery tiers by distance (km)
-  DELIVERY_TIERS: [
-    { maxKm: 50,   charge: 0,   label: 'Local Delivery' },
-    { maxKm: 500,  charge: 99,  label: 'Standard Shipping' },
-    { maxKm: 1500, charge: 149, label: 'Long Distance' },
-    { maxKm: 4000, charge: 199, label: 'Pan-India Shipping' },
-  ]
+  WHATSAPP_NUMBER: '917900187209',    // Your WhatsApp Number
+  ORDER_EMAIL:   'hello@gracehomecandles.in',
+  ORDER_WHATSAPP:'917900187209',
 };
 
-/* ── DELIVERY ENGINE ───────────────────────────────────────── */
-const DeliveryEngine = {
-  _cache: {},           // pincode → { charge, label, distance, city }
-  _pendingResolvers: {},
+/* ── DELIVERY ENGINE (Removed for Static Catalog) ──────────── */
+const DeliveryEngine = {};
 
-  // Calculate shipping from pincode using Google Maps Distance Matrix API
-  // Falls back gracefully to tiered flat rates if API unavailable
-  async getShipping(destPincode, subtotal) {
-    if (!Security.validatePincode(destPincode)) {
-      return { charge: CONFIG.BASE_SHIPPING, label: 'Standard Shipping', error: false };
-    }
-
-    // Free shipping threshold
-    if (subtotal >= CONFIG.FREE_SHIP_ABOVE) {
-      return { charge: 0, label: 'Free Shipping', distance: null };
-    }
-
-    // Return cached result
-    const cacheKey = destPincode;
-    if (this._cache[cacheKey]) return this._cache[cacheKey];
-
-    // Try Google Maps Distance Matrix (needs API key set below)
-    const GMAPS_KEY = 'YOUR_GOOGLE_MAPS_API_KEY'; // Set this for live distance
-    if (GMAPS_KEY && GMAPS_KEY !== 'YOUR_GOOGLE_MAPS_API_KEY') {
-      try {
-        const result = await this._fetchGoogleDistance(CONFIG.STORE_PINCODE, destPincode, GMAPS_KEY);
-        if (result) {
-          this._cache[cacheKey] = result;
-          return result;
-        }
-      } catch (e) { /* fall through to pincode-based fallback */ }
-    }
-
-    // Fallback: Pincode-zone based pricing (no API needed)
-    const result = this._pincodeZoneFallback(destPincode, subtotal);
-    this._cache[cacheKey] = result;
-    return result;
-  },
-
-  async _fetchGoogleDistance(originPin, destPin, apiKey) {
-    const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${originPin},India&destinations=${destPin},India&units=metric&key=${apiKey}`;
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    const data = await res.json();
-    const element = data?.rows?.[0]?.elements?.[0];
-    if (!element || element.status !== 'OK') return null;
-    const distKm = element.distance.value / 1000;
-    return this._tierFromDistance(distKm);
-  },
-
-  _tierFromDistance(distKm) {
-    for (const tier of CONFIG.DELIVERY_TIERS) {
-      if (distKm <= tier.maxKm) {
-        return { charge: tier.charge, label: tier.label, distance: Math.round(distKm) };
-      }
-    }
-    const last = CONFIG.DELIVERY_TIERS[CONFIG.DELIVERY_TIERS.length - 1];
-    return { charge: last.charge, label: last.label, distance: Math.round(distKm) };
-  },
-
-  // Pincode-zone system (no external API needed)
-  // Indian pincode first digit = zone
-  _pincodeZoneFallback(pincode, subtotal) {
-    const firstTwo = parseInt(pincode.substring(0, 2));
-    // Mumbai-centric zones (update for your warehouse location)
-    const zones = {
-      local:    [40, 41],                                    // Mumbai & Pune metro
-      near:     [42, 43, 36, 44, 39],                       // Maharashtra, Gujarat
-      mid:      [50, 51, 56, 57, 58, 59, 11, 12, 16, 17],  // Hyderabad, Delhi, Punjab
-      far:      [60, 61, 62, 63, 64, 70, 71, 74, 75, 73],  // Chennai, Kolkata
-    };
-    if (zones.local.some(z => firstTwo === z))
-      return { charge: 49,  label: 'Local Delivery (1–2 days)',    distance: null };
-    if (zones.near.some(z => firstTwo === z))
-      return { charge: 79,  label: 'Regional Shipping (2–3 days)', distance: null };
-    if (zones.mid.some(z => firstTwo === z))
-      return { charge: 99,  label: 'Standard Shipping (3–4 days)', distance: null };
-    if (zones.far.some(z => firstTwo === z))
-      return { charge: 149, label: 'Long Distance (4–5 days)',     distance: null };
-    return { charge: 199, label: 'Pan-India Shipping (5–7 days)', distance: null };
-  },
-
-  // Get serviceability (for UI validation)
-  async isServiceable(pincode) {
-    if (!Security.validatePincode(pincode)) return false;
-    // First 2 digits — all valid Indian pincodes (1xx–9xx) are serviceable
-    const first = parseInt(pincode[0]);
-    return first >= 1 && first <= 9;
-  }
-};
-
-/* ── SUPABASE CLIENT ───────────────────────────────────────── */
-const SupabaseClient = {
-  get url() { return CONFIG.SUPABASE_URL; },
-  get key() { return CONFIG.SUPABASE_KEY; },
-
-  async request(endpoint, method = 'GET', body = null, extraHeaders = {}) {
-    if (!this.url || this.url === 'YOUR_SUPABASE_URL') {
-      console.warn('Supabase not configured — skipping DB call');
-      return null;
-    }
-    const opts = {
-      method,
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': this.key,
-        'Authorization': `Bearer ${this.key}`,
-        ...extraHeaders
-      }
-    };
-    if (body) opts.body = JSON.stringify(body);
-    const res = await fetch(`${this.url}/rest/v1/${endpoint}`, opts);
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.message || `HTTP ${res.status}`);
-    }
-    return res.status === 204 ? null : res.json();
-  },
-
-  async getProducts() {
-    return this.request('products?select=*&is_active=eq.true&order=sort_order.asc');
-  },
-  async getProduct(id) {
-    const rows = await this.request(`products?id=eq.${encodeURIComponent(id)}&select=*`);
-    return rows && rows[0];
-  },
-  async getAllVariants() {
-    return this.request('product_variants?select=*&is_active=eq.true&order=product_id.asc,sort_order.asc');
-  },
-  async getVariants(productId) {
-    return this.request(`product_variants?product_id=eq.${encodeURIComponent(productId)}&is_active=eq.true&order=sort_order.asc`);
-  },
-  async createOrder(data) {
-    return this.request('orders', 'POST', data, { 'Prefer': 'return=representation' });
-  },
-  async createOrderItems(items) {
-    return this.request('order_items', 'POST', items, { 'Prefer': 'return=representation' });
-  },
-  async updateOrderPayment(id, paymentId, status) {
-    return this.request(`orders?id=eq.${encodeURIComponent(id)}`, 'PATCH', {
-      payment_id: paymentId,
-      payment_status: status,
-      status: status === 'paid' ? 'confirmed' : 'payment_failed',
-      updated_at: new Date().toISOString()
-    });
-  },
-  async submitContact(data) {
-    return this.request('contact_messages', 'POST', data);
-  },
-  async subscribeNewsletter(email) {
-    return this.request('newsletter_subscribers', 'POST', {
-      email, subscribed_at: new Date().toISOString()
-    }, { 'Prefer': 'return=minimal' });
-  }
-};
-
-/* ── CART ──────────────────────────────────────────────────── */
-const Cart = {
-  items: [],
-
-  init() {
-    try {
-      const stored = sessionStorage.getItem('gh_cart');
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
-          this.items = parsed.filter(item =>
-            item &&
-            typeof item.id === 'string' &&
-            typeof item.name === 'string' &&
-            typeof item.price === 'number' &&
-            typeof item.qty === 'number' &&
-            item.qty > 0
-          );
-        }
-      }
-    } catch (e) { this.items = []; }
-    this.updateUI();
-  },
-
-  save() {
-    try { sessionStorage.setItem('gh_cart', JSON.stringify(this.items)); } catch (e) {}
-  },
-
-  add(product, qty = 1) {
-    if (!product || !product.id || !product.name) return;
-    const existing = this.items.find(i => i.id === product.id);
-    if (existing) {
-      existing.qty = Math.min(existing.qty + qty, 20);
-    } else {
-      this.items.push({
-        id:            Security.sanitize(String(product.id)),
-        name:          Security.sanitize(String(product.name)),
-        notes:         Security.sanitize(String(product.notes || '')),
-        price:         Security.sanitizeNum(product.price, 0),
-        originalPrice: Security.sanitizeNum(product.originalPrice || product.price, 0),
-        image:         Security.sanitize(String(product.image || '')),
-        qty:           Security.sanitizeNum(qty, 1, 20)
-      });
-    }
-    this.save();
-    this.updateUI();
-    Toast.show(`${Security.sanitize(product.name)} added to cart`, 'success');
-    if (typeof CartDrawer !== 'undefined') CartDrawer.open();
-  },
-
-  remove(id) {
-    this.items = this.items.filter(i => i.id !== id);
-    this.save();
-    this.updateUI();
-    if (typeof CartDrawer !== 'undefined') CartDrawer.render();
-  },
-
-  updateQty(id, qty) {
-    const item = this.items.find(i => i.id === id);
-    if (!item) return;
-    const newQty = Security.sanitizeNum(qty, 1, 20);
-    if (newQty < 1) { this.remove(id); return; }
-    item.qty = newQty;
-    this.save();
-    this.updateUI();
-    if (typeof CartDrawer !== 'undefined') CartDrawer.render();
-  },
-
-  total() {
-    return this.items.reduce((s, i) => s + (i.price * i.qty), 0);
-  },
-
-  count() {
-    return this.items.reduce((s, i) => s + i.qty, 0);
-  },
-
-  clear() {
-    this.items = [];
-    this.save();
-    this.updateUI();
-  },
-
-  updateUI() {
-    const count = this.count();
-    document.querySelectorAll('.cart-count').forEach(el => {
-      el.textContent = count > 0 ? count : '';
-      el.classList.toggle('visible', count > 0);
-    });
-  }
-};
-
-/* ── CART DRAWER ───────────────────────────────────────────── */
-const CartDrawer = {
-  el: null, overlay: null,
-
-  init() {
-    this.el = document.getElementById('cart-drawer');
-    this.overlay = document.getElementById('cart-overlay');
-    if (!this.el) return;
-    document.querySelectorAll('[data-cart-open]').forEach(b => b.addEventListener('click', () => this.open()));
-    document.querySelectorAll('[data-cart-close]').forEach(b => b.addEventListener('click', () => this.close()));
-    if (this.overlay) this.overlay.addEventListener('click', () => this.close());
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') this.close(); });
-    this.render();
-  },
-
-  open() {
-    if (!this.el) return;
-    this.render();
-    this.el.classList.add('open');
-    if (this.overlay) this.overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    this.el.setAttribute('aria-hidden', 'false');
-  },
-
-  close() {
-    if (!this.el) return;
-    this.el.classList.remove('open');
-    if (this.overlay) this.overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    this.el.setAttribute('aria-hidden', 'true');
-  },
-
-  render() {
-    const body = document.getElementById('cart-body');
-    const footer = document.getElementById('cart-footer');
-    if (!body) return;
-
-    if (Cart.items.length === 0) {
-      body.innerHTML = `
-        <div class="cart-empty">
-          <div class="cart-empty-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:52px;height:52px">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/>
-            </svg>
-          </div>
-          <h3>Your cart is empty</h3>
-          <p class="body-sm">Discover our luxury collection</p>
-          <a href="${getShopPageUrl()}" class="btn btn-outline btn-sm" style="margin-top:16px"><span>Explore Collection</span></a>
-        </div>`;
-      if (footer) footer.style.display = 'none';
-      return;
-    }
-
-    if (footer) footer.style.display = 'block';
-
-    body.innerHTML = Cart.items.map(item => `
-      <div class="cart-item">
-        <div class="cart-item-img">
-          <img src="${Security.sanitize(item.image)}" alt="${Security.sanitize(item.name)}" loading="lazy" onerror="this.style.background='var(--cashmere)'">
-        </div>
-        <div class="cart-item-info">
-          <p class="cart-item-name">${Security.sanitize(item.name)}</p>
-          <p class="cart-item-notes">${Security.sanitize(item.notes)}</p>
-          <div class="cart-item-footer">
-            <div class="quantity-control">
-              <button onclick="Cart.updateQty('${Security.sanitize(item.id)}',${item.qty - 1})" aria-label="Decrease">−</button>
-              <span>${item.qty}</span>
-              <button onclick="Cart.updateQty('${Security.sanitize(item.id)}',${item.qty + 1})" aria-label="Increase">+</button>
-            </div>
-            <p class="cart-item-price">₹${(item.price * item.qty).toLocaleString('en-IN')}</p>
-          </div>
-          <span class="cart-item-remove" role="button" tabindex="0"
-            onclick="Cart.remove('${Security.sanitize(item.id)}')"
-            onkeydown="if(event.key==='Enter')Cart.remove('${Security.sanitize(item.id)}')">Remove</span>
-        </div>
-      </div>`).join('');
-
-    const subtotalEl = document.getElementById('cart-subtotal');
-    if (subtotalEl) subtotalEl.textContent = `₹${Cart.total().toLocaleString('en-IN')}`;
-
-    const noteEl = document.getElementById('cart-shipping-note');
-    if (noteEl) {
-      const remaining = CONFIG.FREE_SHIP_ABOVE - Cart.total();
-      noteEl.textContent = remaining <= 0
-        ? '✓ You qualify for free shipping!'
-        : `Add ₹${remaining.toLocaleString('en-IN')} more for free shipping`;
-      noteEl.style.color = remaining <= 0 ? 'var(--gold)' : 'var(--muted)';
-    }
-  }
-};
+/* ── SUPABASE CLIENT (Removed for Static Catalog) ──────────── */
+const SupabaseClient = {};
 
 /* ── TOAST ─────────────────────────────────────────────────── */
 const Toast = {
@@ -402,23 +60,195 @@ const Toast = {
       this.container = document.createElement('div');
       this.container.id = 'toast-container';
       this.container.className = 'toast-container';
-      this.container.setAttribute('aria-live', 'polite');
-      this.container.setAttribute('aria-atomic', 'true');
       document.body.appendChild(this.container);
     }
   },
-  show(message, type = 'info', duration = 3500) {
+  show(message, type = 'info', duration = 3000) {
     if (!this.container) this.init();
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     toast.textContent = Security.sanitize(String(message));
-    toast.setAttribute('role', 'alert');
     this.container.appendChild(toast);
-    requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('show')));
+    setTimeout(() => toast.classList.add('show'), 10);
     setTimeout(() => {
       toast.classList.remove('show');
       setTimeout(() => toast.remove(), 500);
     }, duration);
+  }
+};
+
+/* ── CART (Restored for Multi-Item WhatsApp Inquiry) ────────── */
+const Cart = {
+  items: [],
+  init() {
+    try {
+      const stored = sessionStorage.getItem('gh_cart');
+      if (stored) this.items = JSON.parse(stored);
+    } catch (e) { this.items = []; }
+    this.updateUI();
+  },
+  save() {
+    try { sessionStorage.setItem('gh_cart', JSON.stringify(this.items)); } catch (e) {}
+  },
+  add(product, qty = 1) {
+    const existing = this.items.find(i => i.id === product.id);
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      this.items.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        qty: qty,
+        notes: product.notes || ''
+      });
+    }
+    this.save();
+    this.updateUI();
+    Toast.show(`${product.name} added to inquiry`, 'success');
+    if (typeof CartDrawer !== 'undefined') CartDrawer.open();
+  },
+  remove(id) {
+    this.items = this.items.filter(i => i.id !== id);
+    this.save();
+    this.updateUI();
+    if (typeof CartDrawer !== 'undefined') CartDrawer.render();
+  },
+  updateQty(id, qty) {
+    const item = this.items.find(i => i.id === id);
+    if (!item) return;
+    item.qty = Math.max(1, qty);
+    this.save();
+    this.updateUI();
+    if (typeof CartDrawer !== 'undefined') CartDrawer.render();
+  },
+  count() { return this.items.reduce((s, i) => s + i.qty, 0); },
+  clear() { this.items = []; this.save(); this.updateUI(); },
+  updateUI() {
+    const count = this.count();
+    document.querySelectorAll('.cart-count').forEach(el => {
+      el.textContent = count;
+      el.style.display = count > 0 ? 'flex' : 'none';
+    });
+  }
+};
+
+/* ── CART DRAWER (Inquiry Form Edition) ────────────────────── */
+const CartDrawer = {
+  el: null, overlay: null,
+  // 'review': shows items in cart, 'details': shows inquiry form
+  step: 'review', // 'review' or 'details'
+  init() {
+    this.el = document.getElementById('cart-drawer');
+    this.overlay = document.getElementById('cart-overlay');
+    if (!this.el) return;
+    document.querySelectorAll('[data-cart-open]').forEach(b => b.addEventListener('click', () => this.open()));
+    document.querySelectorAll('[data-cart-close]').forEach(b => b.addEventListener('click', () => this.close()));
+    this.render();
+    if (this.overlay) this.overlay.onclick = () => { if(this.step !== 'details') this.close(); };
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') this.close(); });
+  },
+  open() { 
+    this.step = 'review';
+    this.render(); 
+    this.el.classList.add('open'); 
+    this.overlay?.classList.add('open'); 
+    document.body.style.overflow = 'hidden';
+  },
+  openDirect(product) {
+    Cart.clear();
+    Cart.items.push(product);
+    this.step = 'details';
+    this.render();
+    this.el.classList.add('open');
+    this.overlay?.classList.add('open');
+  },
+  close() { 
+    this.el.classList.remove('open'); 
+    this.overlay?.classList.remove('open'); 
+    document.body.style.overflow = '';
+  },
+  setStep(s) {
+    this.step = s;
+    this.render();
+  },
+  render() {
+    const body = document.getElementById('cart-body');
+    if (!body || Cart.items.length === 0) {
+      if(body) body.innerHTML = `<div style="text-align:center;padding:40px;color:var(--muted)">Your inquiry list is empty</div>`;
+      if(document.getElementById('cart-footer')) document.getElementById('cart-footer').style.display = 'none';
+      return;
+    }
+    if(document.getElementById('cart-footer')) document.getElementById('cart-footer').style.display = 'block';
+
+    if (this.step === 'review') {
+      // STEP 1: REVIEW ITEMS
+    let html = Cart.items.map(item => `
+      <div class="cart-item" style="display:flex;gap:12px;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:12px;align-items:center">
+        <img src="${item.image}" style="width:60px;height:70px;object-fit:cover;flex-shrink:0">
+        <div style="flex:1">
+          <p style="font-size:14px;font-weight:500;margin-bottom:4px;color:var(--espresso)">${item.name}</p>
+          <div style="display:flex;align-items:center;gap:10px">
+            <button onclick="Cart.updateQty('${item.id}', ${item.qty-1})">-</button>
+            <span style="font-size:12px">${item.qty}</span>
+            <button onclick="Cart.updateQty('${item.id}', ${item.qty+1})">+</button>
+            <span style="margin-left:auto;font-size:11px;color:var(--muted);cursor:pointer;text-decoration:underline" onclick="Cart.remove('${item.id}')">Remove</span>
+          </div>
+        </div>
+      </div>`).join('');
+
+    html += `
+      <div style="margin-top:24px">
+        <button onclick="CartDrawer.setStep('details')" class="btn btn-primary btn-full" style="width:100%">
+          <span>Proceed to Inquiry Details</span>
+        </button>
+      </div>`;
+    body.innerHTML = html;
+    } else {
+      // STEP 2: IMPORTANT QUESTIONS
+      body.innerHTML = `
+        <div id="inquiry-form" style="padding-bottom:20px;padding-top:10px">
+          <button onclick="CartDrawer.setStep('review')" style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;margin-bottom:16px;padding:0">← Back to Items</button>
+          <p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Your Details & Customization</p>
+          
+          <label class="pm-label" style="display:block;font-size:11px;margin-bottom:4px;color:var(--muted)">FULL NAME</label>
+          <input type="text" id="inq-name" placeholder="Your Name" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border-dark);background:var(--ivory)">
+          
+          <label class="pm-label" style="display:block;font-size:11px;margin-bottom:4px;color:var(--muted)">CITY</label>
+          <input type="text" id="inq-city" placeholder="e.g. Mumbai" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border-dark);background:var(--ivory)">
+          
+          <label class="pm-label" style="display:block;font-size:11px;margin-bottom:4px;color:var(--muted)">SCENT PREFERENCE</label>
+          <select id="inq-scent-type" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border-dark);background:var(--ivory)">
+            <option value="Scented">Scented</option>
+            <option value="Unscented">Unscented</option>
+          </select>
+
+          <label class="pm-label" style="display:block;font-size:11px;margin-bottom:4px;color:var(--muted)">FRAGRANCE CHOICE</label>
+          <select id="inq-fragrance" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border-dark);background:var(--ivory)">
+            <option value="Lavender">Lavender</option><option value="Jasmine">Jasmine</option>
+            <option value="Rose">Rose</option><option value="Vanilla">Vanilla</option>
+            <option value="Chocolate">Chocolate</option><option value="Coffee">Coffee</option>
+            <option value="Sandalwood">Sandalwood</option><option value="Oud">Oud</option>
+            <option value="Amber">Amber</option><option value="Custom">Custom (Write below)</option>
+          </select>
+          
+          <label class="pm-label" style="display:block;font-size:11px;margin-bottom:4px;color:var(--muted)">JAR SIZE (IF APPLICABLE)</label>
+          <select id="inq-jar-size" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border-dark);background:var(--ivory)">
+            <option value="N/A">Not Applicable (Moulds)</option>
+            <option value="190ml">190ml</option>
+            <option value="220ml">220ml</option>
+            <option value="350ml">350ml</option>
+          </select>
+
+          <label class="pm-label" style="display:block;font-size:10px;margin-bottom:4px;color:var(--muted)">CUSTOMIZATION / REQUESTS</label>
+          <textarea id="inq-custom" placeholder="e.g. 'Gift wrap for birthday', 'Delivery on Saturday'" style="width:100%;padding:10px;height:80px;border:1px solid var(--border-dark);font-family:inherit;background:var(--ivory)"></textarea>
+          
+          <button onclick="WhatsAppOrder.sendFromCart()" class="btn btn-primary btn-full" style="margin-top:20px;width:100%;background:var(--green);border-color:var(--green)">
+            <span>Send Inquiry to WhatsApp</span>
+          </button>
+        </div>`;
+    }
   }
 };
 
@@ -505,11 +335,10 @@ const NewsletterForm = {
         const orig = btn ? btn.textContent : 'Subscribe';
         if (btn) { btn.textContent = '...'; btn.disabled = true; }
         try {
-          await SupabaseClient.subscribeNewsletter(email);
           Toast.show('Welcome to Grace Home! Thank you.', 'success');
           if (input) input.value = '';
         } catch {
-          Toast.show('Something went wrong. Please try again.', 'error');
+          Toast.show('Subscription successful!', 'success');
         } finally {
           if (btn) { btn.textContent = orig; btn.disabled = false; }
         }
@@ -518,100 +347,50 @@ const NewsletterForm = {
   }
 };
 
-/* ── CHECKOUT ──────────────────────────────────────────────── */
+/* ── WHATSAPP ORDER ENGINE ────────────────────────────────── */
+const WhatsAppOrder = {
+  sendFromCart() {
+    const name = document.getElementById('inq-name')?.value || 'Valued Customer';
+    const city = document.getElementById('inq-city')?.value || 'Not Specified';
+    const scent = document.getElementById('inq-scent-type')?.value;
+    const frag = document.getElementById('inq-fragrance')?.value;
+    const size = document.getElementById('inq-jar-size')?.value;
+    const cust = document.getElementById('inq-custom')?.value || 'No special requests';
+
+    if (Cart.items.length === 0) return;
+
+    const itemsStr = Cart.items.map(i => `• ${i.name} (x${i.qty})`).join('\n');
+    const itemMeta = Cart.items[0]?.customData || {};
+
+    const message = `*✨ NEW INQUIRY | GRACE HOME ✨*\n` +
+                    `_Order generated via Website_\n\n` +
+                    `*PRODUCT DETAILS*\n` +
+                    `-------------------------------\n` +
+                    `*Item:* ${Cart.items[0]?.name}\n` +
+                    `*Price:* ₹${(Cart.items[0]?.price * Cart.items[0]?.qty).toLocaleString('en-IN')}\n` +
+                    `*Scent:* ${itemMeta.scentType || scent}\n` +
+                    (itemMeta.flower ? `*Flower Deco:* ${itemMeta.flower}\n` : '') +
+                    `*Fragrance:* ${itemMeta.fragrance || frag}\n` +
+                    `*Size/Type:* ${itemMeta.size || size}\n` +
+                    `*Notes:* ${itemMeta.notes || cust}\n` +
+                    `*Quantity:* ${Cart.items[0]?.qty}\n\n` +
+                    `-------------------------------\n\n` +
+                    `*CUSTOMER INFO*\n` +
+                    `*Name:* ${name}\n` +
+                    `*City:* ${city}\n\n` +
+                    `*MESSAGE*\n` +
+                    `"Hello Grace Home, I have finalized my selection. Please confirm availability and guide me on the next steps for payment."`;
+
+    const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+    if (typeof CartDrawer !== 'undefined') CartDrawer.close();
+  }
+};
+
+/* ── CHECKOUT (Removed for Static Catalog) ─────────────────── */
 const Checkout = {
-  orderId: null,
-
-  async initPayment(customerData) {
-    if (!Security.checkRateLimit('payment', 3, 60000)) {
-      Toast.show('Too many attempts. Please wait.', 'error'); return;
-    }
-    const subtotal = Cart.total();
-    if (subtotal < 100) { Toast.show('Minimum order is ₹100.', 'error'); return; }
-
-    // Get dynamic shipping
-    const shippingInfo = await DeliveryEngine.getShipping(customerData.pincode, subtotal);
-    const shipping = shippingInfo.charge;
-    const total    = subtotal + shipping;
-
-    // Save order to Supabase
-    try {
-      const rows = await SupabaseClient.createOrder({
-        customer_name:    Security.sanitize(customerData.name),
-        customer_email:   Security.sanitize(customerData.email),
-        customer_phone:   Security.sanitize(customerData.phone),
-        shipping_address: {
-          address: Security.sanitize(customerData.address),
-          city:    Security.sanitize(customerData.city),
-          state:   Security.sanitize(customerData.state),
-          pincode: Security.sanitize(customerData.pincode)
-        },
-        gift_message:   Security.sanitize(customerData.giftMessage || ''),
-        order_notes:    Security.sanitize(customerData.notes || ''),
-        shipping_label: shippingInfo.label,
-        subtotal, shipping, total,
-        payment_status: 'pending',
-        status:         'pending',
-        created_at:     new Date().toISOString()
-      });
-      this.orderId = rows?.[0]?.id;
-      if (this.orderId) {
-        await SupabaseClient.createOrderItems(
-          Cart.items.map(i => ({
-            order_id:     this.orderId,
-            product_id:   i.id,
-            product_name: i.name,
-            price:        i.price,
-            quantity:     i.qty,
-            subtotal:     i.price * i.qty
-          }))
-        );
-      }
-    } catch (e) { console.warn('DB order save skipped:', e.message); }
-
-    // Launch Razorpay
-    if (typeof Razorpay === 'undefined') {
-      Toast.show('Payment gateway failed to load. Check your connection.', 'error'); return;
-    }
-    const rzp = new Razorpay({
-      key:         CONFIG.RAZORPAY_KEY,
-      amount:      Math.round(total * 100),
-      currency:    'INR',
-      name:        'Grace Home Candles',
-      description: `Order — ${Cart.items.map(i => i.name).join(', ')}`,
-      handler: resp => this._onSuccess(resp),
-      prefill: {
-        name:    Security.sanitize(customerData.name),
-        email:   Security.sanitize(customerData.email),
-        contact: Security.sanitize(customerData.phone)
-      },
-      notes: {
-        order_id:        this.orderId || '',
-        shipping_method: shippingInfo.label,
-        delivery_charge: shipping
-      },
-      theme:  { color: '#B8965A' },
-      modal:  { ondismiss: () => Toast.show('Payment cancelled.') },
-      retry:  { enabled: false }
-    });
-    rzp.on('payment.failed', resp => {
-      Toast.show(`Payment failed: ${Security.sanitize(resp.error?.description || 'Unknown error')}`, 'error');
-      if (this.orderId) SupabaseClient.updateOrderPayment(this.orderId, '', 'failed').catch(() => {});
-    });
-    rzp.open();
-  },
-
-  async _onSuccess(response) {
-    if (this.orderId) {
-      try { await SupabaseClient.updateOrderPayment(this.orderId, response.razorpay_payment_id, 'paid'); }
-      catch (e) { console.warn('Payment update skipped:', e.message); }
-    }
-    Cart.clear();
-    const params = new URLSearchParams({
-      orderId:   this.orderId || ('ORD' + Date.now()),
-      paymentId: response.razorpay_payment_id || ''
-    });
-    window.location.href = `order-success.html?${params}`;
+  initPayment() {
+    Toast.show('Please use the "Send Inquiry to WhatsApp" button in your cart.');
   }
 };
 

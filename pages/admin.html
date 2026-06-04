@@ -570,12 +570,10 @@ ul{list-style:none}
 
 /* ── CONFIG — CHANGE THESE ─────────────────────────────────── */
 const ADMIN_CONFIG = {
-  USERNAME:     'kevinsir',
-  PASSWORD:     'Jesus@08',   // ← CHANGE BEFORE GOING LIVE
+  USERNAME:     'admin',
+  PASSWORD:     'GraceHomre e@2025',   // ← CHANGE BEFORE GOING LIVE
   SESSION_KEY:  'gh_admin_session',
-  SESSION_TTL:  8 * 60 * 60 * 1000, // 8 hours in ms
-  SUPABASE_URL: 'https://wtnkefyyhzyjrlvrtrdg.supabase.co',
-  SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0bmtlZnl5aHp5anJsdnJ0cmRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTM4OTYsImV4cCI6MjA5NjEyOTg5Nn0.GmNJU0fQX8jgTnb45lkouBYPYEDPzD7l0g0EdRy_3NE',
+  SESSION_TTL:  8 * 60 * 60 * 1000, // 8 hours in ms (for admin login session)
   PAGE_SIZE:    20,
 };
 
@@ -779,19 +777,19 @@ const Admin = {
 
   /* ── Fetch ── */
   async fetchOrders() {
-    const data = await DB.get('orders?select=*&order=created_at.desc&limit=500');
+    const data = null; // No DB for orders in static mode
     this.allOrders = data || this.demoOrders();
   },
   async fetchProducts() {
-    const data = await DB.get('products?select=*&order=sort_order.asc');
+    const data = null; // No DB for products in static mode
     this.allProducts = data || [];
   },
   async fetchMessages() {
-    const data = await DB.get('contact_messages?select=*&order=created_at.desc&limit=200');
+    const data = null; // No DB for messages in static mode
     this.allMessages = data || [];
   },
   async fetchSubscribers() {
-    const data = await DB.get('newsletter_subscribers?select=*&order=subscribed_at.desc');
+    const data = null; // No DB for subscribers in static mode
     this.allSubscribers = data || [];
   },
 

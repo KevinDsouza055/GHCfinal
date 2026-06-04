@@ -48,16 +48,11 @@
     </button>
   </div>
   <div class="cart-body" id="cart-body"></div>
-  <div class="cart-footer" id="cart-footer" style="display:none">
-    <div class="cart-subtotal">
-      <span class="cart-subtotal-label">Subtotal</span>
-      <span class="cart-subtotal-amount" id="cart-subtotal">₹0</span>
-    </div>
-    <p class="cart-shipping-note" id="cart-shipping-note"></p>
-    <div class="cart-actions">
-      <a href="pages/checkout.html" class="btn btn-primary btn-full"><span>Proceed to Checkout</span></a>
-      <a href="pages/shop.html" class="btn btn-ghost" style="text-align:center">Continue Shopping</a>
-    </div>
+  <div class="cart-footer" id="cart-footer" style="display:block;padding:20px;border-top:1px solid var(--border)">
+    <!-- Content for cart footer will be dynamically rendered by CartDrawer.render() -->
+    <p style="font-size:11px;color:var(--muted);text-align:center">
+      Your inquiry list. Proceed to details to customize and send via WhatsApp.
+    </p>
   </div>
 </aside>
 
@@ -123,7 +118,7 @@
 
       <div class="hero-visual" aria-hidden="true">
         <div class="hero-image-wrap">
-          <img src="https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=900&q=85"
+          <img src="assets/strawberrymilk.jpg"
                alt="Luxury candle in amber glass" loading="eager" fetchpriority="high">
           <div class="hero-badge">
             <div class="hero-badge-num">5</div>
@@ -221,39 +216,6 @@
   </div>
 </section>
 
-<!-- ── BRAND STORY ───────────────────────────────────── -->
-<section class="section-pad" aria-labelledby="story-title">
-  <div class="container">
-    <div class="story-grid">
-      <div class="story-image" aria-hidden="true">
-        <div class="story-image-main">
-          <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?w=800&q=85"
-               alt="Grace Home Candle craftsmanship" loading="lazy">
-        </div>
-        <div class="story-image-accent">
-          <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&q=85"
-               alt="Candle detail" loading="lazy">
-        </div>
-      </div>
-      <div class="story-text">
-        <p class="overline reveal">Our Story</p>
-        <h2 id="story-title" class="display-lg reveal reveal-delay-1">Born from a love<br>of <em>stillness</em></h2>
-        <div class="divider divider-left reveal reveal-delay-2"></div>
-        <p class="body-lg reveal reveal-delay-2">
-          Grace Home began in a small Mumbai studio in 2021, born from one woman's belief that every home deserves a moment of ceremony — a light, a scent, a pause.
-        </p>
-        <div class="story-quote reveal reveal-delay-3">
-          <p>"We don't just make candles. We make the quiet moments between the loud ones."</p>
-        </div>
-        <p class="body-md reveal reveal-delay-3">
-          Each Grace Home candle is hand-poured in small batches, using a proprietary coconut-soy wax blend that burns slower, cleaner, and more beautifully than conventional alternatives. We work with fragrance houses across India and Europe to source only the most exceptional oils.
-        </p>
-        <a href="pages/about.html" class="btn btn-ghost reveal reveal-delay-4" style="margin-top:28px">Read Our Full Story →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ── TESTIMONIALS ──────────────────────────────────── -->
 <section class="testimonials-wrap" aria-labelledby="testimonials-title">
   <div class="container">
@@ -298,64 +260,6 @@
     </div>
   </div>
 </section>
-
-<!-- ── GIFTING ────────────────────────────────────────── -->
-<section class="gifting-section" aria-labelledby="gifting-title">
-  <div class="container">
-    <div class="gifting-grid">
-      <div class="gifting-text">
-        <p class="overline reveal">Luxury Gifting</p>
-        <h2 id="gifting-title" class="display-lg reveal reveal-delay-1">The gift of<br><em>atmosphere</em></h2>
-        <div class="divider divider-left reveal reveal-delay-1"></div>
-        <p class="body-lg reveal reveal-delay-2">
-          Our signature gift sets are curated for those who appreciate the extraordinary. Every piece is wrapped in archival tissue and nestled in our signature rigid box.
-        </p>
-        <div class="reveal reveal-delay-2">
-          <div class="gifting-feature">
-            <div class="gifting-feat-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/>
-              </svg>
-            </div>
-            <div>
-              <p class="gifting-feat-title">Signature Gift Boxes</p>
-              <p class="body-sm">Hand-finished rigid boxes in our signature champagne palette. Perfect for celebrations.</p>
-            </div>
-          </div>
-          <div class="gifting-feature">
-            <div class="gifting-feat-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/>
-              </svg>
-            </div>
-            <div>
-              <p class="gifting-feat-title">Personalised Notes</p>
-              <p class="body-sm">Add a handwritten note in your own words. Complimentary with every gift order.</p>
-            </div>
-          </div>
-          <div class="gifting-feature">
-            <div class="gifting-feat-icon" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/>
-              </svg>
-            </div>
-            <div>
-              <p class="gifting-feat-title">Pan-India Delivery</p>
-              <p class="body-sm">Carefully packed and delivered across India within 3–5 business days.</p>
-            </div>
-          </div>
-        </div>
-        <a href="pages/gifting.html" class="btn btn-primary reveal reveal-delay-3" style="margin-top:8px"><span>Explore Gift Sets</span></a>
-      </div>
-      <div class="gifting-image reveal reveal-delay-1">
-        <img src="https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&q=85"
-             alt="Grace Home luxury gift box" loading="lazy">
-        <div class="gifting-tag" aria-hidden="true">Luxury Gifting</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ── INSTAGRAM GALLERY ─────────────────────────────── -->
 <section class="section-pad-sm" aria-labelledby="instagram-title">
   <div class="container">
@@ -366,7 +270,7 @@
   </div>
   <div class="instagram-grid" role="list" aria-label="Instagram gallery">
     <div class="insta-item reveal" role="listitem">
-      <img src="https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=400&q=80" alt="Candle lifestyle 1" loading="lazy">
+      <img src="assets/strawberrymilk.jpg" alt="Candle lifestyle 1" loading="lazy">
       <div class="insta-overlay" aria-hidden="true">
         <svg class="insta-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
@@ -375,23 +279,23 @@
       </div>
     </div>
     <div class="insta-item reveal reveal-delay-1" role="listitem">
-      <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?w=400&q=80" alt="Candle lifestyle 2" loading="lazy">
+      <img src="assets/strawberrymilk.jpg" alt="Candle lifestyle 2" loading="lazy">
       <div class="insta-overlay" aria-hidden="true"></div>
     </div>
     <div class="insta-item reveal reveal-delay-2" role="listitem">
-      <img src="https://images.unsplash.com/photo-1608181831718-6b9c7e1bda9f?w=400&q=80" alt="Candle lifestyle 3" loading="lazy">
+      <img src="assets/strawberrymilk.jpg" alt="Candle lifestyle 3" loading="lazy">
       <div class="insta-overlay" aria-hidden="true"></div>
     </div>
     <div class="insta-item reveal reveal-delay-3" role="listitem">
-      <img src="https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&q=80" alt="Candle lifestyle 4" loading="lazy">
+      <img src="assets/strawberrymilk.jpg" alt="Candle lifestyle 4" loading="lazy">
       <div class="insta-overlay" aria-hidden="true"></div>
     </div>
     <div class="insta-item reveal reveal-delay-4" role="listitem">
-      <img src="https://images.unsplash.com/photo-1543342384-1f1350e27861?w=400&q=80" alt="Candle lifestyle 5" loading="lazy">
+      <img src="assets/strawberrymilk.jpg" alt="Candle lifestyle 5" loading="lazy">
       <div class="insta-overlay" aria-hidden="true"></div>
     </div>
     <div class="insta-item reveal reveal-delay-4" role="listitem">
-      <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&q=80" alt="Candle lifestyle 6" loading="lazy">
+      <img src="assets/strawberrymilk.jpg" alt="Candle lifestyle 6" loading="lazy">
       <div class="insta-overlay" aria-hidden="true"></div>
     </div>
   </div>

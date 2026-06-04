@@ -6,98 +6,98 @@
 
 /* ── Fallback data (used ONLY when Supabase is not configured) ── */
 const FALLBACK_PRODUCTS = [
-  { id:'velvet-vanilla', name:'Velvet Vanilla', type:'single', category:'scented',
-    notes:'Tahitian Vanilla · Warm Musk · Amber', short_desc:'Enveloping and intimate, like cashmere on skin.',
-    description:'A luxurious depth of pure Tahitian vanilla harmonises with warm amber and whispered musk.',
-    fragrance_top:'Madagascar Vanilla', fragrance_mid:'Warm Amber', fragrance_base:'White Musk & Sandalwood',
-    burn_time:'60–70 hours', size:'300g', wax:'Coconut-Soy Blend', wick:'Cotton Braided',
-    original_price:1499, sale_price:1199, badges:['Bestseller'],
-    image:'https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=800&q=85',
-    images:['https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=800&q=85'],
-    is_active:true, is_featured:true, is_bestseller:true, sort_order:1 },
+  { id:'azure-bloom', name:'Azure Bloom', type:'single', category:'scented',
+    notes:'Jar Candle', short_desc:'Stunning blue-tinted candle with artisan aesthetics.',
+    original_price:899, sale_price:599, badges:['Best Seller'],
+    image:'assets/azurebloom.jpg',
+    is_active:true, is_featured:true, sort_order:1 },
 
-  { id:'midnight-oud', name:'Midnight Oud', type:'single', category:'scented',
-    notes:'Aged Oud · Dark Rose · Patchouli', short_desc:'The scent of velvet dusk and ancient wood.',
-    description:'Rare aged oud meets the shadow of dark rose petals, grounded in deep patchouli and cedarwood.',
-    fragrance_top:'Saffron & Black Pepper', fragrance_mid:'Dark Rose & Oud', fragrance_base:'Patchouli & Cedarwood',
-    burn_time:'65–75 hours', size:'300g', wax:'Coconut-Soy Blend', wick:'Cotton Braided',
-    original_price:1799, sale_price:1499, badges:['Bestseller','New'],
-    image:'https://images.unsplash.com/photo-1608181831718-6b9c7e1bda9f?w=800&q=85',
-    images:['https://images.unsplash.com/photo-1608181831718-6b9c7e1bda9f?w=800&q=85'],
-    is_active:true, is_featured:true, is_bestseller:true, sort_order:2 },
+  { id:'eternal-embrace', name:'Eternal Embrace', type:'single', category:'scented',
+    notes:'Mould Candle', short_desc:'Timeless sculptural piece for your home.',
+    original_price:499, sale_price:299, badges:['Artistic'],
+    image:'assets/eternalembrace.jpg',
+    is_active:true, is_featured:true, sort_order:2 },
 
-  { id:'cashmere-rose', name:'Cashmere Rose', type:'single', category:'scented',
-    notes:'Centifolia Rose · Cashmere Wood · Peony', short_desc:'Infinitely feminine. Quietly powerful.',
-    description:'A bouquet of centifolia rose at full bloom, softened by cashmere wood and the tender blush of peony.',
-    fragrance_top:'Pink Peony & Bergamot', fragrance_mid:'Centifolia Rose', fragrance_base:'Cashmere Wood & Vanilla',
-    burn_time:'60–70 hours', size:'300g', wax:'Coconut-Soy Blend', wick:'Cotton Braided',
-    original_price:1699, sale_price:1349, badges:['New'],
-    image:'https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=800&q=85',
-    images:['https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=800&q=85'],
-    is_active:true, is_featured:true, is_bestseller:false, sort_order:3 },
+  { id:'ivory-rose', name:'Ivory Rose', type:'single', category:'scented',
+    notes:'Mould Candle', short_desc:'Elegant rose sculpture in pure soy-coconut wax.',
+    original_price:599, sale_price:399, badges:['Hand-crafted'],
+    image:'assets/ivoryrose.jpg',
+    is_active:true, is_featured:true, sort_order:3 },
 
-  { id:'amber-sandalwood', name:'Amber Sandalwood', type:'single', category:'scented',
-    notes:'Mysore Sandalwood · Golden Amber · Vetiver', short_desc:'Sun-warmed skin and sacred wood.',
-    description:'The richness of Mysore sandalwood married with golden amber resin and earthy vetiver.',
-    fragrance_top:'Bergamot & Cardamom', fragrance_mid:'Mysore Sandalwood & Amber', fragrance_base:'Vetiver & Tonka Bean',
-    burn_time:'70–80 hours', size:'300g', wax:'Coconut-Soy Blend', wick:'Cotton Braided',
-    original_price:1699, sale_price:1299, badges:['Bestseller'],
-    image:'https://images.unsplash.com/photo-1543342384-1f1350e27861?w=800&q=85',
-    images:['https://images.unsplash.com/photo-1543342384-1f1350e27861?w=800&q=85'],
-    is_active:true, is_featured:false, is_bestseller:true, sort_order:4 },
+  { id:'rose-sculpture', name:'Rose Sculpture', type:'single', category:'scented',
+    notes:'Mould Candle', short_desc:'Intricate floral pillar candle.',
+    original_price:549, sale_price:349, badges:['Trending'],
+    image:'assets/rosesculpture.jpg',
+    is_active:true, is_featured:true, sort_order:4 },
 
-  { id:'lavender-silk', name:'Lavender Silk', type:'single', category:'scented',
-    notes:'Provençal Lavender · White Tea · Musk', short_desc:'The art of doing nothing, beautifully.',
-    description:'Fields of Provençal lavender drift over delicate white tea and a barely-there silk musk.',
-    fragrance_top:'Lavender & Eucalyptus', fragrance_mid:'White Tea & Iris', fragrance_base:'Silk Musk & Cedarwood',
-    burn_time:'55–65 hours', size:'300g', wax:'Coconut-Soy Blend', wick:'Cotton Braided',
-    original_price:1499, sale_price:1149, badges:['New'],
-    image:'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&q=85',
-    images:['https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&q=85'],
-    is_active:true, is_featured:false, is_bestseller:false, sort_order:5 },
+  { id:'strawberry-milk', name:'Strawberry Milk', type:'single', category:'scented',
+    notes:'Jar Candle', short_desc:'A sweet, creamy blend of fresh strawberries and cold milk.',
+    original_price:799, sale_price:599, badges:['New Arrival'],
+    image:'assets/strawberrymilk.jpg',
+    is_active:true, is_featured:true, sort_order:0 },
+
+  { id:'clear-jar', name:'Clear Glass Jar', type:'single', category:'scented',
+    notes:'Jar Candle', short_desc:'Elegant everyday clear glass.',
+    original_price:899, sale_price:699, badges:['Classic'],
+    image:'assets/strawberrymilk.jpg',
+    is_active:true, is_featured:true, sort_order:1 },
+
+  { id:'amber-jar', name:'Amber Apothecary Jar', type:'single', category:'scented',
+    notes:'Jar Candle', short_desc:'Warm, vintage apothecary feel.',
+    original_price:1099, sale_price:849, badges:['Bestseller'],
+    image:'assets/strawberrymilk.jpg',
+    is_active:true, is_featured:true, sort_order:2 },
+
+  { id:'midnight-jar', name:'Midnight Matte Jar', type:'single', category:'scented',
+    notes:'Jar Candle', short_desc:'Luxury matte black glass.',
+    original_price:1199, sale_price:999, badges:['Luxury'],
+    image:'assets/strawberrymilk.jpg',
+    is_active:true, is_featured:true, sort_order:3 },
+
+  { id:'venus-pillar', name:'Venus Sculpture Mould', type:'single', category:'unscented',
+    notes:'Mould Candle', short_desc:'Artistic silhouette decor.',
+    original_price:799, sale_price:599, badges:['Sculptural'],
+    image:'assets/strawberrymilk.jpg',
+    is_active:true, is_featured:true, sort_order:4 },
+
+  { id:'bubble-cube', name:'Bubble Cube Mould', type:'single', category:'unscented',
+    notes:'Mould Candle', short_desc:'Modern geometric aesthetic.',
+    original_price:699, sale_price:449, badges:['Trending'],
+    image:'assets/strawberrymilk.jpg',
+    is_active:true, is_featured:true, sort_order:5 },
+
+  { id:'heart-mould', name:'Geometric Heart Mould', type:'single', category:'unscented',
+    notes:'Mould Candle', short_desc:'Perfect for romantic gifting.',
+    original_price:599, sale_price:399, badges:['Gift Idea'],
+    image:'assets/strawberrymilk.jpg',
+    is_active:true, is_featured:true, sort_order:6 },
 
   { id:'gift-duo', name:'The Signature Duo', type:'gift_set', category:'both',
     notes:'Velvet Vanilla + Cashmere Rose', short_desc:'Two bestsellers in one luxury box.',
     description:'Two bestselling Grace Home candles in our signature gift box.',
     burn_time:'60–70 hours each', original_price:2698, sale_price:2199, badges:['Gift Set'],
-    image:'https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&q=85',
-    images:['https://images.unsplash.com/photo-1607006344380-b6775a0824a7?w=800&q=85'],
+    image:'assets/strawberrymilk.jpg',
+    images:['assets/strawberrymilk.jpg'],
     is_active:true, is_featured:true, sort_order:10 },
 
   { id:'gift-complete', name:'The Complete Set', type:'gift_set', category:'both',
     notes:'All 5 Signature Fragrances', short_desc:'The ultimate Grace Home experience.',
     description:'All five signature candles in one grand presentation box.',
     burn_time:'55–80 hours each', original_price:6745, sale_price:5499, badges:['Gift Set','Most Gifted'],
-    image:'https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=800&q=85',
-    images:['https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=800&q=85'],
+    image:'assets/strawberrymilk.jpg',
+    images:['assets/strawberrymilk.jpg'],
     is_active:true, is_featured:true, sort_order:11 },
 
   { id:'gift-evening', name:'The Evening Ritual', type:'gift_set', category:'scented',
     notes:'Midnight Oud + Lavender Silk', short_desc:'From dusk to sleep.',
     description:'Two candles curated for the evening — bold Midnight Oud then calming Lavender Silk.',
     burn_time:'55–75 hours each', original_price:3298, sale_price:2899, badges:['Gift Set','New'],
-    image:'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&q=85',
-    images:['https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&q=85'],
+    image:'assets/strawberrymilk.jpg',
+    images:['assets/strawberrymilk.jpg'],
     is_active:true, is_featured:false, sort_order:12 }
 ];
 
-const FALLBACK_VARIANTS = {
-  'velvet-vanilla':   _defaultVariants(1499, 1199),
-  'midnight-oud':     _defaultVariants(1799, 1499),
-  'cashmere-rose':    _defaultVariants(1699, 1349),
-  'amber-sandalwood': _defaultVariants(1699, 1299),
-  'lavender-silk':    _defaultVariants(1499, 1149)
-};
-
-function _defaultVariants(orig, sale) {
-  return [
-    { id:'v1', variant_name:'Scented · Single',    variant_type:'scent_type', quantity:1, scent_type:'scented',   original_price:orig,                          sale_price:sale,                         is_default:true,  sort_order:1 },
-    { id:'v2', variant_name:'Scented · Set of 2',  variant_type:'quantity',   quantity:2, scent_type:'scented',   original_price:Math.round(orig*1.85/10)*10,   sale_price:Math.round(sale*1.85/10)*10,  is_default:false, sort_order:2 },
-    { id:'v3', variant_name:'Scented · Set of 4',  variant_type:'quantity',   quantity:4, scent_type:'scented',   original_price:Math.round(orig*3.5/10)*10,    sale_price:Math.round(sale*3.5/10)*10,   is_default:false, sort_order:3 },
-    { id:'v4', variant_name:'Unscented · Single',  variant_type:'scent_type', quantity:1, scent_type:'unscented', original_price:Math.round(orig*0.9/10)*10,    sale_price:Math.round(sale*0.9/10)*10,   is_default:false, sort_order:4 },
-    { id:'v5', variant_name:'Unscented · Set of 2',variant_type:'quantity',   quantity:2, scent_type:'unscented', original_price:Math.round(orig*1.65/10)*10,   sale_price:Math.round(sale*1.65/10)*10,  is_default:false, sort_order:5 }
-  ];
-}
+const FALLBACK_VARIANTS = {}; // No longer used for static catalog
 
 /* ── ProductStore — single source of truth for the frontend ── */
 const ProductStore = {
@@ -107,29 +107,9 @@ const ProductStore = {
 
   async load() {
     if (this.loaded) return;
-    try {
-      // Try Supabase
-      const [prods, vars] = await Promise.all([
-        SupabaseClient.getProducts(),
-        SupabaseClient.getAllVariants()
-      ]);
-      if (prods && prods.length > 0) {
-        this.products = prods;
-        // Group variants by product_id
-        this.variants = {};
-        (vars || []).forEach(v => {
-          if (!this.variants[v.product_id]) this.variants[v.product_id] = [];
-          this.variants[v.product_id].push(v);
-        });
-        this.loaded = true;
-        return;
-      }
-    } catch (e) {
-      console.warn('ProductStore: Supabase unavailable, using fallback data');
-    }
     // Fallback
     this.products = FALLBACK_PRODUCTS;
-    this.variants = FALLBACK_VARIANTS;
+    this.variants = {}; // No variants for static catalog
     this.loaded = true;
   },
 
@@ -137,7 +117,7 @@ const ProductStore = {
   getFeatured()   { return this.products.filter(p => p.is_active && p.is_featured); },
   getBestsellers(){ return this.products.filter(p => p.is_active && p.is_bestseller); },
   getSingles()    { return this.products.filter(p => p.is_active && p.type === 'single'); },
-  getBundles()    { return this.products.filter(p => p.is_active && (p.type === 'bundle' || p.type === 'gift_set')); },
+  getBundles()    { return this.products.filter(p => p.is_active && p.type === 'gift_set'); },
   getById(id)     { return this.products.find(p => p.id === id && p.is_active) || null; },
   getVariants(id) { return (this.variants[id] || []).sort((a,b) => a.sort_order - b.sort_order); },
   getDefaultVariant(id) {
@@ -168,16 +148,16 @@ function renderProductCard(product, index = 0) {
     <article class="product-card reveal reveal-delay-${(index % 4) + 1}"
       data-product-id="${product.id}"
       style="cursor:pointer"
-      onclick="if(!event.target.closest('button'))window.location.href=getProductPageUrl('${product.id}')">
+      onclick="if(!event.target.closest('button'))window.location.href='product.html?id=${product.id}'">
       <div class="product-image-wrap">
         <img src="${product.image || ''}" alt="${product.name}" loading="lazy"
-          onerror="this.src='https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=400&q=60'">
+          onerror="this.src='assets/strawberrymilk.jpg'">
         <div class="product-badge">${badges}</div>
         ${product.category === 'both' || product.type !== 'single' ? '' : `
         <div class="product-quick-add">
           <button class="btn btn-primary btn-sm btn-full"
-            onclick="event.stopPropagation();ProductStore.quickAdd('${product.id}')">
-            <span>${hasVariants ? 'Select Options' : 'Add to Cart'}</span>
+            onclick="event.stopPropagation();ProductStore.quickAdd('${product.id}', event)">
+            <span>Add to Inquiry</span>
           </button>
         </div>`}
       </div>
@@ -194,41 +174,36 @@ function renderProductCard(product, index = 0) {
 }
 
 /* Quick add — for products without variants, add directly; else go to product page */
-ProductStore.quickAdd = function(productId) {
+ProductStore.quickAdd = function(productId, event) {
   const product = this.getById(productId);
   if (!product) return;
-  const vars = this.getVariants(productId);
-  if (vars.length <= 1) {
-    // Single variant or no variants — add directly
-    const v = vars[0];
-    Cart.add({
-      id:            v ? `${product.id}__${v.id}` : product.id,
-      name:          product.name,
-      notes:         v ? v.variant_name : (product.notes || ''),
-      price:         v ? v.sale_price   : product.sale_price,
-      originalPrice: v ? v.original_price : product.original_price,
-      image:         product.image || '',
-      variantId:     v ? v.id : null
-    });
-  } else {
-    // Multiple variants — go to product page to choose
-    window.location.href = getProductPageUrl(productId);
-  }
+  // For static catalog, always add the base product to cart
+  Cart.add({
+    id:            product.id,
+    name:          product.name,
+    notes:         product.notes || '',
+    price:         product.sale_price, // Use sale price as base
+    originalPrice: product.original_price,
+    image:         product.image || ''
+  });
+  // No variants selection on quick add, customization happens in cart drawer
+  event.target.textContent = 'Added!';
+  setTimeout(() => event.target.textContent = 'Add to Inquiry', 1000);
 };
-
-function getProductPageUrl(productId) {
-  const prefix = window.location.pathname.includes('/pages/') ? '' : 'pages/';
-  return `${prefix}product.html?id=${encodeURIComponent(productId)}`;
-}
 
 /* ── Variant Selector UI (used on product detail page) ────── */
 function renderVariantSelector(product, containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
   const variants = ProductStore.getVariants(product.id);
-  if (!variants.length) { container.innerHTML = ''; return; }
+  
+  // If no variants, just show the base price and add to cart logic
+  if (!variants || variants.length === 0) {
+    _renderBaseProduct(product, container);
+    return;
+  }
 
-  let selectedId = (variants.find(v => v.is_default) || variants[0]).id;
+  let selectedId = (variants.find(v => v.is_default) || variants[0])?.id;
 
   function render() {
     const sel = variants.find(v => v.id === selectedId) || variants[0];
@@ -305,32 +280,30 @@ function renderVariantSelector(product, containerId) {
   render();
 }
 
-/* ── Extend SupabaseClient for variants ─────────────────── */
-if (typeof SupabaseClient !== 'undefined') {
-  SupabaseClient.getAllVariants = async function() {
-    return this.request('product_variants?select=*&is_active=eq.true&order=product_id.asc,sort_order.asc');
-  };
-  SupabaseClient.getVariants = async function(productId) {
-    return this.request(`product_variants?product_id=eq.${encodeURIComponent(productId)}&is_active=eq.true&order=sort_order.asc`);
-  };
-  SupabaseClient.upsertProduct = async function(data) {
-    return this.request('products', 'POST', data, { 'Prefer': 'resolution=merge-duplicates,return=representation' });
-  };
-  SupabaseClient.updateProduct = async function(id, data) {
-    return this.request(`products?id=eq.${encodeURIComponent(id)}`, 'PATCH', data, { 'Prefer': 'return=representation' });
-  };
-  SupabaseClient.deleteProduct = async function(id) {
-    return this.request(`products?id=eq.${encodeURIComponent(id)}`, 'DELETE');
-  };
-  SupabaseClient.upsertVariant = async function(data) {
-    return this.request('product_variants', 'POST', data, { 'Prefer': 'resolution=merge-duplicates,return=representation' });
-  };
-  SupabaseClient.updateVariant = async function(id, data) {
-    return this.request(`product_variants?id=eq.${encodeURIComponent(id)}`, 'PATCH', data, { 'Prefer': 'return=representation' });
-  };
-  SupabaseClient.deleteVariant = async function(id) {
-    return this.request(`product_variants?id=eq.${encodeURIComponent(id)}`, 'DELETE');
-  };
+function _renderBaseProduct(product, container) {
+  container.innerHTML = `
+    <div style="margin-bottom:24px">
+      <div style="padding:14px 16px;background:var(--cream);border:1px solid var(--border);font-size:12px">
+        <span style="color:var(--espresso);font-weight:500;font-size:18px">
+          ₹${product.sale_price.toLocaleString('en-IN')}
+        </span>
+        ${product.original_price > product.sale_price ? `
+          <s style="margin-left:10px;color:var(--sand)">₹${product.original_price.toLocaleString('en-IN')}</s>
+        ` : ''}
+      </div>
+    </div>`;
+    
+  const addBtn = document.getElementById('add-to-cart-btn');
+  if (addBtn) {
+    addBtn.onclick = () => {
+      Cart.add({
+        id: product.id,
+        name: product.name,
+        price: product.sale_price,
+        image: product.image
+      });
+    };
+  }
 }
 
 /* Backwards-compat: PRODUCTS array (legacy reference) */
