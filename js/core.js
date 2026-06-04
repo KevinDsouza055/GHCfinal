@@ -426,20 +426,7 @@ const Toast = {
 const ScrollReveal = {
   observer: null,
   init() {
-    if (!('IntersectionObserver' in window)) {
-      document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
-      return;
-    }
-    if (this.observer) this.observer.disconnect();
-    this.observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          this.observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
-    document.querySelectorAll('.reveal:not(.revealed)').forEach(el => this.observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
   }
 };
 
@@ -495,14 +482,8 @@ const Loader = {
   init() {
     const loader = document.getElementById('page-loader');
     if (!loader) return;
-    const hide = () => loader.classList.add('hidden');
-    if (document.readyState === 'complete') {
-      setTimeout(hide, 400);
-    } else {
-      window.addEventListener('load', () => setTimeout(hide, 400));
-      // Fallback if load event already fired
-      setTimeout(hide, 3000);
-    }
+    loader.classList.add('hidden');
+    loader.setAttribute('aria-hidden', 'true');
   }
 };
 
