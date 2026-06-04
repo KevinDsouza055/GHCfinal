@@ -42,7 +42,7 @@ const Security = {
 const CONFIG = {
   SUPABASE_URL:  'https://wtnkefyyhzyjrlvrtrdg.supabase.co',
   SUPABASE_KEY:  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0bmtlZnl5aHp5anJsdnJ0cmRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTM4OTYsImV4cCI6MjA5NjEyOTg5Nn0.GmNJU0fQX8jgTnb45lkouBYPYEDPzD7l0g0EdRy_3NE',
-  RAZORPAY_KEY:  'YOUR_RAZORPAY_KEY_ID',
+  RAZORPAY_KEY:  'rzp_test_SxTKeDc0rKT5pJ',
   STORE_PINCODE: '400050',            // Your Mumbai warehouse pincode
   FREE_SHIP_ABOVE: 999,               // Free shipping threshold (₹)
   BASE_SHIPPING:   99,                // Base shipping charge (₹)

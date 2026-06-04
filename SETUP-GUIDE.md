@@ -78,8 +78,8 @@ SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJl
 
 **`pages/admin.html`** (in ADMIN_CONFIG near top of script):
 ```js
-SUPABASE_URL: 'https://your-project.supabase.co',
-SUPABASE_KEY: 'your-anon-key',
+SUPABASE_URL: 'https://wtnkefyyhzyjrlvrtrdg.supabase.co',
+SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0bmtlZnl5aHp5anJsdnJ0cmRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA1NTM4OTYsImV4cCI6MjA5NjEyOTg5Nn0.GmNJU0fQX8jgTnb45lkouBYPYEDPzD7l0g0EdRy_3NE',
 ```
 
 That's it. The entire site now reads from Supabase.
