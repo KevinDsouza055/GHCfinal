@@ -45,12 +45,6 @@ const CONFIG = {
   ORDER_WHATSAPP:'917900187209',
 };
 
-/* ── DELIVERY ENGINE (Removed for Static Catalog) ──────────── */
-const DeliveryEngine = {};
-
-/* ── SUPABASE CLIENT (Removed for Static Catalog) ──────────── */
-const SupabaseClient = {};
-
 /* ── TOAST ─────────────────────────────────────────────────── */
 const Toast = {
   container: null,
@@ -362,24 +356,24 @@ const WhatsAppOrder = {
     const itemsStr = Cart.items.map(i => `• ${i.name} (x${i.qty})`).join('\n');
     const itemMeta = Cart.items[0]?.customData || {};
 
-    const message = `*✨ NEW INQUIRY | GRACE HOME ✨*\n` +
+    const message = `*✨ NEW INQUIRY | GRACE HOME ✨*\n\n` +
                     `_Order generated via Website_\n\n` +
-                    `*PRODUCT DETAILS*\n` +
-                    `-------------------------------\n` +
+                    `*📦 PRODUCT DETAILS*\n` +
+                    `------------------------------------------\n` +
                     `*Item:* ${Cart.items[0]?.name}\n` +
                     `*Price:* ₹${(Cart.items[0]?.price * Cart.items[0]?.qty).toLocaleString('en-IN')}\n` +
                     `*Scent:* ${itemMeta.scentType || scent}\n` +
                     (itemMeta.flower ? `*Flower Deco:* ${itemMeta.flower}\n` : '') +
                     `*Fragrance:* ${itemMeta.fragrance || frag}\n` +
                     `*Size/Type:* ${itemMeta.size || size}\n` +
-                    `*Notes:* ${itemMeta.notes || cust}\n` +
-                    `*Quantity:* ${Cart.items[0]?.qty}\n\n` +
-                    `-------------------------------\n\n` +
-                    `*CUSTOMER INFO*\n` +
+                    `*Quantity:* ${Cart.items[0]?.qty}\n` +
+                    `*Personalization:* ${itemMeta.notes || cust}\n` +
+                    `------------------------------------------\n\n` +
+                    `*👤 CUSTOMER INFO*\n` +
                     `*Name:* ${name}\n` +
-                    `*City:* ${city}\n\n` +
-                    `*MESSAGE*\n` +
-                    `"Hello Grace Home, I have finalized my selection. Please confirm availability and guide me on the next steps for payment."`;
+                    `*City:* ${city}\n` +
+                    `------------------------------------------\n\n` +
+                    `_Hello Grace Home, I have finalized my selection. Please confirm availability and guide me on the next steps for payment._`;
 
     const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');

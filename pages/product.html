@@ -146,6 +146,9 @@ async function initProductPage() {
   document.getElementById('page-desc').content         = product.short_desc || product.description || '';
   document.getElementById('breadcrumb-name').textContent = product.name;
 
+  // Helper to fix image paths for subfolder pages
+  const fixPath = (p) => (p && !p.startsWith('http') && !p.startsWith('../')) ? '../' + p : p;
+
   const variants    = ProductStore.getVariants(id);
   const defaultVar  = ProductStore.getDefaultVariant(id);
   const displayPrice = defaultVar
@@ -158,7 +161,9 @@ async function initProductPage() {
   const badges = (product.badges || []).map(b =>
     `<span class="badge badge-${b.toLowerCase().replace(/\s+/g,'-')}">${b}</span>`).join(' ');
 
-  const images  = product.images && product.images.length > 0 ? product.images : [product.image];
+  const rawImages = product.images && product.images.length > 0 ? product.images : [product.image];
+  const images    = rawImages.map(fixPath);
+
   const thumbs  = images.map((img, i) => `
     <div class="product-thumb ${i===0?'active':''}" data-img="${img}" tabindex="0" role="button" aria-label="View image ${i+1}">
       <img src="${img}" alt="${product.name} view ${i+1}" loading="lazy"

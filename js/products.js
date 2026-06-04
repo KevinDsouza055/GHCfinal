@@ -6,95 +6,35 @@
 
 /* ── Fallback data (used ONLY when Supabase is not configured) ── */
 const FALLBACK_PRODUCTS = [
-  { id:'azure-bloom', name:'Azure Bloom', type:'single', category:'scented',
+  { id:'azure-bloom', name:'Azure Bloom', type:'single', category:'jars',
     notes:'Jar Candle', short_desc:'Stunning blue-tinted candle with artisan aesthetics.',
     original_price:899, sale_price:599, badges:['Best Seller'],
     image:'assets/azurebloom.jpg',
     is_active:true, is_featured:true, sort_order:1 },
 
-  { id:'eternal-embrace', name:'Eternal Embrace', type:'single', category:'scented',
+  { id:'eternal-embrace', name:'Eternal Embrace', type:'single', category:'moulds',
     notes:'Mould Candle', short_desc:'Timeless sculptural piece for your home.',
     original_price:499, sale_price:299, badges:['Artistic'],
     image:'assets/eternalembrace.jpg',
     is_active:true, is_featured:true, sort_order:2 },
 
-  { id:'ivory-rose', name:'Ivory Rose', type:'single', category:'scented',
+  { id:'ivory-rose', name:'Ivory Rose', type:'single', category:'moulds',
     notes:'Mould Candle', short_desc:'Elegant rose sculpture in pure soy-coconut wax.',
     original_price:599, sale_price:399, badges:['Hand-crafted'],
     image:'assets/ivoryrose.jpg',
     is_active:true, is_featured:true, sort_order:3 },
 
-  { id:'rose-sculpture', name:'Rose Sculpture', type:'single', category:'scented',
+  { id:'rose-sculpture', name:'Rose Sculpture', type:'single', category:'moulds',
     notes:'Mould Candle', short_desc:'Intricate floral pillar candle.',
     original_price:549, sale_price:349, badges:['Trending'],
     image:'assets/rosesculpture.jpg',
     is_active:true, is_featured:true, sort_order:4 },
 
-  { id:'strawberry-milk', name:'Strawberry Milk', type:'single', category:'scented',
+  { id:'strawberry-milk', name:'Strawberry Milk', type:'single', category:'jars',
     notes:'Jar Candle', short_desc:'A sweet, creamy blend of fresh strawberries and cold milk.',
     original_price:799, sale_price:599, badges:['New Arrival'],
     image:'assets/strawberrymilk.jpg',
-    is_active:true, is_featured:true, sort_order:0 },
-
-  { id:'clear-jar', name:'Clear Glass Jar', type:'single', category:'scented',
-    notes:'Jar Candle', short_desc:'Elegant everyday clear glass.',
-    original_price:899, sale_price:699, badges:['Classic'],
-    image:'assets/strawberrymilk.jpg',
-    is_active:true, is_featured:true, sort_order:1 },
-
-  { id:'amber-jar', name:'Amber Apothecary Jar', type:'single', category:'scented',
-    notes:'Jar Candle', short_desc:'Warm, vintage apothecary feel.',
-    original_price:1099, sale_price:849, badges:['Bestseller'],
-    image:'assets/strawberrymilk.jpg',
-    is_active:true, is_featured:true, sort_order:2 },
-
-  { id:'midnight-jar', name:'Midnight Matte Jar', type:'single', category:'scented',
-    notes:'Jar Candle', short_desc:'Luxury matte black glass.',
-    original_price:1199, sale_price:999, badges:['Luxury'],
-    image:'assets/strawberrymilk.jpg',
-    is_active:true, is_featured:true, sort_order:3 },
-
-  { id:'venus-pillar', name:'Venus Sculpture Mould', type:'single', category:'unscented',
-    notes:'Mould Candle', short_desc:'Artistic silhouette decor.',
-    original_price:799, sale_price:599, badges:['Sculptural'],
-    image:'assets/strawberrymilk.jpg',
-    is_active:true, is_featured:true, sort_order:4 },
-
-  { id:'bubble-cube', name:'Bubble Cube Mould', type:'single', category:'unscented',
-    notes:'Mould Candle', short_desc:'Modern geometric aesthetic.',
-    original_price:699, sale_price:449, badges:['Trending'],
-    image:'assets/strawberrymilk.jpg',
-    is_active:true, is_featured:true, sort_order:5 },
-
-  { id:'heart-mould', name:'Geometric Heart Mould', type:'single', category:'unscented',
-    notes:'Mould Candle', short_desc:'Perfect for romantic gifting.',
-    original_price:599, sale_price:399, badges:['Gift Idea'],
-    image:'assets/strawberrymilk.jpg',
-    is_active:true, is_featured:true, sort_order:6 },
-
-  { id:'gift-duo', name:'The Signature Duo', type:'gift_set', category:'both',
-    notes:'Velvet Vanilla + Cashmere Rose', short_desc:'Two bestsellers in one luxury box.',
-    description:'Two bestselling Grace Home candles in our signature gift box.',
-    burn_time:'60–70 hours each', original_price:2698, sale_price:2199, badges:['Gift Set'],
-    image:'assets/strawberrymilk.jpg',
-    images:['assets/strawberrymilk.jpg'],
-    is_active:true, is_featured:true, sort_order:10 },
-
-  { id:'gift-complete', name:'The Complete Set', type:'gift_set', category:'both',
-    notes:'All 5 Signature Fragrances', short_desc:'The ultimate Grace Home experience.',
-    description:'All five signature candles in one grand presentation box.',
-    burn_time:'55–80 hours each', original_price:6745, sale_price:5499, badges:['Gift Set','Most Gifted'],
-    image:'assets/strawberrymilk.jpg',
-    images:['assets/strawberrymilk.jpg'],
-    is_active:true, is_featured:true, sort_order:11 },
-
-  { id:'gift-evening', name:'The Evening Ritual', type:'gift_set', category:'scented',
-    notes:'Midnight Oud + Lavender Silk', short_desc:'From dusk to sleep.',
-    description:'Two candles curated for the evening — bold Midnight Oud then calming Lavender Silk.',
-    burn_time:'55–75 hours each', original_price:3298, sale_price:2899, badges:['Gift Set','New'],
-    image:'assets/strawberrymilk.jpg',
-    images:['assets/strawberrymilk.jpg'],
-    is_active:true, is_featured:false, sort_order:12 }
+    is_active:true, is_featured:true, sort_order:0 }
 ];
 
 const FALLBACK_VARIANTS = {}; // No longer used for static catalog
@@ -144,16 +84,23 @@ function renderProductCard(product, index = 0) {
   const hasVariants = (ProductStore.getVariants(product.id) || []).length > 1;
   const varLabel = hasVariants ? '<span style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-left:6px">+ Options</span>' : '';
 
+  // Detect if we are in a subfolder (like /pages/) to fix image path
+  const isSubPage = window.location.pathname.includes('/pages/');
+  const imagePath = isSubPage ? '../' + product.image : product.image;
+
   return `
     <article class="product-card reveal reveal-delay-${(index % 4) + 1}"
       data-product-id="${product.id}"
       style="cursor:pointer"
-      onclick="if(!event.target.closest('button'))window.location.href='product.html?id=${product.id}'">
+      onclick="if(!event.target.closest('button')) { 
+        const url = window.location.pathname.includes('/pages/') ? 'product.html' : 'pages/product.html';
+        window.location.href = url + '?id=${product.id}';
+      }">
       <div class="product-image-wrap">
-        <img src="${product.image || ''}" alt="${product.name}" loading="lazy"
-          onerror="this.src='assets/strawberrymilk.jpg'">
+        <img src="${imagePath}" alt="${product.name}" loading="lazy"
+          onerror="this.src='${isSubPage ? '../' : ''}assets/strawberrymilk.jpg'">
         <div class="product-badge">${badges}</div>
-        ${product.category === 'both' || product.type !== 'single' ? '' : `
+        ${product.type !== 'single' ? '' : `
         <div class="product-quick-add">
           <button class="btn btn-primary btn-sm btn-full"
             onclick="event.stopPropagation();ProductStore.quickAdd('${product.id}', event)">
@@ -173,22 +120,13 @@ function renderProductCard(product, index = 0) {
     </article>`;
 }
 
-/* Quick add — for products without variants, add directly; else go to product page */
-ProductStore.quickAdd = function(productId, event) {
+/* Quick add — Redirects to product page to ensure customization lock workflow */
+ProductStore.quickAdd = function(productId) {
   const product = this.getById(productId);
   if (!product) return;
-  // For static catalog, always add the base product to cart
-  Cart.add({
-    id:            product.id,
-    name:          product.name,
-    notes:         product.notes || '',
-    price:         product.sale_price, // Use sale price as base
-    originalPrice: product.original_price,
-    image:         product.image || ''
-  });
-  // No variants selection on quick add, customization happens in cart drawer
-  event.target.textContent = 'Added!';
-  setTimeout(() => event.target.textContent = 'Add to Inquiry', 1000);
+  const isSubPage = window.location.pathname.includes('/pages/');
+  const url = isSubPage ? 'product.html' : 'pages/product.html';
+  window.location.href = `${url}?id=${product.id}`;
 };
 
 /* ── Variant Selector UI (used on product detail page) ────── */

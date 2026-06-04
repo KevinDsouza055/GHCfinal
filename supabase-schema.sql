@@ -270,44 +270,11 @@ CREATE TRIGGER trg_orders_updated_at
 INSERT INTO products (id,name,type,category,notes,short_desc,description,fragrance_top,fragrance_mid,fragrance_base,
   burn_time,original_price,sale_price,badges,image,images,is_active,is_featured,is_bestseller,sort_order)
 VALUES
-('azure-bloom','Azure Bloom','single','scented','Jar Candle','Blue-tinted artisan jar candle.','Stunning blue-tinted candle featuring delicate floral aesthetics.',NULL,NULL,NULL,NULL,899,599,ARRAY['Best Seller'],'assets/azurebloom.jpg',NULL,TRUE,TRUE,FALSE,1),
-('eternal-embrace','Eternal Embrace','single','scented','Mould Candle','Timeless sculptural piece.','A beautiful sculptural candle crafted to bring art into your home.',NULL,NULL,NULL,NULL,499,299,ARRAY['Artistic'],'assets/eternalembrace.jpg',NULL,TRUE,TRUE,FALSE,2),
-('ivory-rose','Ivory Rose','single','scented','Mould Candle','Elegant rose sculpture.','Intricate ivory rose pillar crafted from premium soy-coconut wax.',NULL,NULL,NULL,NULL,599,399,ARRAY['Hand-crafted'],'assets/ivoryrose.jpg',NULL,TRUE,TRUE,FALSE,3),
-('rose-sculpture','Rose Sculpture','single','scented','Mould Candle','Intricate floral pillar.','A detailed rose sculpture designed for aesthetic home decor.',NULL,NULL,NULL,NULL,549,349,ARRAY['Trending'],'assets/rosesculpture.jpg',NULL,TRUE,TRUE,FALSE,4),
-('strawberry-milk','Strawberry Milk','single','scented','Jar Candle','Creamy strawberry blend.','A sweet, creamy blend of fresh strawberries and cold milk.',NULL,NULL,NULL,NULL,799,599,ARRAY['New Arrival'],'assets/strawberrymilk.jpg',NULL,TRUE,TRUE,FALSE,0),
-('classic-jar','Classic Clear Jar','single','scented','Custom Fragrance','Elegant jar candle.',NULL,NULL,NULL,NULL,NULL,899,699,ARRAY['Best Value'],'assets/strawberrymilk.jpg',NULL,TRUE,TRUE,FALSE,5),
-('amber-jar','Premium Amber Jar','single','scented','Custom Fragrance','Apothecary style.','Vintage jar for warm glow.',NULL,NULL,NULL,NULL,1099,849,ARRAY['Bestseller'],'assets/strawberrymilk.jpg',NULL,TRUE,TRUE,TRUE,6),
-('midnight-jar','Midnight Glass Jar','single','scented','Custom Fragrance','Minimalist jar.','Matte black luxury glass.',NULL,NULL,NULL,NULL,1199,999,ARRAY['Luxury'],'assets/strawberrymilk.jpg',NULL,TRUE,TRUE,FALSE,3),
-('venus-mould','Venus Pillar','single','unscented','Hand-poured Mould','Iconic silhouette.','Classic Venus de Milo silhouette.',NULL,NULL,NULL,NULL,799,599,ARRAY['Decor'],'assets/strawberrymilk.jpg',NULL,TRUE,TRUE,FALSE,4),
-('bubble-mould','Bubble Cube','single','unscented','Hand-poured Mould','Modern cube.','Geometric bubble cube design.',NULL,NULL,NULL,NULL,699,449,ARRAY['Trending'],'assets/strawberrymilk.jpg',NULL,TRUE,TRUE,FALSE,5),
-('heart-mould','Geometric Heart','single','unscented','Hand-poured Mould','Romantic heart.','Sharp geometric heart pillar.',NULL,NULL,NULL,NULL,599,399,ARRAY['Gift Idea'],'assets/strawberrymilk.jpg',NULL,TRUE,TRUE,FALSE,6),
-
-('cashmere-rose','Signature Rose','single','scented',
- 'Centifolia Rose · Cashmere Wood · Peony','Infinitely feminine. Quietly powerful.',
- 'A bouquet of centifolia rose at full bloom, softened by cashmere wood and the tender blush of peony.',
- 'Pink Peony & Bergamot','Centifolia Rose','Cashmere Wood & Vanilla','60–70 hours',
- 1699,1349,ARRAY['New'],
- 'assets/strawberrymilk.jpg',
- ARRAY['assets/strawberrymilk.jpg'],
- TRUE,FALSE,FALSE,7),
-
-('amber-sandalwood','Amber Sandalwood','single','scented',
- 'Mysore Sandalwood · Golden Amber · Vetiver','Sun-warmed skin and sacred wood.',
- 'The richness of Mysore sandalwood married with golden amber resin and earthy vetiver.',
- 'Bergamot & Cardamom','Mysore Sandalwood & Amber','Vetiver & Tonka Bean','70–80 hours',
- 1699,1299,ARRAY['Bestseller'],
- 'assets/strawberrymilk.jpg',
- ARRAY['assets/strawberrymilk.jpg'],
- TRUE,FALSE,TRUE,8),
-
-('lavender-silk','Lavender Silk','single','scented',
- 'Provençal Lavender · White Tea · Musk','The art of doing nothing, beautifully.',
- 'Fields of Provençal lavender drift over delicate white tea and a barely-there silk musk.',
- 'Lavender & Eucalyptus','White Tea & Iris','Silk Musk & Cedarwood','55–65 hours',
- 1499,1149,ARRAY['New'],
- 'assets/strawberrymilk.jpg',
- ARRAY['assets/strawberrymilk.jpg'],
- TRUE,FALSE,FALSE,9)
+('azure-bloom','Azure Bloom','single','jars','Jar Candle','Blue-tinted artisan jar candle.','Stunning blue-tinted candle featuring delicate floral aesthetics.',NULL,NULL,NULL,NULL,899,599,ARRAY['Best Seller'],'assets/azurebloom.jpg',NULL,TRUE,TRUE,FALSE,1),
+('eternal-embrace','Eternal Embrace','single','moulds','Mould Candle','Timeless sculptural piece.','A beautiful sculptural candle crafted to bring art into your home.',NULL,NULL,NULL,NULL,499,299,ARRAY['Artistic'],'assets/eternalembrace.jpg',NULL,TRUE,TRUE,FALSE,2),
+('ivory-rose','Ivory Rose','single','moulds','Mould Candle','Elegant rose sculpture.','Intricate ivory rose pillar crafted from premium soy-coconut wax.',NULL,NULL,NULL,NULL,599,399,ARRAY['Hand-crafted'],'assets/ivoryrose.jpg',NULL,TRUE,TRUE,FALSE,3),
+('rose-sculpture','Rose Sculpture','single','moulds','Mould Candle','Intricate floral pillar.','A detailed rose sculpture designed for aesthetic home decor.',NULL,NULL,NULL,NULL,549,349,ARRAY['Trending'],'assets/rosesculpture.jpg',NULL,TRUE,TRUE,FALSE,4),
+('strawberry-milk','Strawberry Milk','single','jars','Jar Candle','Creamy strawberry blend.','A sweet, creamy blend of fresh strawberries and cold milk.',NULL,NULL,NULL,NULL,799,599,ARRAY['New Arrival'],'assets/strawberrymilk.jpg',NULL,TRUE,TRUE,FALSE,0)
 ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════

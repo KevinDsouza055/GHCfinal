@@ -93,9 +93,8 @@
     <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
       <span style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted)">Filter:</span>
       <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="bestseller">Bestsellers</button>
-      <button class="filter-btn" data-filter="new">New Arrivals</button>
-      <button class="filter-btn" data-filter="gifts">Gift Sets</button>
+      <button class="filter-btn" data-filter="jars">Jars</button>
+      <button class="filter-btn" data-filter="moulds">Moulds</button>
     </div>
   </div>
 </div>
@@ -168,9 +167,8 @@
     const noResults = document.getElementById('no-results');
     let filtered = PRODUCTS;
 
-    if (filter === 'bestseller') filtered = PRODUCTS.filter(p => p.is_bestseller || (p.badges||[]).includes('Bestseller'));
-    else if (filter === 'new')   filtered = PRODUCTS.filter(p => (p.badges||[]).includes('New'));
-    else if (filter === 'gifts') filtered = PRODUCTS.filter(p => p.type === 'gift_set' || p.type === 'bundle');
+    if (filter === 'jars') filtered = PRODUCTS.filter(p => p.category === 'jars');
+    else if (filter === 'moulds') filtered = PRODUCTS.filter(p => p.category === 'moulds');
 
     if (filtered.length === 0) {
       grid.innerHTML = '';
