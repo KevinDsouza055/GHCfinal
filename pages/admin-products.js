@@ -14,6 +14,8 @@ Object.assign(Admin, {
     const tbody = document.getElementById('products-body');
     if (!tbody) return;
 
+    const fixPath = (p) => (p && !p.startsWith('http') && !p.startsWith('../')) ? '../' + p : p;
+
     if (!products.length) {
       tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--muted)">
         No products yet. <button onclick="Admin.openProductModal()" style="color:var(--gold);background:none;border:none;cursor:pointer;font-size:13px;text-decoration:underline">Add your first product →</button>
@@ -23,7 +25,7 @@ Object.assign(Admin, {
 
     tbody.innerHTML = products.map(p => `
       <tr>
-        <td><img src="${esc(p.image||'')}" class="product-row-img" alt="${esc(p.name)}"
+        <td><img src="${fixPath(p.image||'')}" class="product-row-img" alt="${esc(p.name)}"
           onerror="this.style.background='var(--cashmere)'" loading="lazy"></td>
         <td>
           <strong style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400">${esc(p.name)}</strong>

@@ -989,9 +989,10 @@ const Admin = {
   /* ── Products ── */
   renderProducts() {
     const products = this.allProducts.length ? this.allProducts : this.demoProducts();
+    const fixPath = (p) => (p && !p.startsWith('http') && !p.startsWith('../')) ? '../' + p : p;
     document.getElementById('products-body').innerHTML = products.map(p => `
       <tr>
-        <td><img src="${esc(p.image||'')}" class="product-row-img" alt="${esc(p.name)}" loading="lazy" onerror="this.style.background='var(--cashmere)'"></td>
+        <td><img src="${fixPath(p.image||'')}" class="product-row-img" alt="${esc(p.name)}" loading="lazy" onerror="this.style.background='var(--cashmere)'"></td>
         <td>
           <strong style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400">${esc(p.name)}</strong>
           <div style="font-size:10px;color:var(--muted);margin-top:2px">${esc(p.size||'300g')} · ${esc(p.wax||'Coconut-Soy')}</div>

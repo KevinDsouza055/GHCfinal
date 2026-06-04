@@ -181,14 +181,14 @@
             <div id="form-errors" style="display:none;background:#FDF2F2;border:1px solid #F5C6CB;border-left:3px solid #C0665A;padding:14px 18px;margin-bottom:20px;font-size:13px;color:#721C24" role="alert" aria-live="assertive"></div>
 
             <button type="submit" class="btn btn-primary btn-lg btn-full" id="pay-btn">
-              <span id="pay-btn-text">Proceed to Payment</span>
+              <span id="pay-btn-text">Send Order via WhatsApp</span>
             </button>
 
             <p style="font-size:11px;color:var(--muted);margin-top:14px;text-align:center;line-height:1.7">
               By placing your order you agree to our
               <a href="terms.html" style="color:var(--gold);text-decoration:underline" target="_blank">Terms</a>
               &amp; <a href="privacy-policy.html" style="color:var(--gold);text-decoration:underline" target="_blank">Privacy Policy</a>.
-              All payments secured by Razorpay.
+              Direct inquiry via WhatsApp.
             </p>
           </form>
         </div>
@@ -313,7 +313,7 @@ async function handlePincodeInput(pincode) {
   if (check) check.style.display = 'none';
   if (svcMsg) svcMsg.style.display = 'none';
 
-  const subtotal = Cart.total();
+  const subtotal = document.getElementById('summary-subtotal').textContent.replace(/\D/g,'');
   const info = await DeliveryEngine.getShipping(pincode, subtotal);
   currentShipping = info;
 
@@ -325,11 +325,12 @@ async function handlePincodeInput(pincode) {
   }
   if (check) check.style.display = 'block';
 
-  renderSummary(info.charge, info.label);
+  calcTotal();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderSummary(CONFIG.BASE_SHIPPING, '');
+document.addEventListener('DOMContentLoaded', async () => {
+  await ProductStore.load();
+  renderSummary();
 
   const pincodeInput = document.getElementById('pincode');
   if (pincodeInput) {
@@ -393,15 +394,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (errors.length) { showErrors(errors); return; }
 
-    payText.textContent = 'Opening Payment...';
+    payText.textContent = 'Opening WhatsApp...';
     payBtn.disabled = true;
 
     try {
       await Checkout.initPayment({ name, phone, email, address: addr, city, state, pincode: pin, giftMessage: gift, notes });
     } catch (err) {
-      Toast.show('Could not initiate payment. Please try again.', 'error');
+      Toast.show('Could not send message. Please try again.', 'error');
     } finally {
-      payText.textContent = 'Proceed to Payment';
+      payText.textContent = 'Send Order via WhatsApp';
       payBtn.disabled = false;
     }
   });
