@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <title id="page-title">Product — Grace Home Candles</title>
+  <meta name="description" id="page-desc" content="Luxury hand-poured candles by Grace Home.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+
+<div id="page-loader" class="page-loader" role="status">
+  <div><div class="loader-logo">Grace <span>Home</span></div><div class="loader-bar"></div></div>
+</div>
+
+<div id="cart-overlay" class="cart-overlay" aria-hidden="true"></div>
+<aside id="cart-drawer" class="cart-drawer" aria-hidden="true" aria-label="Shopping Cart">
+  <div class="cart-header">
+    <h2 class="cart-title">Your Cart</h2>
+    <button class="cart-close" data-cart-close aria-label="Close cart">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="cart-footer" id="cart-footer" style="display:none">
+    <div class="cart-subtotal"><span class="cart-subtotal-label">Subtotal</span><span class="cart-subtotal-amount" id="cart-subtotal">₹0</span></div>
+    <p class="cart-shipping-note" id="cart-shipping-note"></p>
+    <div class="cart-actions">
+      <a href="checkout.html" class="btn btn-primary btn-full"><span>Proceed to Checkout</span></a>
+    </div>
+  </div>
+</aside>
+
+<nav id="mobile-nav" class="mobile-nav">
+  <button id="mobile-nav-close" class="mobile-nav-close">✕</button>
+  <a href="../index.html" class="mobile-nav-link">Home</a>
+  <a href="shop.html" class="mobile-nav-link">Shop</a>
+  <a href="about.html" class="mobile-nav-link">Our Story</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+</nav>
+
+<header id="site-header" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <nav class="nav-left">
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="about.html" class="nav-link">Our Story</a>
+        <a href="gifting.html" class="nav-link">Gifting</a>
+      </nav>
+      <a href="../index.html" class="nav-logo">Grace <span>Home</span></a>
+      <div class="nav-right">
+        <a href="contact.html" class="nav-link">Contact</a>
+        <button class="nav-icon-btn" data-cart-open aria-label="Open cart">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
+          <span class="cart-count"></span>
+        </button>
+        <button class="hamburger" id="mobile-nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:80px">
+  <div class="container">
+    <nav class="breadcrumb" style="padding-top:28px" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="shop.html">Shop</a>
+      <span class="breadcrumb-sep">/</span>
+      <span id="breadcrumb-name" aria-current="page">Product</span>
+    </nav>
+  </div>
+
+  <!-- Product Detail -->
+  <div class="container">
+    <div id="product-detail-wrap" class="product-detail">
+      <!-- Skeleton loader -->
+      <div style="aspect-ratio:3/4;background:var(--cashmere);animation:shimmer 1.5s infinite"
+           style="background:linear-gradient(90deg,var(--cream) 25%,var(--cashmere) 50%,var(--cream) 75%);background-size:200% 100%"></div>
+      <div style="padding-top:20px">
+        <div style="height:12px;width:60%;background:var(--cashmere);margin-bottom:12px"></div>
+        <div style="height:32px;width:80%;background:var(--cashmere);margin-bottom:20px"></div>
+        <div style="height:16px;width:40%;background:var(--cashmere)"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Products -->
+  <section style="background:var(--cream);padding:80px 0;margin-top:60px">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:44px">
+        <p class="overline">You May Also Love</p>
+        <h2 class="display-sm">Related Candles</h2>
+      </div>
+      <div class="products-grid" id="related-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom" style="padding:32px 0">
+      <p>© <span id="current-year"></span> Grace Home Candles. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="return-policy.html">Returns</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+<script src="../js/products.js"></script>
+<script src="../js/core.js"></script>
+<script>
+document.getElementById('current-year').textContent = new Date().getFullYear();
+
+async function initProductPage() {
+  const params  = new URLSearchParams(window.location.search);
+  const id      = params.get('id');
+  const wrap    = document.getElementById('product-detail-wrap');
+
+  // Load product store (Supabase or fallback)
+  await ProductStore.load();
+
+  const product = ProductStore.getById(id);
+
+  if (!product) {
+    wrap.innerHTML = `
+      <div style="text-align:center;padding:80px;grid-column:1/-1">
+        <p class="overline" style="margin-bottom:12px">Not Found</p>
+        <h2 class="display-sm" style="margin-bottom:20px">Product not found</h2>
+        <a href="shop.html" class="btn btn-outline"><span>Back to Shop</span></a>
+      </div>`;
+    return;
+  }
+
+  // Update meta
+  document.getElementById('page-title').textContent    = `${product.name} — Grace Home Candles`;
+  document.getElementById('page-desc').content         = product.short_desc || product.description || '';
+  document.getElementById('breadcrumb-name').textContent = product.name;
+
+  const variants    = ProductStore.getVariants(id);
+  const defaultVar  = ProductStore.getDefaultVariant(id);
+  const displayPrice = defaultVar
+    ? { sale: defaultVar.sale_price, original: defaultVar.original_price }
+    : { sale: product.sale_price,    original: product.original_price };
+
+  const savings = displayPrice.original - displayPrice.sale;
+  const pct     = savings > 0 ? Math.round((savings / displayPrice.original) * 100) : 0;
+
+  const badges = (product.badges || []).map(b =>
+    `<span class="badge badge-${b.toLowerCase().replace(/\s+/g,'-')}">${b}</span>`).join(' ');
+
+  const images  = product.images && product.images.length > 0 ? product.images : [product.image];
+  const thumbs  = images.map((img, i) => `
+    <div class="product-thumb ${i===0?'active':''}" data-img="${img}" tabindex="0" role="button" aria-label="View image ${i+1}">
+      <img src="${img}" alt="${product.name} view ${i+1}" loading="lazy"
+        onerror="this.parentElement.style.display='none'">
+    </div>`).join('');
+
+  const isBundle = product.type === 'gift_set' || product.type === 'bundle';
+
+  wrap.innerHTML = `
+    <!-- Gallery -->
+    <div class="product-gallery">
+      <div class="product-main-image" id="main-image-wrap" tabindex="0" aria-label="Product image">
+        <img id="main-image" src="${images[0]}" alt="${product.name}" loading="eager"
+          onerror="this.src='https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=800&q=85'">
+      </div>
+      ${images.length > 1 ? `<div class="product-thumbs" role="list">${thumbs}</div>` : ''}
+    </div>
+
+    <!-- Info -->
+    <div class="product-info">
+      ${badges ? `<div style="margin-bottom:12px">${badges}</div>` : ''}
+      <p class="overline" style="margin-bottom:10px">${product.notes || ''}</p>
+      <h1 class="display-md" style="margin-bottom:14px">${product.name}</h1>
+
+      <!-- Price display (updated by variant selector) -->
+      <div class="product-pricing" style="margin-bottom:24px">
+        <span class="price-sale" id="product-price-sale" style="font-size:32px">
+          ₹${displayPrice.sale.toLocaleString('en-IN')}
+        </span>
+        ${displayPrice.original > displayPrice.sale ? `
+        <span class="price-original" id="product-price-orig">
+          ₹${displayPrice.original.toLocaleString('en-IN')}
+        </span>` : '<span id="product-price-orig"></span>'}
+        ${pct > 0 ? `<span class="price-savings">Save ${pct}%</span>` : ''}
+      </div>
+
+      <!-- Variant Selector -->
+      ${variants.length > 0 ? `<div id="variant-selector"></div>` : ''}
+
+      <!-- Description -->
+      <p class="product-desc">${product.description || ''}</p>
+
+      <!-- Specs -->
+      <div class="product-specs">
+        ${product.fragrance_top ? `<div class="spec-row"><span class="spec-label">Top Notes</span><span class="spec-value">${product.fragrance_top}</span></div>` : ''}
+        ${product.fragrance_mid ? `<div class="spec-row"><span class="spec-label">Heart Notes</span><span class="spec-value">${product.fragrance_mid}</span></div>` : ''}
+        ${product.fragrance_base? `<div class="spec-row"><span class="spec-label">Base Notes</span><span class="spec-value">${product.fragrance_base}</span></div>` : ''}
+        ${product.burn_time     ? `<div class="spec-row"><span class="spec-label">Burn Time</span><span class="spec-value">${product.burn_time}</span></div>` : ''}
+        ${product.size          ? `<div class="spec-row"><span class="spec-label">Size</span><span class="spec-value">${product.size}</span></div>` : ''}
+        ${product.wax           ? `<div class="spec-row"><span class="spec-label">Wax</span><span class="spec-value">${product.wax}</span></div>` : ''}
+        ${product.wick          ? `<div class="spec-row"><span class="spec-label">Wick</span><span class="spec-value">${product.wick}</span></div>` : ''}
+        ${isBundle              ? `<div class="spec-row"><span class="spec-label">What's Included</span><span class="spec-value">${product.notes}</span></div>` : ''}
+      </div>
+
+      <!-- Actions -->
+      <div class="product-actions">
+        <button id="add-to-cart-btn" class="btn btn-primary btn-lg btn-full">
+          <span>Add to Cart — ₹${displayPrice.sale.toLocaleString('en-IN')}</span>
+        </button>
+        <a href="checkout.html" class="btn btn-outline btn-lg btn-full"
+          onclick="
+            const dv = ProductStore.getDefaultVariant('${product.id}');
+            Cart.add({
+              id: dv ? '${product.id}__'+dv.id : '${product.id}',
+              name: '${product.name.replace(/'/g,"\\'")}',
+              notes: dv ? dv.variant_name : '${(product.notes||'').replace(/'/g,"\\'")}',
+              price: dv ? dv.sale_price : ${product.sale_price},
+              originalPrice: dv ? dv.original_price : ${product.original_price},
+              image: '${(product.image||'').replace(/'/g,"\\'")}',
+              variantId: dv ? dv.id : null
+            });
+          ">
+          <span>Buy Now</span>
+        </a>
+      </div>
+
+      <!-- Assurances -->
+      <div class="product-assurances">
+        <div class="assurance-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
+          Free shipping ₹999+
+        </div>
+        <div class="assurance-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+          7-day returns
+        </div>
+        <div class="assurance-item">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+          Secure payment
+        </div>
+      </div>
+    </div>`;
+
+  // Thumbnail click
+  document.querySelectorAll('.product-thumb').forEach(thumb => {
+    const activate = () => {
+      document.getElementById('main-image').src = thumb.dataset.img;
+      document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+    };
+    thumb.addEventListener('click',   activate);
+    thumb.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') activate(); });
+  });
+
+  // Initialize variant selector (this also wires up Add to Cart button)
+  if (variants.length > 0) {
+    renderVariantSelector(product, 'variant-selector');
+  } else {
+    // No variants — wire Add to Cart directly
+    const addBtn = document.getElementById('add-to-cart-btn');
+    if (addBtn) {
+      addBtn.onclick = () => Cart.add({
+        id:            product.id,
+        name:          product.name,
+        notes:         product.notes || '',
+        price:         product.sale_price,
+        originalPrice: product.original_price,
+        image:         product.image || ''
+      });
+    }
+  }
+
+  // Related products (exclude current, show 3)
+  const related = ProductStore.getAll().filter(p => p.id !== id).slice(0, 3);
+  const relGrid = document.getElementById('related-grid');
+  if (relGrid && related.length) {
+    relGrid.innerHTML = related.map((p, i) => renderProductCard(p, i)).join('');
+    relGrid.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('button')) return;
+        window.location.href = `product.html?id=${card.dataset.productId}`;
+      });
+    });
+  }
+
+  ScrollReveal.init();
+}
+
+document.addEventListener('DOMContentLoaded', initProductPage);
+</script>
+</body>
+</html>
