@@ -154,13 +154,12 @@ const CartDrawer = {
   },
   render() {
     const body = document.getElementById('cart-body');
-    const footer = document.getElementById('cart-footer');
     if (!body || Cart.items.length === 0) {
       if(body) body.innerHTML = `<div style="text-align:center;padding:40px;color:var(--muted)">Your inquiry list is empty</div>`;
-      if(footer) footer.style.display = 'none';
+      if(document.getElementById('cart-footer')) document.getElementById('cart-footer').style.display = 'none';
       return;
     }
-    if(footer) footer.style.display = 'block';
+    if(document.getElementById('cart-footer')) document.getElementById('cart-footer').style.display = 'block';
 
     const isSubPage = window.location.pathname.includes('/pages/');
     const fixPath = (p) => (p && !p.startsWith('http') && !p.startsWith('../')) ? (isSubPage ? '../' + p : p) : p;
@@ -179,8 +178,195 @@ const CartDrawer = {
         </div>
       </div>`).join('');
 
+    html += `
+      <div style="margin-top:24px">
+        <button onclick="CartDrawer.setStep('details')" class="btn btn-primary btn-full" style="width:100%">
+          <span>Proceed to Inquiry Details</span>
+        </button>
+      </div>`;
     body.innerHTML = html;
+    } else {
+      // STEP 2: IMPORTANT QUESTIONS
+      body.innerHTML = `
+        <div id="inquiry-form" style="padding-bottom:20px;padding-top:10px">
+          <button onclick="CartDrawer.setStep('review')" style="background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;margin-bottom:16px;padding:0">← Back to Items</button>
+          <p style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Your Details & Customization</p>
+          
+          <label class="pm-label" style="display:block;font-size:11px;margin-bottom:4px;color:var(--muted)">FULL NAME</label>
+          <input type="text" id="inq-name" placeholder="Your Name" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border-dark);background:var(--ivory)">
+          
+          <label class="pm-label" style="display:block;font-size:11px;margin-bottom:4px;color:var(--muted)">CITY</label>
+          <input type="text" id="inq-city" placeholder="e.g. Mumbai" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border-dark);background:var(--ivory)">
+          
+          <label class="pm-label" style="display:block;font-size:11px;margin-bottom:4px;color:var(--muted)">SCENT PREFERENCE</label>
+          <select id="inq-scent-type" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border-dark);background:var(--ivory)">
+            <option value="Scented">Scented</option>
+            <option value="Unscented">Unscented</option>
+          </select>
+
+          <label class="pm-label" style="display:block;font-size:11px;margin-bottom:4px;color:var(--muted)">FRAGRANCE CHOICE</label>
+          <select id="inq-fragrance" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border-dark);background:var(--ivory)">
+            <option value="Lavender">Lavender</option><option value="Jasmine">Jasmine</option>
+            <option value="Rose">Rose</option><option value="Vanilla">Vanilla</option>
+            <option value="Chocolate">Chocolate</option><option value="Coffee">Coffee</option>
+            <option value="Sandalwood">Sandalwood</option><option value="Oud">Oud</option>
+            <option value="Amber">Amber</option><option value="Custom">Custom (Write below)</option>
+          </select>
+          
+          <label class="pm-label" style="display:block;font-size:11px;margin-bottom:4px;color:var(--muted)">JAR SIZE (IF APPLICABLE)</label>
+          <select id="inq-jar-size" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border-dark);background:var(--ivory)">
+            <option value="N/A">Not Applicable (Moulds)</option>
+            <option value="190ml">190ml</option>
+            <option value="220ml">220ml</option>
+            <option value="350ml">350ml</option>
+          </select>
+
+          <label class="pm-label" style="display:block;font-size:10px;margin-bottom:4px;color:var(--muted)">CUSTOMIZATION / REQUESTS</label>
+          <textarea id="inq-custom" placeholder="e.g. 'Gift wrap for birthday', 'Delivery on Saturday'" style="width:100%;padding:10px;height:80px;border:1px solid var(--border-dark);font-family:inherit;background:var(--ivory)"></textarea>
+          
+          <button onclick="WhatsAppOrder.sendFromCart()" class="btn btn-primary btn-full" style="margin-top:20px;width:100%;background:var(--green);border-color:var(--green)">
+            <span>Send Inquiry to WhatsApp</span>
+          </button>
+        </div>`;
+    }
   }
+};
+
+/* ── CUSTOM CANDLE ENGINE ─────────────────────────────────── */
+const CustomCandle = {
+  selectedColor: 'White',
+  
+  init() {
+    const form = document.getElementById('custom-candle-form');
+    if (!form) {
+      console.warn('CustomCandle: form #custom-candle-form not found');
+      return;
+    }
+
+    this.renderColors();
+    this.populateMouldStyles();
+    this.setupListeners();
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.handleSubmit(new FormData(form));
+    });
+  },
+
+  renderColors() {
+    const colors = [
+      { name: 'White', hex: '#FFFFFF' }, { name: 'Black', hex: '#000000' },
+      { name: 'Red', hex: '#FF4D4D' }, { name: 'Pink', hex: '#FFB6C1' },
+      { name: 'Blue', hex: '#89CFF0' }, { name: 'Purple', hex: '#B19CD9' },
+      { name: 'Green', hex: '#77DD77' }, { name: 'Yellow', hex: '#FDFD96' },
+      { name: 'Beige', hex: '#F5F5DC' }, { name: 'Brown', hex: '#A52A2A' },
+      { name: 'Gold', hex: '#D4AF37' }
+    ];
+    const container = document.getElementById('color-swatches');
+    if (!container) return;
+    container.innerHTML = colors.map(c => `
+      <div class="swatch ${c.name === 'White' ? 'active' : ''}" 
+           style="background-color: ${c.hex}" 
+           onclick="CustomCandle.selectColor('${c.name}', this)"></div>
+    `).join('');
+  },
+
+  selectColor(name, el) {
+    this.selectedColor = name;
+    document.getElementById('selected-color').value = name;
+    if (document.getElementById('pv-color')) document.getElementById('pv-color').textContent = name;
+    document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+    el.classList.add('active');
+  },
+
+  async populateMouldStyles() {
+    await ProductStore.load();
+    // Filter products that are specifically moulds
+    const moulds = ProductStore.getAll().filter(p => p.category === 'moulds' || p.notes?.toLowerCase().includes('mould'));
+    const typeSelect = document.getElementById('candleType');
+    if (typeSelect) {
+      typeSelect.innerHTML = `<option value="" disabled selected>Choose a mould...</option>` + 
+        moulds.map(p => `<option value="${p.name}" data-img="${p.image}">${p.name}</option>`).join('');
+    }
+  },
+
+  toggleBaseType(type) {
+    const jarField = document.getElementById('jar-size-field');
+    const mouldField = document.getElementById('mould-style-field');
+    const pvSizeRow = document.getElementById('pv-size-row');
+    const pvStyleRow = document.getElementById('pv-style-row');
+
+    if (document.getElementById('pv-base-type')) document.getElementById('pv-base-type').textContent = type;
+
+    if (type === 'Jar') {
+      if (jarField) jarField.style.display = 'block';
+      if (mouldField) mouldField.style.display = 'none';
+      if (pvSizeRow) pvSizeRow.style.display = 'flex';
+      if (pvStyleRow) pvStyleRow.style.display = 'none';
+      if (document.getElementById('preview-image')) document.getElementById('preview-image').src = 'assets/heroghc.jpg';
+    } else {
+      if (jarField) jarField.style.display = 'none';
+      if (mouldField) mouldField.style.display = 'block';
+      if (pvSizeRow) pvSizeRow.style.display = 'none';
+      if (pvStyleRow) pvStyleRow.style.display = 'flex';
+    }
+  },
+
+  setupListeners() {
+    const typeSelect = document.getElementById('candleType');
+    const fragSelect = document.getElementById('fragrance');
+    const customQty  = document.getElementById('custom-qty');
+    
+    typeSelect?.addEventListener('change', () => {
+      const opt = typeSelect.options[typeSelect.selectedIndex];
+      if (document.getElementById('pv-style')) document.getElementById('pv-style').textContent = typeSelect.value;
+      if (opt.dataset.img && document.getElementById('preview-image')) {
+        const isSub = window.location.pathname.includes('/pages/');
+        document.getElementById('preview-image').src = isSub ? '../' + opt.dataset.img : opt.dataset.img;
+      }
+    });
+
+    fragSelect?.addEventListener('change', () => {
+      if (document.getElementById('pv-frag')) document.getElementById('pv-frag').textContent = fragSelect.value;
+    });
+
+    document.querySelectorAll('input[name="jarSize"]').forEach(input => {
+      input.addEventListener('change', () => { if (document.getElementById('pv-size')) document.getElementById('pv-size').textContent = input.value; });
+    });
+  },
+
+  handleSubmit(fd) {
+    const baseType = fd.get('baseType');
+    const data = {
+      name: fd.get('customerName'), phone: fd.get('customerPhone'), email: fd.get('customerEmail') || 'N/A',
+      baseType: baseType,
+      jarSize: baseType === 'Jar' ? fd.get('jarSize') : 'N/A',
+      mouldStyle: baseType === 'Mould' ? fd.get('candleType') : 'N/A',
+      fragrance: fd.get('fragrance'),
+      color: fd.get('color'), quantity: fd.get('quantity'), message: fd.get('customMessage') || 'None'
+    };
+
+    if ((baseType === 'Mould' && !data.mouldStyle) || !data.fragrance || !data.name || !data.phone) {
+      Toast.show('Please fill in all required fields.', 'error'); return;
+    }
+
+    const message = `*✨ NEW CUSTOM CANDLE INQUIRY ✨*\n\n` +
+                    `*👤 CUSTOMER*\nName: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\n\n` +
+                    `*🕯️ SPECIFICATIONS*\nType: ${data.baseType}\n` +
+                    (baseType === 'Jar' ? `Jar Size: ${data.jarSize}\n` : `Mould Style: ${data.mouldStyle}\n`) +
+                    `Fragrance: ${data.fragrance}\nColor: ${data.color}\nQty: ${data.quantity}\n\n` +
+                    `*📝 MESSAGE*\n${data.message}\n\n` +
+                    `_Inquiry from Grace Home Website_`;
+
+    window.open(`https://wa.me/917900187209?text=${encodeURIComponent(message)}`, '_blank');
+  }
+};
+
+window.changeQty = (delta) => {
+  const input = document.getElementById('custom-qty');
+  const newVal = Math.max(1, parseInt(input.value) + delta);
+  input.value = newVal;
+  if (document.getElementById('pv-qty')) document.getElementById('pv-qty').textContent = newVal;
 };
 
 /* ── SCROLL REVEAL ─────────────────────────────────────────── */
@@ -280,37 +466,18 @@ const NewsletterForm = {
 
 /* ── WHATSAPP ORDER ENGINE ────────────────────────────────── */
 const WhatsAppOrder = {
-  sendFromCart() {
-    const name = document.getElementById('inq-name')?.value || 'Valued Customer';
-    const city = document.getElementById('inq-city')?.value || 'Not Specified';
-    const scent = document.getElementById('inq-scent-type')?.value;
-    const frag = document.getElementById('inq-fragrance')?.value;
-    const size = document.getElementById('inq-jar-size')?.value;
-    const cust = document.getElementById('inq-custom')?.value || 'No special requests';
-
+  sendInquiryFromCart() {
     if (Cart.items.length === 0) return;
 
     const itemsStr = Cart.items.map(i => `• ${i.name} (x${i.qty})`).join('\n');
-    const itemMeta = Cart.items[0]?.customData || {};
 
-    const message = `*✨ NEW INQUIRY | GRACE HOME ✨*\n\n` +
+    const message = `*✨ NEW ENQUIRY | GRACE HOME ✨*\n\n` +
                     `_Order generated via Website_\n\n` +
-                    `*📦 PRODUCT DETAILS*\n` +
+                    `*📦 ITEMS REQUESTED*\n` +
                     `------------------------------------------\n` +
-                    `*Item:* ${Cart.items[0]?.name}\n` +
-                    `*Price:* ₹${(Cart.items[0]?.price * Cart.items[0]?.qty).toLocaleString('en-IN')}\n` +
-                    `*Scent:* ${itemMeta.scentType || scent}\n` +
-                    (itemMeta.flower ? `*Flower Deco:* ${itemMeta.flower}\n` : '') +
-                    `*Fragrance:* ${itemMeta.fragrance || frag}\n` +
-                    `*Size/Type:* ${itemMeta.size || size}\n` +
-                    `*Quantity:* ${Cart.items[0]?.qty}\n` +
-                    `*Personalization:* ${itemMeta.notes || cust}\n` +
+                    `${itemsStr}\n` +
                     `------------------------------------------\n\n` +
-                    `*👤 CUSTOMER INFO*\n` +
-                    `*Name:* ${name}\n` +
-                    `*City:* ${city}\n` +
-                    `------------------------------------------\n\n` +
-                    `_Hello Grace Home, I have finalized my selection. Please confirm availability and guide me on the next steps for payment._`;
+                    `_Hello Grace Home, I am interested in these candles. Please let me know the availability and total cost for my location._`;
 
     const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
@@ -344,4 +511,5 @@ document.addEventListener('DOMContentLoaded', () => {
   MobileNav.init();
   FAQ.init();
   NewsletterForm.init();
+  CustomCandle.init();
 });

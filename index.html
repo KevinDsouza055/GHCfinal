@@ -100,6 +100,9 @@
 <section class="hero" aria-labelledby="hero-headline">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="container">
+    <div class="hero-logo-centered reveal" aria-hidden="true">
+      <img src="assets/logoghc.jpg" alt="Grace Home Candles Logo">
+    </div>
     <div class="hero-grid">
       <div class="hero-text">
         <p class="hero-overline reveal">Hand-poured in India · Since 2021</p>
@@ -118,7 +121,7 @@
 
       <div class="hero-visual" aria-hidden="true">
         <div class="hero-image-wrap">
-          <img src="assets/strawberrymilk.jpg"
+          <img src="assets/heroghc.jpg"
                alt="Luxury candle in amber glass" loading="eager" fetchpriority="high">
           <div class="hero-badge">
             <div class="hero-badge-num">5</div>
@@ -150,6 +153,114 @@
 <style>
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 </style>
+
+<!-- ── PERSONALISATION SUITE ────────────────────────── -->
+<section class="section-pad" id="custom-candle" aria-labelledby="custom-title" style="background:var(--ivory)">
+  <div class="container">
+    <div class="section-header centered">
+      <p class="overline reveal">Personalisation</p>
+      <h2 id="custom-title" class="display-lg reveal reveal-delay-1">✨ Create Your Custom Candle</h2>
+      <div class="divider reveal reveal-delay-2"></div>
+      <p class="body-lg reveal reveal-delay-3">Design a candle that's uniquely yours. Choose your jar, fragrance, color, and style, then send us your requirements on WhatsApp.</p>
+    </div>
+
+    <div class="custom-grid">
+      <!-- Form -->
+      <div class="custom-form-wrap reveal">
+        <form id="custom-candle-form">
+          <!-- 1. Base Choice: Jar or Mould -->
+          <div class="custom-field">
+            <label class="custom-label">1. Choose Candle Type</label>
+            <div class="size-selector">
+              <label class="size-card">
+                <input type="radio" name="baseType" value="Jar" checked onchange="CustomCandle.toggleBaseType('Jar')">
+                <span>Jar Candle</span>
+              </label>
+              <label class="size-card">
+                <input type="radio" name="baseType" value="Mould" onchange="CustomCandle.toggleBaseType('Mould')">
+                <span>Mould Candle</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 2. Conditional: Jar Size -->
+          <div class="custom-field" id="jar-size-field">
+            <label class="custom-label">2. Select Jar Size</label>
+            <div class="size-selector">
+              <label class="size-card"><input type="radio" name="jarSize" value="190ml" checked><span>190ml</span></label>
+              <label class="size-card"><input type="radio" name="jarSize" value="220ml"><span>220ml</span></label>
+              <label class="size-card"><input type="radio" name="jarSize" value="350ml"><span>350ml</span></label>
+            </div>
+          </div>
+
+          <!-- 2. Conditional: Mould Style -->
+          <div class="custom-field" id="mould-style-field" style="display:none">
+            <label class="custom-label" for="candleType">2. Select Mould Style</label>
+            <select id="candleType" name="candleType" class="form-control">
+              <option value="" disabled selected>Choose a mould...</option>
+            </select>
+          </div>
+
+          <!-- 3. Fragrance -->
+          <div class="custom-field">
+            <label class="custom-label" for="fragrance">3. Fragrance Selection</label>
+            <select id="fragrance" name="fragrance" class="form-control" required>
+              <option value="" disabled selected>Choose a scent...</option>
+              <option value="Lavender">Lavender</option><option value="Jasmine">Jasmine</option>
+              <option value="Rose">Rose</option><option value="Vanilla">Vanilla</option>
+              <option value="Chocolate">Chocolate</option><option value="Coffee">Coffee</option>
+              <option value="Sandalwood">Sandalwood</option><option value="Oud">Oud</option>
+              <option value="Amber">Amber</option><option value="Custom">Other (Specify in message)</option>
+            </select>
+          </div>
+
+          <!-- 4. Color -->
+          <div class="custom-field">
+            <label class="custom-label">4. Candle Color</label>
+            <div class="color-selector" id="color-swatches"></div>
+            <input type="hidden" name="color" id="selected-color" value="White">
+          </div>
+
+          <!-- 5. Quantity -->
+          <div class="custom-field">
+            <label class="custom-label">5. Quantity</label>
+            <div class="qty-selector">
+              <button type="button" onclick="changeQty(-1)">−</button>
+              <input type="number" name="quantity" id="custom-qty" value="1" min="1" readonly>
+              <button type="button" onclick="changeQty(1)">+</button>
+            </div>
+          </div>
+
+          <!-- 6. Message -->
+          <div class="custom-field">
+            <label class="custom-label" for="customMessage">6. Requirements / Custom Message</label>
+            <textarea id="customMessage" name="customMessage" class="form-control" placeholder="e.g. Gift packaging required, Wedding favors, Add name engraving..."></textarea>
+          </div>
+
+          <!-- 7. Details -->
+          <div class="custom-details-row">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" name="customerName" class="form-control" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" name="customerPhone" class="form-control" placeholder="98XXXXXXXX" required maxlength="10">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email (Optional)</label>
+            <input type="email" name="customerEmail" class="form-control" placeholder="your@email.com">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top:20px; background:#25D366; border-color:#25D366">
+            <span>Send Custom Candle Inquiry</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ── FEATURED COLLECTION ───────────────────────────── -->
 <section class="section-pad" id="collection" aria-labelledby="collection-title">

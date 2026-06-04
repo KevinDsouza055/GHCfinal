@@ -223,7 +223,7 @@ async function initProductPage() {
         <button id="add-to-cart-btn" class="btn btn-primary btn-lg btn-full">
           <span>Add to Cart — ₹${displayPrice.sale.toLocaleString('en-IN')}</span>
         </button>
-        <button class="btn btn-outline btn-lg btn-full"
+        <button class="btn btn-outline btn-lg btn-full" id="buy-now-trigger"
           onclick="Cart.add({
             id: '${product.id}',
             name: '${product.name.replace(/'/g,"\\'")}',
@@ -231,7 +231,7 @@ async function initProductPage() {
             price: ${product.sale_price},
             originalPrice: ${product.original_price},
             image: '${(product.image||'').replace(/'/g,"\\'")}'
-          }); window.location.href='checkout.html';">
+          }); CartDrawer.open();">
           <span>Buy Now</span>
         </button>
       </div>
