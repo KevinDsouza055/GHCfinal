@@ -1527,12 +1527,12 @@ nav,
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(120deg, rgba(251,250,246,0.3) 0%, rgba(251,250,246,0.1) 50%, rgba(23,19,18,0.05) 100%),
+    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
     url("../assets/heroghc.jpg") center/cover no-repeat;
   z-index: 0;
 }
 .hero-bg::before {
-  background: linear-gradient(90deg, rgba(251,250,246,0.4), transparent);
+  background: linear-gradient(180deg, rgba(0,0,0,0.4), transparent 50%);
   display: block; content: ''; position: absolute; inset: 0;
 }
 .hero-grid {
