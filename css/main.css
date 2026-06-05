@@ -1527,7 +1527,7 @@ nav,
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
     url("../assets/heroghc.jpg") center/cover no-repeat;
   z-index: 0;
 }
@@ -1717,7 +1717,7 @@ select.form-control { appearance: auto; }
     align-items: flex-end;
   }
   .hero-bg::before {
-    background: linear-gradient(180deg, rgba(251,250,246,0.42), rgba(251,250,246,0.97) 68%);
+    background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
   }
   .hero-grid {
     min-height: auto;
@@ -2124,4 +2124,27 @@ select.form-control { appearance: auto; }
   width: 32px;
   height: 32px;
   fill: currentColor;
+.recommendation-row { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; scroll-snap-type: x mandatory; }
+.rec-card { flex: 0 0 260px; background: white; padding: 32px 24px; border: 1px solid var(--border); transition: var(--transition); cursor: pointer; scroll-snap-align: start; }
+.rec-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.rec-icon { font-size: 24px; display: block; margin-bottom: 16px; }
+.rec-card h3 { font-family: var(--font-serif); font-size: 18px; margin-bottom: 8px; }
+.rec-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+.quiz-float-btn { position: fixed; bottom: 30px; right: 30px; background: var(--espresso); color: white; padding: 16px 24px; border-radius: 99px; display: flex; align-items: center; gap: 12px; z-index: 1500; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; box-shadow: var(--shadow-md); transition: var(--transition); }
+.quiz-float-btn:hover { background: var(--gold); transform: scale(1.05); }
+
+.quiz-modal { position: fixed; inset: 0; background: rgba(26,18,16,0.9); z-index: 3000; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
+.quiz-modal.open { display: flex; }
+.quiz-content { background: var(--ivory); width: 100%; max-width: 500px; padding: 60px 40px; border-radius: var(--radius); position: relative; }
+.quiz-close { position: absolute; top: 20px; right: 20px; font-size: 20px; color: var(--muted); }
+.quiz-option { width: 100%; text-align: left; padding: 16px 20px; border: 1px solid var(--border-dark); margin-bottom: 12px; border-radius: var(--radius); transition: all 0.2s; font-size: 14px; }
+.quiz-option:hover { border-color: var(--gold); background: var(--cream); }
+
+.perfect-tag { padding: 6px 16px; background: var(--cream); border: 1px solid var(--border); font-size: 11px; letter-spacing: 0.05em; color: var(--muted); border-radius: 99px; }
+
+.badge-relaxing { background: var(--sage); color: white; }
+.badge-home-decor { background: var(--espresso); color: white; }
+.badge-romantic { background: var(--rose); color: white; }
+.badge-great-gift { background: var(--gold); color: white; }
 }

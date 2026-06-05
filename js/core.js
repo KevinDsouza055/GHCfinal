@@ -291,7 +291,68 @@ const CustomCandle = {
       const opt = typeSelect.options[typeSelect.selectedIndex];
     });
 
+/* ── RECOMMENDATION QUIZ ─────────────────────────────────── */
+const Quiz = {
+  step: 1,
+  answers: {},
+  init() {
+    const trigger = document.getElementById('quiz-trigger');
+    const modal = document.getElementById('quiz-modal');
+    const close = document.getElementById('quiz-close');
+    if (!trigger) return;
+    trigger.onclick = () => { modal.classList.add('open'); this.renderStep(); };
+    close.onclick = () => modal.classList.remove('open');
+  },
+  renderStep() {
+    const container = document.getElementById('quiz-step-container');
+    if (this.step === 1) {
+      container.innerHTML = `<p class="overline" style="margin-bottom:10px">Question 01</p><h2 class="display-sm" style="margin-bottom:30px">What is the candle for?</h2>
+        <button class="quiz-option" onclick="Quiz.answer('purpose', 'gift')">Gift</button>
+        <button class="quiz-option" onclick="Quiz.answer('purpose', 'decor')">Home Decor</button>
+        <button class="quiz-option" onclick="Quiz.answer('purpose', 'selfcare')">Self Care</button>
+        <button class="quiz-option" onclick="Quiz.answer('purpose', 'event')">Event</button>`;
+    } else if (this.step === 2) {
+      container.innerHTML = `<p class="overline" style="margin-bottom:10px">Question 02</p><h2 class="display-sm" style="margin-bottom:30px">Preferred fragrance family?</h2>
+        <button class="quiz-option" onclick="Quiz.answer('family', 'Floral')">Floral</button>
+        <button class="quiz-option" onclick="Quiz.answer('family', 'Sweet')">Sweet</button>
+        <button class="quiz-option" onclick="Quiz.answer('family', 'Fresh')">Fresh</button>
+        <button class="quiz-option" onclick="Quiz.answer('family', 'any')">No Preference</button>`;
+    } else if (this.step === 3) {
+      this.showResults();
+    }
+  },
+  answer(key, val) {
+    this.answers[key] = val;
+    this.step++;
+    this.renderStep();
+  },
+  showResults() {
+    const container = document.getElementById('quiz-step-container');
+    const all = ProductStore.getAll();
+    let filtered = all.filter(p => {
+      if (this.answers.family !== 'any' && p.family !== this.answers.family) return false;
+      return true;
+    });
+    if (filtered.length === 0) filtered = all.slice(0, 2);
+    
+    container.innerHTML = `<h2 class="display-sm" style="margin-bottom:20px">We Recommend:</h2>
+      <div style="display:grid; gap:16px; margin-bottom:30px">
+        ${filtered.slice(0, 2).map(p => `
+          <div style="display:flex; gap:12px; align-items:center; border:1px solid var(--border); padding:12px">
+            <img src="${p.image}" style="width:50px; height:60px; object-fit:cover">
+            <div>
+              <p style="font-weight:500; font-size:14px">${p.name}</p>
+              <a href="product.html?id=${p.id}" style="font-size:11px; color:var(--gold)">View Product →</a>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <button class="btn btn-primary btn-full" onclick="location.reload()">Start Over</button>`;
+  }
+};
+
     fragSelect?.addEventListener('change', () => {
+  Quiz.init();
     });
 
     document.querySelectorAll('input[name="jarSize"]').forEach(input => {

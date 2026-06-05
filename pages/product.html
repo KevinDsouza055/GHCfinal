@@ -255,8 +255,45 @@ async function initProductPage() {
           Secure payment
         </div>
       </div>
+
+      <!-- Perfect For Tags -->
+      <div id="perfect-for-section" style="margin-top:40px; display:none">
+        <p class="overline" style="margin-bottom:12px">Perfect For</p>
+        <div id="perfect-for-tags" style="display:flex; flex-wrap:wrap; gap:8px"></div>
+      </div>
+
+      <!-- Comparison Guide -->
+      <div style="margin-top:48px; padding:32px; background:var(--cream); border-radius:var(--radius)">
+        <h3 class="display-sm" style="font-size:18px; margin-bottom:20px">Which Candle is Right?</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px">
+          <div>
+            <p style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:8px">Jar Candles</p>
+            <ul style="font-size:13px; color:var(--muted); line-height:1.8">
+              <li>✔ Longer burn time</li>
+              <li>✔ Strong fragrance throw</li>
+              <li>✔ Everyday ritual use</li>
+            </ul>
+          </div>
+          <div>
+            <p style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:8px">Decorative Candles</p>
+            <ul style="font-size:13px; color:var(--muted); line-height:1.8">
+              <li>✔ Premium home decor</li>
+              <li>✔ Unique sculptural designs</li>
+              <li>✔ Exceptional gifting</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>`;
 
+  // Render "Perfect For" tags
+  if (product.perfect_for && product.perfect_for.length > 0) {
+    const tagContainer = document.getElementById('perfect-for-tags');
+    document.getElementById('perfect-for-section').style.display = 'block';
+    tagContainer.innerHTML = product.perfect_for.map(tag => 
+      `<span class="perfect-tag">${tag}</span>`
+    ).join('');
+  }
   // Thumbnail click
   document.querySelectorAll('.product-thumb').forEach(thumb => {
     const activate = () => {

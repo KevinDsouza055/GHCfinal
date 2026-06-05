@@ -83,6 +83,43 @@
   </div>
 </section>
 
+<!-- Need Help Choosing Section -->
+<section style="background:var(--ivory);padding:60px 0 20px">
+  <div class="container">
+    <div class="section-header centered" style="margin-bottom:40px">
+      <p class="overline">Curated for You</p>
+      <h2 class="display-sm">Need Help Choosing?</h2>
+    </div>
+    <div class="recommendation-row">
+      <div class="rec-card" onclick="renderShop('relaxation')">
+        <span class="rec-icon">🌿</span>
+        <h3>For Relaxation</h3>
+        <p>Lavender, Jasmine. Best for bedrooms and self-care.</p>
+      </div>
+      <div class="rec-card" onclick="renderShop('decor')">
+        <span class="rec-icon">🏡</span>
+        <h3>For Home Decor</h3>
+        <p>Sculptural & Pillar candles. Best for living rooms.</p>
+      </div>
+      <div class="rec-card" onclick="renderShop('gifts')">
+        <span class="rec-icon">🎁</span>
+        <h3>For Gifts</h3>
+        <p>Gift Sets, Personalized labels, and luxury sets.</p>
+      </div>
+      <div class="rec-card" onclick="renderShop('occasions')">
+        <span class="rec-icon">💕</span>
+        <h3>Special Occasions</h3>
+        <p>Weddings, Anniversaries, and Romantic settings.</p>
+      </div>
+      <div class="rec-card" onclick="renderShop('cozy')">
+        <span class="rec-icon">☕</span>
+        <h3>Cozy Ambience</h3>
+        <p>Vanilla, Coffee, Sandalwood. Warm and inviting.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Filter Bar -->
 <div style="background:var(--cream);border-bottom:1px solid var(--border);padding:20px 0">
   <div class="container">
@@ -154,6 +191,22 @@
     </div>
   </div>
 </footer>
+
+<!-- Floating Quiz Button -->
+<button class="quiz-float-btn" id="quiz-trigger">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width:20px;height:20px"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"/></svg>
+  <span>Not sure what to choose?</span>
+</button>
+
+<!-- Quiz Modal -->
+<div id="quiz-modal" class="quiz-modal" aria-hidden="true">
+  <div class="quiz-content">
+    <button class="quiz-close" id="quiz-close">✕</button>
+    <div id="quiz-step-container">
+      <!-- Dynamic Quiz Steps -->
+    </div>
+  </div>
+</div>
 
 <!-- Floating WhatsApp -->
 <a href="https://wa.me/917900187209" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">

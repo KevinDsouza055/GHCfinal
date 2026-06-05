@@ -7,32 +7,37 @@
 /* ── Fallback data (used ONLY when Supabase is not configured) ── */
 const FALLBACK_PRODUCTS = [
   { id:'azure-bloom', name:'Azure Bloom', type:'single', category:'jars',
-    notes:'Jar Candle', short_desc:'Stunning blue-tinted candle with artisan aesthetics.',
-    original_price:899, sale_price:599, badges:['Best Seller'],
+    notes:'Jar Candle', short_desc:'Stunning blue-tinted candle with artisan aesthetics.', family: 'Fresh',
+    original_price:899, sale_price:599, badges:['Best Seller', 'Relaxing'],
+    perfect_for: ['Bedroom', 'Self Care', 'Meditation'],
     image:'assets/azurebloom.jpg',
     is_active:true, is_featured:true, sort_order:1 },
 
   { id:'eternal-embrace', name:'Eternal Embrace', type:'single', category:'moulds',
-    notes:'Mould Candle', short_desc:'Timeless sculptural piece for your home.',
-    original_price:499, sale_price:299, badges:['Artistic'],
+    notes:'Mould Candle', short_desc:'Timeless sculptural piece for your home.', family: 'Unscented',
+    original_price:499, sale_price:299, badges:['Home Decor', 'Artistic'],
+    perfect_for: ['Living Room', 'Gifting', 'Anniversaries'],
     image:'assets/eternalembrace.jpg',
     is_active:true, is_featured:true, sort_order:2 },
 
   { id:'ivory-rose', name:'Ivory Rose', type:'single', category:'moulds',
-    notes:'Mould Candle', short_desc:'Elegant rose sculpture in pure soy-coconut wax.',
-    original_price:599, sale_price:399, badges:['Hand-crafted'],
+    notes:'Mould Candle', short_desc:'Elegant rose sculpture in pure soy-coconut wax.', family: 'Floral',
+    original_price:599, sale_price:399, badges:['Romantic', 'Hand-crafted'],
+    perfect_for: ['Bedroom', 'Valentine\'s Day', 'Proposal Gifts'],
     image:'assets/ivoryrose.jpg',
     is_active:true, is_featured:true, sort_order:3 },
 
   { id:'rose-sculpture', name:'Rose Sculpture', type:'single', category:'moulds',
-    notes:'Mould Candle', short_desc:'Intricate floral pillar candle.',
-    original_price:549, sale_price:349, badges:['Trending'],
+    notes:'Mould Candle', short_desc:'Intricate floral pillar candle.', family: 'Floral',
+    original_price:549, sale_price:349, badges:['Great Gift', 'Trending'],
+    perfect_for: ['Festivals', 'Living Room', 'Gifting'],
     image:'assets/rosesculpture.jpg',
     is_active:true, is_featured:true, sort_order:4 },
 
   { id:'strawberry-milk', name:'Strawberry Milk', type:'single', category:'jars',
-    notes:'Jar Candle', short_desc:'A sweet, creamy blend of fresh strawberries and cold milk.',
-    original_price:799, sale_price:599, badges:['New Arrival'],
+    notes:'Jar Candle', short_desc:'A sweet, creamy blend of fresh strawberries and cold milk.', family: 'Sweet',
+    original_price:799, sale_price:599, badges:['New Arrival', 'Great Gift'],
+    perfect_for: ['Kitchen', 'Cozy Ambience', 'Birthdays'],
     image:'assets/strawberrymilk.jpg',
     is_active:true, is_featured:true, sort_order:0 }
 ];
