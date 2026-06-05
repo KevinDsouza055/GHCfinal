@@ -41,7 +41,7 @@ const Security = {
 /* ── CONFIG (Simplified for Static Catalog) ────────────────── */
 const CONFIG = {
   WHATSAPP_NUMBER: '917900187209',    // Your WhatsApp Number
-  ORDER_EMAIL:   'hello@gracehomecandles.in',
+  ORDER_EMAIL:   'gracehomecandles@gmail.com',
   ORDER_WHATSAPP:'917900187209',
 };
 
