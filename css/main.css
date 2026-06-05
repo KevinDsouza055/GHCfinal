@@ -1529,7 +1529,7 @@ nav,
   background:
     linear-gradient(120deg, rgba(251,250,246,0.3) 0%, rgba(251,250,246,0.1) 50%, rgba(23,19,18,0.05) 100%),
     url("../assets/heroghc.jpg") center/cover no-repeat;
-  z-index: -1;
+  z-index: 0;
 }
 .hero-bg::before {
   background: linear-gradient(90deg, rgba(251,250,246,0.4), transparent);
@@ -2093,4 +2093,35 @@ select.form-control { appearance: auto; }
   margin-top: 32px;
   padding-top: 32px;
   border-top: 1px solid var(--border);
+}
+
+/* ── WhatsApp Floating Button ── */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #25d366;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.1);
+  color: #FFF;
+  background-color: #128c7e;
+}
+
+.whatsapp-float svg {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
 }
