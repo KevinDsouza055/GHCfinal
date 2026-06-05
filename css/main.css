@@ -201,16 +201,16 @@ input, textarea, select { font-family: var(--font-sans); }
 }
 .header-inner {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   gap: 20px;
 }
 .nav-logo {
-  display: none;
+  display: block;
   font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 300;
+  letter-spacing: 0.12em;
   color: var(--espresso);
 }
 .nav-logo span { color: var(--gold); }
@@ -1749,7 +1749,7 @@ select.form-control { appearance: auto; }
   .header-inner {
     min-height: 58px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 0 8px 0 16px;
   }
   .nav-logo {
