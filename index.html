@@ -61,7 +61,14 @@
   <button id="mobile-nav-close" class="mobile-nav-close" aria-label="Close menu">✕</button>
   <a href="index.html" class="mobile-nav-link">Home</a>
   <a href="pages/shop.html" class="mobile-nav-link">Shop</a>
+  <a href="pages/gifting.html" class="mobile-nav-link">Gifting</a>
   <a href="pages/contact.html" class="mobile-nav-link">Contact</a>
+  <div style="margin-top:20px; display:flex; flex-direction:column; gap:8px">
+    <a href="pages/faq.html" class="mobile-nav-link sub-link">FAQ</a>
+    <a href="pages/shipping-policy.html" class="mobile-nav-link sub-link">Shipping Policy</a>
+    <a href="pages/return-policy.html" class="mobile-nav-link sub-link">Returns</a>
+    <a href="pages/terms.html" class="mobile-nav-link sub-link">Terms & Conditions</a>
+  </div>
 </nav>
 
 <!-- Site Header -->
@@ -196,6 +203,10 @@
             <label class="custom-label">4. Candle Color</label>
             <div class="color-selector" id="color-swatches"></div>
             <input type="hidden" name="color" id="selected-color" value="White">
+          </div>
+          <div id="custom-color-input" style="display:none; margin-top:-10px; margin-bottom:28px">
+            <label class="form-label">Specify Your Color</label>
+            <input type="text" name="customColor" class="form-control" placeholder="e.g. Sage Green, Pastel Blue">
           </div>
 
           <!-- 5. Quantity -->

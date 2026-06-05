@@ -1467,57 +1467,48 @@ nav,
 }
 
 .mobile-nav {
-  inset: 14px;
-  width: auto;
-  min-height: auto;
-  border: 1px solid rgba(255,255,255,0.68);
-  border-radius: 30px;
-  background:
-    linear-gradient(145deg, rgba(251,250,246,0.96), rgba(242,239,231,0.96)),
-    var(--ivory);
-  box-shadow: 0 30px 90px rgba(32,38,50,0.22);
-  gap: 14px;
-  justify-content: flex-start;
-  padding: 92px 18px 24px;
-  transform: translateY(-112%);
-  opacity: 0;
-  visibility: hidden;
+  position: fixed;
+  inset: 0;
+  background: var(--ivory);
+  z-index: 2500;
+  display: flex;
+  flex-direction: column;
+  padding: 100px 40px;
+  gap: 20px;
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
 }
 .mobile-nav.open {
-  transform: translateY(0);
-  opacity: 1;
-  visibility: visible;
+  transform: translateX(0);
 }
 .mobile-nav-close {
-  top: 18px;
-  right: 18px;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: var(--espresso);
-  color: var(--ivory);
-  font-size: 0;
-}
-.mobile-nav-close::before {
-  content: "X";
-  font-size: 16px;
-  letter-spacing: 0;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 24px;
+  color: var(--espresso);
+  z-index: 10;
 }
 .mobile-nav-link {
-  width: 100%;
-  max-width: 420px;
-  min-height: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: rgba(255,255,255,0.56);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-family: var(--font-serif);
+  font-size: 32px;
+  color: var(--espresso);
+  letter-spacing: -0.01em;
   text-transform: uppercase;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.3s;
+}
+.mobile-nav-link:hover { color: var(--gold); }
+.mobile-nav-link.sub-link {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  border: none;
+  padding: 5px 0;
+  margin-top: 5px;
 }
 
 .hero {
@@ -2141,4 +2132,3 @@ select.form-control { appearance: auto; }
 .badge-home-decor { background: var(--espresso); color: white; }
 .badge-romantic { background: var(--rose); color: white; }
 .badge-great-gift { background: var(--gold); color: white; }
-
