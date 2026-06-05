@@ -200,13 +200,13 @@ input, textarea, select { font-family: var(--font-sans); }
   padding: 16px 0;
 }
 .header-inner {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 20px;
 }
 .nav-logo {
-  text-align: center;
+  display: none;
   font-family: var(--font-serif);
   font-size: 22px;
   font-weight: 400;
@@ -214,13 +214,15 @@ input, textarea, select { font-family: var(--font-sans); }
   color: var(--espresso);
 }
 .nav-logo span { color: var(--gold); }
-.nav-left, .nav-right {
+.nav-left { display: none; }
+.nav-right {
   display: flex;
   align-items: center;
   gap: 32px;
 }
 .nav-right { justify-content: flex-end; }
 .nav-link {
+  display: none;
   font-size: 10px;
   font-weight: 400;
   letter-spacing: 0.2em;
@@ -264,7 +266,7 @@ input, textarea, select { font-family: var(--font-sans); }
 }
 .cart-count.visible { display: flex; }
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 5px;
   padding: 8px;
@@ -1746,7 +1748,8 @@ select.form-control { appearance: auto; }
   #site-header .container { max-width: calc(100% - 20px); }
   .header-inner {
     min-height: 58px;
-    grid-template-columns: 46px 1fr auto;
+    display: flex;
+    justify-content: flex-end;
     padding: 0 8px 0 16px;
   }
   .nav-logo {
@@ -2124,6 +2127,7 @@ select.form-control { appearance: auto; }
   width: 32px;
   height: 32px;
   fill: currentColor;
+}
 .recommendation-row { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 20px; scroll-snap-type: x mandatory; }
 .rec-card { flex: 0 0 260px; background: white; padding: 32px 24px; border: 1px solid var(--border); transition: var(--transition); cursor: pointer; scroll-snap-align: start; }
 .rec-card:hover { border-color: var(--gold); transform: translateY(-5px); box-shadow: var(--shadow-md); }
@@ -2133,6 +2137,20 @@ select.form-control { appearance: auto; }
 
 .quiz-float-btn { position: fixed; bottom: 30px; right: 30px; background: var(--espresso); color: white; padding: 16px 24px; border-radius: 99px; display: flex; align-items: center; gap: 12px; z-index: 1500; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; box-shadow: var(--shadow-md); transition: var(--transition); }
 .quiz-float-btn:hover { background: var(--gold); transform: scale(1.05); }
+
+@media (max-width: 768px) {
+  .quiz-float-btn {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    font-size: 10px;
+    gap: 8px;
+  }
+  .quiz-float-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+}
 
 .quiz-modal { position: fixed; inset: 0; background: rgba(26,18,16,0.9); z-index: 3000; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); }
 .quiz-modal.open { display: flex; }

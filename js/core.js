@@ -144,11 +144,13 @@ const CartDrawer = {
   open() { 
     this.render(); 
     this.el.classList.add('open'); 
+    this.el.removeAttribute('inert');
     this.overlay?.classList.add('open'); 
     document.body.style.overflow = 'hidden';
   },
   close() { 
     this.el.classList.remove('open'); 
+    this.el.setAttribute('inert', '');
     this.overlay?.classList.remove('open'); 
     document.body.style.overflow = '';
   },
@@ -425,8 +427,18 @@ const MobileNav = {
     const toggle = document.getElementById('mobile-nav-toggle');
     const close  = document.getElementById('mobile-nav-close');
     if (!nav) return;
-    const open  = () => { nav.classList.add('open'); nav.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; if(toggle) toggle.setAttribute('aria-expanded','true'); };
-    const shut  = () => { nav.classList.remove('open'); nav.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; if(toggle) toggle.setAttribute('aria-expanded','false'); };
+    const open  = () => { 
+      nav.classList.add('open'); 
+      nav.removeAttribute('inert');
+      document.body.style.overflow = 'hidden'; 
+      if(toggle) toggle.setAttribute('aria-expanded','true'); 
+    };
+    const shut  = () => { 
+      nav.classList.remove('open'); 
+      nav.setAttribute('inert', '');
+      document.body.style.overflow = ''; 
+      if(toggle) toggle.setAttribute('aria-expanded','false'); 
+    };
     if (toggle) toggle.addEventListener('click', open);
     if (close)  close.addEventListener('click', shut);
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));

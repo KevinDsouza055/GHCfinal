@@ -22,7 +22,7 @@
 </div>
 
 <div id="cart-overlay" class="cart-overlay" aria-hidden="true"></div>
-<aside id="cart-drawer" class="cart-drawer" aria-hidden="true" aria-label="Shopping Cart">
+<aside id="cart-drawer" class="cart-drawer" aria-label="Shopping Cart" inert>
   <div class="cart-header">
     <h2 class="cart-title">Your Cart</h2>
     <button class="cart-close" data-cart-close aria-label="Close cart">
@@ -43,7 +43,7 @@
   </div>
 </aside>
 
-<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation">
+<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" inert>
   <button id="mobile-nav-close" class="mobile-nav-close">✕</button>
   <a href="../index.html" class="mobile-nav-link">Home</a>
   <a href="shop.html" class="mobile-nav-link">Shop</a>
@@ -53,12 +53,7 @@
 <header id="site-header" role="banner">
   <div class="container">
     <div class="header-inner">
-      <nav class="nav-left">
-        <a href="shop.html" class="nav-link">Shop</a>
-      </nav>
-      <a href="../index.html" class="nav-logo">Grace Home <span>Candles</span></a>
       <div class="nav-right">
-        <a href="contact.html" class="nav-link">Contact</a>
         <button class="nav-icon-btn" data-cart-open aria-label="Open cart">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg>
           <span class="cart-count"></span>
@@ -231,6 +226,14 @@
 
     if (filter === 'jars') filtered = PRODUCTS.filter(p => p.category === 'jars');
     else if (filter === 'moulds') filtered = PRODUCTS.filter(p => p.category === 'moulds');
+    else if (filter === 'relaxation') filtered = PRODUCTS.filter(p => p.badges?.includes('Relaxing') || p.perfect_for?.includes('Self Care'));
+    else if (filter === 'decor') filtered = PRODUCTS.filter(p => p.badges?.includes('Home Decor') || p.category === 'moulds');
+    else if (filter === 'gifts') filtered = PRODUCTS.filter(p => p.badges?.includes('Great Gift') || p.perfect_for?.includes('Gifting'));
+    else if (filter === 'occasions') filtered = PRODUCTS.filter(p => p.perfect_for?.some(tag => ['Anniversaries', 'Weddings', "Valentine's Day"].includes(tag)));
+    else if (filter === 'cozy') filtered = PRODUCTS.filter(p => p.perfect_for?.includes('Cozy Ambience'));
+
+    // Update active state on filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === filter));
 
     if (filtered.length === 0) {
       grid.innerHTML = '';
