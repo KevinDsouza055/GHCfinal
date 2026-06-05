@@ -228,7 +228,7 @@ document.getElementById('contact-form').addEventListener('submit', async (e) => 
       message: Security.sanitize(message),
       created_at: new Date().toISOString()
     });
-    successEl.textContent = 'Thank you for reaching out! We'll get back to you within 24 hours.';
+    successEl.textContent = 'Thank you for reaching out! We\'ll get back to you within 24 hours.';
     successEl.style.display = 'block';
     document.getElementById('contact-form').reset();
     Toast.show('Message sent successfully!', 'success');
