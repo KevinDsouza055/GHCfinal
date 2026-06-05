@@ -86,27 +86,27 @@
       <h2 class="display-sm">Need Help Choosing?</h2>
     </div>
     <div class="recommendation-row">
-      <div class="rec-card" onclick="renderShop('relaxation')">
+      <div class="rec-card">
         <span class="rec-icon">🌿</span>
         <h3>For Relaxation</h3>
         <p>Lavender, Jasmine. Best for bedrooms and self-care.</p>
       </div>
-      <div class="rec-card" onclick="renderShop('decor')">
+      <div class="rec-card">
         <span class="rec-icon">🏡</span>
         <h3>For Home Decor</h3>
         <p>Sculptural & Pillar candles. Best for living rooms.</p>
       </div>
-      <div class="rec-card" onclick="renderShop('gifts')">
+      <div class="rec-card">
         <span class="rec-icon">🎁</span>
         <h3>For Gifts</h3>
         <p>Gift Sets, Personalized labels, and luxury sets.</p>
       </div>
-      <div class="rec-card" onclick="renderShop('occasions')">
+      <div class="rec-card">
         <span class="rec-icon">💕</span>
         <h3>Special Occasions</h3>
         <p>Weddings, Anniversaries, and Romantic settings.</p>
       </div>
-      <div class="rec-card" onclick="renderShop('cozy')">
+      <div class="rec-card">
         <span class="rec-icon">☕</span>
         <h3>Cozy Ambience</h3>
         <p>Vanilla, Coffee, Sandalwood. Warm and inviting.</p>
@@ -226,11 +226,6 @@
 
     if (filter === 'jars') filtered = PRODUCTS.filter(p => p.category === 'jars');
     else if (filter === 'moulds') filtered = PRODUCTS.filter(p => p.category === 'moulds');
-    else if (filter === 'relaxation') filtered = PRODUCTS.filter(p => p.badges?.includes('Relaxing') || p.perfect_for?.includes('Self Care'));
-    else if (filter === 'decor') filtered = PRODUCTS.filter(p => p.badges?.includes('Home Decor') || p.category === 'moulds');
-    else if (filter === 'gifts') filtered = PRODUCTS.filter(p => p.badges?.includes('Great Gift') || p.perfect_for?.includes('Gifting'));
-    else if (filter === 'occasions') filtered = PRODUCTS.filter(p => p.perfect_for?.some(tag => ['Anniversaries', 'Weddings', "Valentine's Day"].includes(tag)));
-    else if (filter === 'cozy') filtered = PRODUCTS.filter(p => p.perfect_for?.includes('Cozy Ambience'));
 
     // Update active state on filter buttons
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === filter));
