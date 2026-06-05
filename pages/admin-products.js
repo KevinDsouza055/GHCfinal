@@ -162,7 +162,7 @@ Object.assign(Admin, {
         <div class="pm-row-3">
           <div class="pm-field">
             <label class="pm-label">Burn Time</label>
-            <input class="pm-input" id="pm-burn" value="${esc(p?.burn_time||'60–70 hours')}">
+            <input class="pm-input" id="pm-burn" placeholder="e.g. 45 hours" value="${esc(p?.burn_time||'')}">
           </div>
           <div class="pm-field">
             <label class="pm-label">Size (wt)</label>
