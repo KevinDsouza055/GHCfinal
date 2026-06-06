@@ -32,7 +32,16 @@
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { 
+  font-size: 16px; 
+  scroll-behavior: smooth; 
+  -webkit-text-size-adjust: 100%; 
+  scrollbar-width: none !important; 
+  -ms-overflow-style: none !important; 
+  overflow-x: hidden;
+}
+*::-webkit-scrollbar { display: none !important; }
+* { scrollbar-width: none !important; -ms-overflow-style: none !important; }
 body {
   font-family: var(--font-sans);
   font-weight: 300;
@@ -40,6 +49,8 @@ body {
   background: var(--ivory);
   line-height: 1.7;
   overflow-x: hidden;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; height: auto; display: block; }
@@ -286,15 +297,13 @@ input, textarea, select { font-family: var(--font-sans); }
   inset: 0;
   background: var(--ivory);
   z-index: 1100;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 32px;
-  transform: translateX(100%);
-  transition: transform var(--transition);
 }
-.mobile-nav.open { transform: translateX(0); }
+.mobile-nav.open { display: flex; }
 .mobile-nav-close {
   position: absolute;
   top: 28px; right: 24px;
@@ -407,14 +416,14 @@ input, textarea, select { font-family: var(--font-sans); }
   font-size: 10px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: rgba(255,255,255,0.6);
   margin-top: 60px;
 }
 .hero-scroll::before {
   content: '';
   width: 40px;
   height: 1px;
-  background: var(--sand);
+  background: var(--gold-light);
 }
 
 /* ── Section Header ── */
@@ -1471,16 +1480,14 @@ nav,
   inset: 0;
   background: var(--ivory);
   z-index: 2500;
-  display: flex;
+  display: none;
   flex-direction: column;
   padding: 100px 40px;
   gap: 20px;
-  transform: translateX(100%);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   overflow-y: auto;
 }
 .mobile-nav.open {
-  transform: translateX(0);
+  display: flex;
 }
 .mobile-nav-close {
   position: absolute;
