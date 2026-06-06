@@ -264,19 +264,24 @@ const CustomCandle = {
   toggleBaseType(type) {
     const jarField = document.getElementById('jar-size-field');
     const mouldField = document.getElementById('mould-style-field');
+    const glassField = document.getElementById('glass-size-field');
+
+    if (jarField) jarField.style.display = 'none';
+    if (mouldField) mouldField.style.display = 'none';
+    if (glassField) glassField.style.display = 'none';
 
     if (type === 'Jar') {
       if (jarField) jarField.style.display = 'block';
-      if (mouldField) mouldField.style.display = 'none';
-      // Ensure a jar size is selected by default when switching to Jar
       const firstJarSizeRadio = document.querySelector('input[name="jarSize"][value="190ml"]');
       if (firstJarSizeRadio) firstJarSizeRadio.checked = true;
-    } else {
-      if (jarField) jarField.style.display = 'none';
+    } else if (type === 'Mould') {
       if (mouldField) mouldField.style.display = 'block';
-      // Ensure mould style is reset/prompted when switching to Mould
       const candleTypeSelect = document.getElementById('candleType');
       if (candleTypeSelect) candleTypeSelect.value = ''; // Reset to "Select a style..."
+    } else if (type === 'Glass') {
+      if (glassField) glassField.style.display = 'block';
+      const firstGlassSizeRadio = document.querySelector('input[name="glassSize"][value="150ml"]');
+      if (firstGlassSizeRadio) firstGlassSizeRadio.checked = true;
     }
   },
 
@@ -296,6 +301,9 @@ const CustomCandle = {
     document.querySelectorAll('input[name="jarSize"]').forEach(input => {
       input.addEventListener('change', () => { /* No preview update needed */ });
     });
+    document.querySelectorAll('input[name="glassSize"]').forEach(input => {
+      input.addEventListener('change', () => { /* No preview update needed */ });
+    });
   },
 
   handleSubmit(fd) {
@@ -304,6 +312,7 @@ const CustomCandle = {
       name: fd.get('customerName'), phone: fd.get('customerPhone'), email: fd.get('customerEmail') || 'N/A',
       baseType: baseType,
       jarSize: baseType === 'Jar' ? fd.get('jarSize') : 'N/A',
+      glassSize: baseType === 'Glass' ? fd.get('glassSize') : 'N/A',
       mouldStyle: baseType === 'Mould' ? fd.get('candleType') : 'N/A',
       fragrance: fd.get('fragrance'),
       color: fd.get('color') === 'Custom' ? fd.get('customColor') : fd.get('color'),
@@ -311,14 +320,16 @@ const CustomCandle = {
       message: fd.get('customMessage') || 'None'
     };
 
-    if ((baseType === 'Mould' && !data.mouldStyle) || !data.fragrance || !data.name || !data.phone) {
+    if ((baseType === 'Mould' && !data.mouldStyle) || (baseType === 'Glass' && !data.glassSize) || !data.fragrance || !data.name || !data.phone) {
       Toast.show('Please fill in all required fields.', 'error'); return;
     }
 
     const message = `*✨ NEW CUSTOM CANDLE INQUIRY ✨*\n\n` +
                     `*👤 CUSTOMER*\nName: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\n\n` +
                     `*🕯️ SPECIFICATIONS*\nType: ${data.baseType}\n` +
-                    (baseType === 'Jar' ? `Jar Size: ${data.jarSize}\n` : `Mould Style: ${data.mouldStyle}\n`) +
+                    (baseType === 'Jar' ? `Jar Size: ${data.jarSize}\n` : '') +
+                    (baseType === 'Glass' ? `Glass Size: ${data.glassSize}\n` : '') +
+                    (baseType === 'Mould' ? `Mould Style: ${data.mouldStyle}\n` : '') +
                     `Fragrance: ${data.fragrance}\nColor: ${data.color}\nQty: ${data.quantity}\n\n` +
                     `*📝 MESSAGE*\n${data.message}\n\n` +
                     `_Inquiry from Grace Home Website_`;

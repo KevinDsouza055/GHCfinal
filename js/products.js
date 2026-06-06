@@ -39,7 +39,35 @@ const FALLBACK_PRODUCTS = [
     original_price:799, sale_price:599, badges:['New Arrival', 'Great Gift'],
     perfect_for: ['Kitchen', 'Cozy Ambience', 'Birthdays'],
     image:'assets/strawberrymilk.jpg',
-    is_active:true, is_featured:true, sort_order:0 }
+    is_active:true, is_featured:true, sort_order:0 },
+
+  { id:'aura-wave', name:'Aura Wave', type:'single', category:'jars',
+    notes:'Jar Candle', short_desc:'Rhythmic patterns of light and scent.', family: 'Fresh',
+    original_price:399, sale_price:249, badges:['New Arrival'],
+    perfect_for: ['Study Room', 'Modern Interiors'],
+    image:'assets/aurawave.jpg',
+    is_active:true, is_featured:true, sort_order:5 },
+
+  { id:'blue-blossom', name:'Blue Blossom', type:'single', category:'jars',
+    notes:'Jar Candle', short_desc:'A vibrant floral escape in every burn.', family: 'Floral',
+    original_price:899, sale_price:599, badges:['Featured'],
+    perfect_for: ['Living Room', 'Guest Welcoming'],
+    image:'assets/blueblossom.jpg',
+    is_active:true, is_featured:true, sort_order:6 },
+
+  { id:'bubble-pack', name:'Bubble Candle (Pack of 4)', type:'single', category:'moulds',
+    notes:'Mould Candle', short_desc:'Modern aesthetic mini-bubble collection.', family: 'Unscented',
+    original_price:549, sale_price:349, badges:['Bundle Deal'],
+    perfect_for: ['Decor', 'Small Gifts'],
+    image:'assets/bubble.jpg',
+    is_active:true, is_featured:true, sort_order:7 },
+
+  { id:'lavender-luxe', name:'Lavender Candle', type:'single', category:'jars',
+    notes:'Jar Candle', short_desc:'Classic calming lavender for peaceful nights.', family: 'Floral',
+    original_price:549, sale_price:349, badges:['Relaxing'],
+    perfect_for: ['Bedroom', 'Sleep Ritual'],
+    image:'assets/lavender.jpg',
+    is_active:true, is_featured:true, sort_order:8 }
 ];
 
 const FALLBACK_VARIANTS = {}; // No longer used for static catalog
