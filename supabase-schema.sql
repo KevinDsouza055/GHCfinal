@@ -268,17 +268,17 @@ CREATE TRIGGER trg_orders_updated_at
 -- SEED: BASE PRODUCTS
 -- ══════════════════════════════════════════════════════════════
 INSERT INTO products (id,name,type,category,notes,short_desc,description,fragrance_top,fragrance_mid,fragrance_base,
-  burn_time,original_price,sale_price,badges,image,images,is_active,is_featured,is_bestseller,sort_order)
+  burn_time,size,original_price,sale_price,badges,image,images,is_active,is_featured,is_bestseller,sort_order)
 VALUES
-('azure-bloom','Azure Bloom','single','jars','Jar Candle','Blue-tinted artisan jar candle.','Stunning blue-tinted candle featuring delicate floral aesthetics.',NULL,NULL,NULL,NULL,899,599,ARRAY['Best Seller'],'assets/azurebloom.jpg',NULL,TRUE,TRUE,FALSE,1),
+('azure-bloom','Azure Bloom','single','jars','Jar Candle (350ml)','Blue-tinted artisan jar candle.','Stunning blue-tinted candle featuring delicate floral aesthetics.',NULL,NULL,NULL,NULL,'350ml',899,599,ARRAY['Best Seller'],'assets/azurebloom.jpg',NULL,TRUE,TRUE,FALSE,1),
 ('eternal-embrace','Eternal Embrace','single','moulds','Mould Candle','Timeless sculptural piece.','A beautiful sculptural candle crafted to bring art into your home.',NULL,NULL,NULL,NULL,499,299,ARRAY['Artistic'],'assets/eternalembrace.jpg',NULL,TRUE,TRUE,FALSE,2),
 ('ivory-rose','Ivory Rose','single','moulds','Mould Candle','Elegant rose sculpture.','Intricate ivory rose pillar crafted from premium soy-coconut wax.',NULL,NULL,NULL,NULL,599,399,ARRAY['Hand-crafted'],'assets/ivoryrose.jpg',NULL,TRUE,TRUE,FALSE,3),
 ('rose-sculpture','Rose Sculpture','single','moulds','Mould Candle','Intricate floral pillar.','A detailed rose sculpture designed for aesthetic home decor.',NULL,NULL,NULL,NULL,549,349,ARRAY['Trending'],'assets/rosesculpture.jpg',NULL,TRUE,TRUE,FALSE,4),
-('strawberry-milk','Strawberry Milk','single','jars','Jar Candle','Creamy strawberry blend.','A sweet, creamy blend of fresh strawberries and cold milk.',NULL,NULL,NULL,NULL,799,599,ARRAY['New Arrival'],'assets/strawberrymilk.jpg',NULL,TRUE,TRUE,FALSE,0),
+('strawberry-milk','Strawberry Milk','single','jars','Jar Candle (220ml)','Creamy strawberry blend.','A sweet, creamy blend of fresh strawberries and cold milk.',NULL,NULL,NULL,NULL,'220ml',799,599,ARRAY['New Arrival'],'assets/strawberrymilk.jpg',NULL,TRUE,TRUE,FALSE,0),
 ('aura-wave','Aura Wave','single','moulds','Mould Candle','Rhythmic patterns of light.','Beautifully designed jar candle with a unique wavy aesthetic.',NULL,NULL,NULL,NULL,399,249,ARRAY['New Arrival'],'assets/aurawave.jpg',NULL,TRUE,TRUE,FALSE,5),
-('blue-blossom','Blue Blossom','single','jars','Jar Candle','Vibrant floral escape.','A refreshing floral fragrance captured in an artisan blue jar.',NULL,NULL,NULL,NULL,899,599,ARRAY['Featured'],'assets/blueblossom.jpg',NULL,TRUE,TRUE,FALSE,6),
+('blue-blossom','Blue Blossom','single','jars','Jar Candle (350ml)','Vibrant floral escape.','A refreshing floral fragrance captured in an artisan blue jar.',NULL,NULL,NULL,NULL,'350ml',899,599,ARRAY['Featured'],'assets/blueblossom.jpg',NULL,TRUE,TRUE,FALSE,6),
 ('bubble-pack','Bubble Candle (Pack of 4)','bundle','moulds','Mould Candle','Modern mini-bubbles.','A set of four mini bubble candles, perfect for aesthetic home decor.',NULL,NULL,NULL,NULL,549,349,ARRAY['Bundle Deal'],'assets/bubble.jpg',NULL,TRUE,TRUE,FALSE,7),
-('lavender-luxe','Lavender Candle','single','jars','Jar Candle','Calming lavender fields.','Authentic lavender scent designed to promote relaxation and deep sleep.',NULL,NULL,NULL,NULL,549,349,ARRAY['Relaxing'],'assets/lavender.jpg',NULL,TRUE,TRUE,FALSE,8)
+('lavender-luxe','Lavender Candle','single','jars','Jar Candle (220ml)','Calming lavender fields.','Authentic lavender scent designed to promote relaxation and deep sleep.',NULL,NULL,NULL,NULL,'220ml',549,349,ARRAY['Relaxing'],'assets/lavender.jpg',NULL,TRUE,TRUE,FALSE,8)
 ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════

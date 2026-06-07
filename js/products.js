@@ -7,7 +7,7 @@
 /* ── Fallback data (used ONLY when Supabase is not configured) ── */
 const FALLBACK_PRODUCTS = [
   { id:'azure-bloom', name:'Azure Bloom', type:'single', category:'jars',
-    notes:'Jar Candle', short_desc:'Stunning blue-tinted candle with artisan aesthetics.', family: 'Fresh',
+    notes:'Jar Candle (350ml)', short_desc:'Stunning blue-tinted candle with artisan aesthetics.', family: 'Fresh',
     original_price:899, sale_price:599, badges:['Best Seller', 'Relaxing'],
     perfect_for: ['Bedroom', 'Self Care', 'Meditation'],
     image:'assets/azurebloom.jpg',
@@ -35,7 +35,7 @@ const FALLBACK_PRODUCTS = [
     is_active:true, is_featured:true, sort_order:4 },
 
   { id:'strawberry-milk', name:'Strawberry Milk', type:'single', category:'jars',
-    notes:'Jar Candle', short_desc:'A sweet, creamy blend of fresh strawberries and cold milk.', family: 'Sweet',
+    notes:'Jar Candle (220ml)', short_desc:'A sweet, creamy blend of fresh strawberries and cold milk.', family: 'Sweet',
     original_price:799, sale_price:599, badges:['New Arrival', 'Great Gift'],
     perfect_for: ['Kitchen', 'Cozy Ambience', 'Birthdays'],
     image:'assets/strawberrymilk.jpg',
@@ -49,7 +49,7 @@ const FALLBACK_PRODUCTS = [
     is_active:true, is_featured:true, sort_order:5 },
 
   { id:'blue-blossom', name:'Blue Blossom', type:'single', category:'jars',
-    notes:'Jar Candle', short_desc:'A vibrant floral escape in every burn.', family: 'Floral',
+    notes:'Jar Candle (350ml)', short_desc:'A vibrant floral escape in every burn.', family: 'Floral',
     original_price:899, sale_price:599, badges:['Featured'],
     perfect_for: ['Living Room', 'Guest Welcoming'],
     image:'assets/blueblossom.jpg',
@@ -63,7 +63,7 @@ const FALLBACK_PRODUCTS = [
     is_active:true, is_featured:true, sort_order:7 },
 
   { id:'lavender-luxe', name:'Lavender Candle', type:'single', category:'jars',
-    notes:'Jar Candle', short_desc:'Classic calming lavender for peaceful nights.', family: 'Floral',
+    notes:'Jar Candle (220ml)', short_desc:'Classic calming lavender for peaceful nights.', family: 'Floral',
     original_price:549, sale_price:349, badges:['Relaxing'],
     perfect_for: ['Bedroom', 'Sleep Ritual'],
     image:'assets/lavender.jpg',
