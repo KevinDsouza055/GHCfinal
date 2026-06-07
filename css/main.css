@@ -456,9 +456,17 @@ input, textarea, select { font-family: var(--font-sans); }
 .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
 .product-image-wrap {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   background: var(--cashmere);
+}
+/* Specific ratio and fit for Bubble Candle Collage */
+[data-product-id="bubble-pack"] .product-image-wrap {
+  aspect-ratio: 1 / 1;
+}
+[data-product-id="bubble-pack"] .product-image-wrap img {
+  object-fit: contain !important;
+  padding: 12px;
 }
 .product-image-wrap img {
   width: 100%; height: 100%;
@@ -1007,7 +1015,7 @@ textarea.form-control { resize: vertical; min-height: 100px; }
 }
 .product-gallery { position: sticky; top: 100px; }
 .product-main-image {
-  aspect-ratio: 3/4;
+  aspect-ratio: 4 / 5;
   background: var(--cashmere);
   overflow: hidden;
   border-radius: var(--radius);
