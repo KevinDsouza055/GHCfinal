@@ -41,8 +41,8 @@ const FALLBACK_PRODUCTS = [
     image:'assets/strawberrymilk.jpg',
     is_active:true, is_featured:true, sort_order:0 },
 
-  { id:'aura-wave', name:'Aura Wave', type:'single', category:'jars',
-    notes:'Jar Candle', short_desc:'Rhythmic patterns of light and scent.', family: 'Fresh',
+  { id:'aura-wave', name:'Aura Wave', type:'single', category:'moulds',
+    notes:'Mould Candle', short_desc:'Rhythmic patterns of light and scent.', family: 'Fresh',
     original_price:399, sale_price:249, badges:['New Arrival'],
     perfect_for: ['Study Room', 'Modern Interiors'],
     image:'assets/aurawave.jpg',
