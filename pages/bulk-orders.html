@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulk Orders — Grace Home Candles</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="icon" type="image/jpeg" href="../assets/logoghc.jpg">
+</head>
+<body>
+
+<!-- Site Header (Simplified) -->
+<header id="site-header" class="scrolled">
+  <div class="container">
+    <div class="header-inner">
+      <a href="../index.html" class="nav-logo">
+        GRACE HOME <span style="font-family:var(--font-sans); font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; vertical-align: middle; margin-left: 4px; color: var(--gold);">Candles</span>
+      </a>
+      <div class="nav-right">
+        <a href="shop.html" class="nav-link" style="display:block">Shop</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main style="padding-top:120px">
+  <section class="page-banner">
+    <div class="container">
+      <nav class="breadcrumb"><a href="../index.html">Home</a> <span class="breadcrumb-sep">/</span> <span>Bulk Orders</span></nav>
+      <h1 class="display-lg">Corporate & Bulk Inquiries</h1>
+      <p class="body-lg" style="max-width:600px; margin: 20px auto 0;">Elevate your gifting with hand-poured luxury. Fill out the form below for wholesale pricing and bespoke solutions.</p>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container">
+      <div class="custom-form-wrap" style="max-width:800px; margin:0 auto">
+        <form id="bulk-order-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number *</label>
+              <input type="tel" name="phone" class="form-control" placeholder="98XXXXXXXX" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" name="email" class="form-control" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company / Event Name</label>
+              <input type="text" name="company" class="form-control" placeholder="Organization or Wedding of...">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Estimated Quantity *</label>
+              <input type="number" name="quantity" class="form-control" placeholder="Min. 25 units recommended" required min="1">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Type of Event</label>
+              <select name="event_type" class="form-control">
+                <option value="Corporate">Corporate Gifting</option>
+                <option value="Wedding">Wedding Favors</option>
+                <option value="Retail">Retail / Resale</option>
+                <option value="Event">Private Event</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Requirements & Message</label>
+            <textarea name="message" class="form-control" rows="5" placeholder="Tell us about the products you are interested in, customization needs, and your deadline."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full btn-lg" style="background:#25D366; border-color:#25D366">
+            <span>Submit Bulk Inquiry via WhatsApp</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2025 Grace Home Candles. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script src="../js/products.js"></script>
+<script src="../js/core.js"></script>
+</body>
+</html>

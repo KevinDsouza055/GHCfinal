@@ -342,9 +342,9 @@ const CustomCandle = {
                     `_I understand that a continuous unboxing video is mandatory for damage claims._\n` +
                     `_Inquiry from Grace Home Website_`;
 
-    window.open(`https://wa.me/917900187209?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
     Toast.show('Inquiry sent! We will contact you shortly.', 'success');
-    form.reset(); // Clear the form after submission
+    document.getElementById('custom-candle-form').reset(); // Clear the form after submission
     CustomCandle.toggleBaseType('Jar'); // Reset to default Jar view
     CustomCandle.handleColorChange('White', document.querySelector('.swatch[style*="background-color: rgb(255, 255, 255)"]')); // Reset color
   }
@@ -354,6 +354,42 @@ window.changeQty = (delta) => {
   const input = document.getElementById('custom-qty');
   const newVal = Math.max(1, parseInt(input.value) + delta);
   input.value = newVal;
+};
+
+/* ── BULK ORDER ENGINE ─────────────────────────────────── */
+const BulkOrder = {
+  init() {
+    const form = document.getElementById('bulk-order-form');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.handleSubmit(new FormData(form));
+    });
+  },
+  handleSubmit(fd) {
+    const data = {
+      name: fd.get('name'), phone: fd.get('phone'), email: fd.get('email'),
+      company: fd.get('company') || 'N/A', qty: fd.get('quantity'),
+      event: fd.get('event_type'), message: fd.get('message')
+    };
+    if (!data.name || !data.phone || !data.qty) {
+      Toast.show('Please fill in required fields.', 'error'); return;
+    }
+
+    const message = `*📦 NEW BULK ORDER INQUIRY 📦*\n\n` +
+                    `*👤 CONTACT*\nName: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\n\n` +
+                    `*🏢 DETAILS*\nCompany/Event: ${data.company}\nType: ${data.event}\nQuantity: ${data.qty}\n\n` +
+                    `*📝 REQUIREMENTS*\n${data.message}\n\n` +
+                    `------------------------------------------\n` +
+                    `*⚠️ UNBOXING POLICY ACKNOWLEDGED*\n` +
+                    `_I understand that a continuous unboxing video of the sealed package is mandatory for damage claims._\n\n` +
+                    `_Inquiry from Grace Home Website_`;
+
+    const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+    Toast.show('Inquiry sent via WhatsApp!', 'success');
+    document.getElementById('bulk-order-form').reset();
+  }
 };
 
 /* ── SCROLL REVEAL ─────────────────────────────────────────── */

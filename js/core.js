@@ -348,6 +348,42 @@ window.changeQty = (delta) => {
   input.value = newVal;
 };
 
+/* ── BULK ORDER ENGINE ─────────────────────────────────── */
+const BulkOrder = {
+  init() {
+    const form = document.getElementById('bulk-order-form');
+    if (!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.handleSubmit(new FormData(form));
+    });
+  },
+  handleSubmit(fd) {
+    const data = {
+      name: fd.get('name'), phone: fd.get('phone'), email: fd.get('email'),
+      company: fd.get('company') || 'N/A', qty: fd.get('quantity'),
+      event: fd.get('event_type'), message: fd.get('message')
+    };
+    if (!data.name || !data.phone || !data.qty) {
+      Toast.show('Please fill in required fields.', 'error'); return;
+    }
+
+    const message = `*📦 NEW BULK ORDER INQUIRY 📦*\n\n` +
+                    `*👤 CONTACT*\nName: ${data.name}\nPhone: ${data.phone}\nEmail: ${data.email}\n\n` +
+                    `*🏢 DETAILS*\nCompany/Event: ${data.company}\nType: ${data.event}\nQuantity: ${data.qty}\n\n` +
+                    `*📝 REQUIREMENTS*\n${data.message}\n\n` +
+                    `------------------------------------------\n` +
+                    `*⚠️ UNBOXING POLICY ACKNOWLEDGED*\n` +
+                    `_I understand that a continuous unboxing video of the sealed package is mandatory for damage claims._\n\n` +
+                    `_Inquiry from Grace Home Website_`;
+
+    const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+    Toast.show('Inquiry sent via WhatsApp!', 'success');
+    document.getElementById('bulk-order-form').reset();
+  }
+};
+
 /* ── SCROLL REVEAL ─────────────────────────────────────────── */
 const ScrollReveal = {
   observer: null,
@@ -465,7 +501,9 @@ const WhatsAppOrder = {
                     `*📦 ITEMS REQUESTED*\n` +
                     `------------------------------------------\n` +
                     `${itemsStr}\n` +
-                    `------------------------------------------\n\n` +
+                    `------------------------------------------\n` +
+                    `*⚠️ UNBOXING POLICY ACKNOWLEDGED*\n` +
+                    `_I understand that a continuous unboxing video of the sealed package is mandatory for damage claims._\n\n` +
                     `_Hello Grace Home, I am interested in these candles. Please let me know the availability and total cost for my location._`;
 
     const url = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -501,4 +539,5 @@ document.addEventListener('DOMContentLoaded', () => {
   FAQ.init();
   NewsletterForm.init();
   CustomCandle.init();
+  BulkOrder.init();
 });
