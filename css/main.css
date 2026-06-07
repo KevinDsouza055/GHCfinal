@@ -487,10 +487,21 @@ input, textarea, select { font-family: var(--font-sans); }
   text-transform: uppercase;
   padding: 5px 10px;
   border-radius: var(--radius);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  backdrop-filter: blur(4px);
 }
-.badge-bestseller { background: var(--espresso); color: var(--ivory); }
-.badge-sale { background: var(--gold); color: var(--ivory); }
-.badge-new { background: var(--ivory); color: var(--espresso); border: 1px solid var(--border-dark); }
+.badge-best-seller, .badge-bestseller { background: var(--espresso); color: var(--ivory); }
+.badge-sale, .badge-bundle-deal { background: var(--rose); color: var(--ivory); }
+.badge-new, .badge-new-arrival { background: var(--sage); color: var(--ivory); }
+.badge-featured { background: var(--ink); color: var(--ivory); }
+.badge-trending { background: var(--gold-light); color: var(--ivory); }
+.badge-hand-crafted { background: var(--sand); color: var(--espresso); }
+.badge-romantic { background: var(--rose); color: var(--ivory); }
+.badge-home-decor { background: var(--charcoal); color: var(--ivory); }
+.badge-artistic { background: var(--ink); color: var(--ivory); }
+.badge-relaxing { background: var(--sage); color: var(--ivory); }
+.badge-great-gift { background: var(--gold); color: var(--ivory); }
+
 .product-quick-add {
   position: absolute;
   bottom: 16px;
@@ -2147,11 +2158,6 @@ select.form-control { appearance: auto; }
 .rec-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
 .perfect-tag { padding: 6px 16px; background: var(--cream); border: 1px solid var(--border); font-size: 11px; letter-spacing: 0.05em; color: var(--muted); border-radius: 99px; }
-
-.badge-relaxing { background: var(--sage); color: white; }
-.badge-home-decor { background: var(--espresso); color: white; }
-.badge-romantic { background: var(--rose); color: white; }
-.badge-great-gift { background: var(--gold); color: white; }
 
 /* ── Policy Notice Box ── */
 .policy-notice-box {

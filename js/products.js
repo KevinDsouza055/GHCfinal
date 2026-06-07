@@ -35,7 +35,7 @@ const FALLBACK_PRODUCTS = [
     is_active:true, is_featured:true, sort_order:4 },
 
   { id:'strawberry-milk', name:'Strawberry Milk', type:'single', category:'jars',
-    notes:'Jar Candle (220ml)', short_desc:'A sweet, creamy blend of fresh strawberries and cold milk.', family: 'Sweet',
+    notes:'Jar Candle (1pc · 220ml)', short_desc:'A sweet, creamy blend of fresh strawberries and cold milk.', family: 'Sweet',
     original_price:799, sale_price:599, badges:['New Arrival', 'Great Gift'],
     perfect_for: ['Kitchen', 'Cozy Ambience', 'Birthdays'],
     image:'assets/strawberrymilk.jpg',

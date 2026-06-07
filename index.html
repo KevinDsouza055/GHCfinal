@@ -144,7 +144,6 @@
   <div class="container">
     <div class="section-header centered">
       <p class="overline reveal">The Collection</p>
-      <h2 id="collection-title" class="display-lg reveal reveal-delay-1">Five Signatures</h2>
       <div class="divider reveal reveal-delay-2"></div>
       <p class="body-lg reveal reveal-delay-3">Each scent is a world. Each candle, a ritual.</p>
     </div>
@@ -505,7 +504,7 @@
     await ProductStore.load();
     const grid = document.getElementById('featured-products-grid');
     if (grid) {
-      const featured = ProductStore.getFeatured().filter(p => p.type === 'single').slice(0, 3);
+      const featured = ProductStore.getFeatured().filter(p => p.type === 'single').slice(0, 6);
       grid.innerHTML = featured.map((p, i) => renderProductCard(p, i)).join('');
       ScrollReveal.init();
       grid.querySelectorAll('.product-card').forEach(card => {
