@@ -21,14 +21,14 @@ const FALLBACK_PRODUCTS = [
     is_active:true, is_featured:true, sort_order:2 },
 
   { id:'ivory-rose', name:'Ivory Rose', type:'single', category:'moulds',
-    notes:'Mould Candle', short_desc:'Elegant rose sculpture in pure soy-coconut wax.', family: 'Floral',
+    notes:'Mould Candle (1pc)', short_desc:'Elegant rose sculpture in pure soy-coconut wax.', family: 'Floral',
     original_price:599, sale_price:399, badges:['Romantic', 'Hand-crafted'],
     perfect_for: ['Bedroom', 'Valentine\'s Day', 'Proposal Gifts'],
     image:'assets/ivoryrose.jpg',
     is_active:true, is_featured:true, sort_order:3 },
 
   { id:'rose-sculpture', name:'Rose Sculpture', type:'single', category:'moulds',
-    notes:'Mould Candle', short_desc:'Intricate floral pillar candle.', family: 'Floral',
+    notes:'Mould Candle (1pc)', short_desc:'Intricate floral pillar candle.', family: 'Floral',
     original_price:549, sale_price:349, badges:['Great Gift', 'Trending'],
     perfect_for: ['Festivals', 'Living Room', 'Gifting'],
     image:'assets/rosesculpture.jpg',
