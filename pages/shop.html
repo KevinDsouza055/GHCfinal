@@ -144,6 +144,10 @@
 <main>
   <section style="padding:64px 0 100px">
     <div class="container">
+      <div id="mould-promo-banner" class="promo-banner">
+        <h3>The Sculptural Collection</h3>
+        <p>Exclusive Offer: Buy any 2 Mould Candles & Get 10% Off Your Order</p>
+      </div>
       <div class="products-grid-4" id="shop-grid">
         <!-- rendered by JS -->
       </div>
@@ -215,6 +219,10 @@
 
     if (filter === 'jars') filtered = PRODUCTS.filter(p => p.category === 'jars');
     else if (filter === 'moulds') filtered = PRODUCTS.filter(p => p.category === 'moulds');
+
+    // Toggle promo banner visibility
+    const banner = document.getElementById('mould-promo-banner');
+    if (banner) banner.classList.toggle('visible', filter === 'moulds');
 
     // Update active state on filter buttons
     document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === filter));

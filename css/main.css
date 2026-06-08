@@ -2171,3 +2171,17 @@ select.form-control { appearance: auto; }
 .policy-notice-box p, .policy-notice-box li { font-size: 13px; color: var(--muted); line-height: 1.6; }
 .policy-notice-box ul { padding-left: 18px; margin: 10px 0; }
 .policy-notice-box strong { color: var(--espresso); }
+
+/* ── Promo Banner ── */
+.promo-banner {
+  background: var(--cream);
+  border: 1px solid var(--gold);
+  padding: 32px 24px;
+  text-align: center;
+  margin-bottom: 48px;
+  border-radius: var(--radius);
+  display: none;
+}
+.promo-banner.visible { display: block; }
+.promo-banner h3 { font-family: var(--font-serif); font-size: 24px; color: var(--espresso); margin-bottom: 8px; font-weight: 300; }
+.promo-banner p { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
