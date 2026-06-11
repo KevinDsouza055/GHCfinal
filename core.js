@@ -503,7 +503,7 @@ const WhatsAppOrder = {
   sendInquiryFromCart() {
     if (Cart.items.length === 0) return;
 
-    const itemsStr = Cart.items.map(i => `• ${i.name}${i.notes ? ' [' + i.notes + ']' : ''} (x${i.qty})`).join('\n');
+    const itemsStr = Cart.items.map(i => `• *${i.name}*${i.notes ? ' [' + i.notes + ']' : ''} (x${i.qty})`).join('\n');
 
     const message = `*✨ NEW ENQUIRY | GRACE HOME ✨*\n\n` +
                     `_Order generated via Website_\n\n` +

@@ -163,17 +163,17 @@ const ProductStore = {
     }
   },
 
-  getAll()        { return this.products.filter(p => p.is_active); },
-  getFeatured()   { return this.products.filter(p => p.is_active && p.is_featured); },
-  getBestsellers(){ return this.products.filter(p => p.is_active && p.is_bestseller); },
+  getAll()        { return this.products.filter(p => p.is_active).sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
+  getFeatured()   { return this.products.filter(p => p.is_active && p.is_featured).sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
+  getBestsellers() { return this.products.filter(p => p.is_active && p.is_bestseller).sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
   getNewArrivals(){ 
     return this.products.filter(p => 
       p.is_active && 
       (p.badges && (p.badges.includes('New Arrival') || p.badges.includes('New')))
-    ); 
+    ).sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); 
   },
-  getSingles()    { return this.products.filter(p => p.is_active && p.type === 'single'); },
-  getBundles()    { return this.products.filter(p => p.is_active && p.type === 'gift_set'); },
+  getSingles()    { return this.products.filter(p => p.is_active && p.type === 'single').sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
+  getBundles()    { return this.products.filter(p => p.is_active && p.type === 'gift_set').sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
   getById(id)     { return this.products.find(p => p.id === id && p.is_active) || null; },
   getVariants(id) { return (this.variants[id] || []).sort((a,b) => a.sort_order - b.sort_order); },
   getDefaultVariant(id) {
@@ -331,7 +331,7 @@ function renderVariantSelector(product, containerId) {
       if (addBtn) {
         addBtn.onclick = () => {
           if (isScented && !selectedScent) {
-            if (typeof toast === 'function') toast('Please select a fragrance first', 'error');
+            if (typeof Toast !== 'undefined') Toast.show('Please select a fragrance first', 'error');
             else alert('Please select a fragrance first');
             return;
           }

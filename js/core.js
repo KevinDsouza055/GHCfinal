@@ -172,6 +172,7 @@ const CartDrawer = {
         <img src="${fixPath(item.image)}" style="width:60px;height:70px;object-fit:cover;flex-shrink:0">
         <div style="flex:1">
           <p style="font-size:14px;font-weight:500;margin-bottom:4px;color:var(--espresso)">${item.name}</p>
+          ${item.notes ? `<p style="font-size:11px;color:var(--sand);margin-bottom:6px">${item.notes}</p>` : ''}
           <div style="display:flex;align-items:center;gap:10px">
             <button onclick="Cart.updateQty('${item.id}', ${item.qty-1})">-</button>
             <span style="font-size:12px">${item.qty}</span>
@@ -190,7 +191,12 @@ const CartDrawer = {
             <span style="font-size:14px;color:var(--muted)">Total Items</span>
             <span style="font-size:18px;color:var(--espresso)">${Cart.count()}</span>
           </div>
-          <button onclick="WhatsAppOrder.sendInquiryFromCart()" class="btn btn-primary btn-full" style="background:#25D366;border-color:#25D366">
+          <div style="background:var(--ivory); padding:10px; border-radius:4px; margin-bottom:15px; border:1px solid var(--border)">
+            <p style="font-size:10px; line-height:1.4; color:var(--muted)">
+              ⚠️ <strong>Note:</strong> A continuous unboxing video of the sealed package is mandatory for any damage claims.
+            </p>
+          </div>
+          <button onclick="WhatsAppOrder.sendInquiryFromCart()" class="btn btn-primary btn-full" style="background:#25D366;border-color:#25D366;border:none">
             <span>Send Enquiry via WhatsApp</span>
           </button>
         </div>`;
@@ -332,9 +338,12 @@ const CustomCandle = {
                     (baseType === 'Mould' ? `Mould Style: ${data.mouldStyle}\n` : '') +
                     `Fragrance: ${data.fragrance}\nColor: ${data.color}\nQty: ${data.quantity}\n\n` +
                     `*📝 MESSAGE*\n${data.message}\n\n` +
+                    `------------------------------------------\n` +
+                    `*⚠️ UNBOXING POLICY ACKNOWLEDGED*\n` +
+                    `_I understand that a continuous unboxing video is mandatory for damage claims._\n` +
                     `_Inquiry from Grace Home Website_`;
 
-    window.open(`https://wa.me/917900187209?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
     Toast.show('Inquiry sent! We will contact you shortly.', 'success');
     form.reset(); // Clear the form after submission
     CustomCandle.toggleBaseType('Jar'); // Reset to default Jar view
@@ -494,7 +503,7 @@ const WhatsAppOrder = {
   sendInquiryFromCart() {
     if (Cart.items.length === 0) return;
 
-    const itemsStr = Cart.items.map(i => `• ${i.name} (x${i.qty})`).join('\n');
+    const itemsStr = Cart.items.map(i => `• *${i.name}*${i.notes ? ' [' + i.notes + ']' : ''} (x${i.qty})`).join('\n');
 
     const message = `*✨ NEW ENQUIRY | GRACE HOME ✨*\n\n` +
                     `_Order generated via Website_\n\n` +
