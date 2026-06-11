@@ -172,6 +172,7 @@ const CartDrawer = {
         <img src="${fixPath(item.image)}" style="width:60px;height:70px;object-fit:cover;flex-shrink:0">
         <div style="flex:1">
           <p style="font-size:14px;font-weight:500;margin-bottom:4px;color:var(--espresso)">${item.name}</p>
+          ${item.notes ? `<p style="font-size:11px;color:var(--sand);margin-bottom:6px">${item.notes}</p>` : ''}
           <div style="display:flex;align-items:center;gap:10px">
             <button onclick="Cart.updateQty('${item.id}', ${item.qty-1})">-</button>
             <span style="font-size:12px">${item.qty}</span>
@@ -502,7 +503,7 @@ const WhatsAppOrder = {
   sendInquiryFromCart() {
     if (Cart.items.length === 0) return;
 
-    const itemsStr = Cart.items.map(i => `• ${i.name} (x${i.qty})`).join('\n');
+    const itemsStr = Cart.items.map(i => `• ${i.name}${i.notes ? ' [' + i.notes + ']' : ''} (x${i.qty})`).join('\n');
 
     const message = `*✨ NEW ENQUIRY | GRACE HOME ✨*\n\n` +
                     `_Order generated via Website_\n\n` +
