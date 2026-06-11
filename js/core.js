@@ -5,6 +5,23 @@
 
 'use strict';
 
+// ── GOOGLE ANALYTICS 4 (GA4) TRACKING ───────────────────────
+(function() {
+  const GA_ID = 'G-60NLEVEWNJ';
+  // Prevent duplicate injection
+  if (!document.querySelector(`script[src*="${GA_ID}"]`)) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(script);
+
+    const configScript = document.createElement('script');
+    configScript.text = `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${GA_ID}');`;
+    document.head.appendChild(configScript);
+  }
+})();
+
+
 /* ── SECURITY ─────────────────────────────────────────────── */
 const Security = {
   sanitize(str) {
