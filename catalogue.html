@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Collection — Grace Home Candles</title>
+  <link rel="icon" type="image/jpeg" href="assets/logoghc.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- Mobile Navigation -->
+<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" inert>
+  <button id="mobile-nav-close" class="mobile-nav-close" aria-label="Close menu">✕</button>
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="catalogue.html" class="mobile-nav-link active">Catalogue</a>
+  <a href="pages/shop.html" class="mobile-nav-link">Shop</a>
+  <a href="pages/gifting.html" class="mobile-nav-link">Gifting</a>
+  <a href="pages/bulk-orders.html" class="mobile-nav-link">Bulk Orders</a>
+  <a href="pages/contact.html" class="mobile-nav-link">Contact</a>
+</nav>
+
+<!-- Site Header -->
+<header id="site-header" class="scrolled">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="nav-logo" aria-label="Grace Home Candles">
+        GRACE HOME <span class="logo-accent">Candles</span>
+      </a>
+      <nav class="nav-main" aria-label="Main navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="catalogue.html" class="nav-link active">Catalogue</a>
+        <a href="pages/shop.html" class="nav-link">Shop</a>
+        <a href="pages/gifting.html" class="nav-link">Gifting</a>
+        <a href="pages/bulk-orders.html" class="nav-link">Bulk Orders</a>
+        <a href="pages/contact.html" class="nav-link">Contact</a>
+      </nav>
+      <div class="nav-right">
+        <button class="hamburger" id="mobile-nav-toggle" aria-label="Open navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="page-banner">
+  <div class="container">
+    <p class="overline">The Art of Fragrance</p>
+    <h1 class="display-lg">Our Collection</h1>
+    <p class="body-lg">Handcrafted candles for every occasion — available for bulk & custom orders</p>
+  </div>
+</section>
+
+<!-- Filters & Grid -->
+<section class="section-pad">
+  <div class="container">
+    <div class="products-grid" id="catalogue-grid">
+      <!-- JS injected -->
+    </div>
+  </div>
+</section>
+
+<!-- Enquiry Modal -->
+<div id="enquiry-modal" class="modal-overlay" style="display: none; justify-content: center; align-items: center; z-index: 3000;">
+  <div class="modal" style="padding: 0; max-width: 500px; border-radius: 8px; overflow: hidden;">
+    <div class="modal-header" style="background: var(--espresso); color: white; padding: 24px;">
+      <h2 id="modal-product-title" class="display-sm" style="color: white; margin: 0;">Enquiry</h2>
+      <button class="modal-close" id="close-enquiry" style="color: white; font-size: 24px;">✕</button>
+    </div>
+    <div class="modal-body" style="padding: 32px;">
+      <form id="enquiry-form">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" id="enq-name" class="form-control" placeholder="Full Name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" id="enq-phone" class="form-control" placeholder="98XXXXXXXX" required maxlength="10">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea id="enq-message" class="form-control" rows="4"></textarea>
+        </div>
+        <div class="action-row" style="display: flex; flex-direction: column; gap: 12px; margin-top: 24px; border: none;">
+          <button type="button" id="send-whatsapp" class="btn btn-primary btn-full" style="background: #25D366; border: none;">
+            <span>Send via WhatsApp</span>
+          </button>
+          <a href="tel:917900187209" class="btn btn-outline btn-full">
+            <span>Call Us</span>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">Grace Home <span>Candles</span></div>
+        <p class="footer-brand-desc">Hand-poured luxury candles crafted with intention.</p>
+      </div>
+      <div>
+        <p class="footer-heading">Shop</p>
+        <ul class="footer-links">
+          <li><a href="catalogue.html">All Candles</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-heading">Legal</p>
+        <ul class="footer-links">
+          <li><a href="pages/privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="pages/terms.html">Terms & Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Grace Home Candles. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/catalogue.js"></script>
+<script>
+  // Simple mobile nav toggle for this page
+  const toggle = document.getElementById('mobile-nav-toggle');
+  const nav = document.getElementById('mobile-nav');
+  const close = document.getElementById('mobile-nav-close');
+  
+  toggle?.addEventListener('click', () => {
+    nav.classList.add('open');
+    nav.removeAttribute('inert');
+  });
+  close?.addEventListener('click', () => {
+    nav.classList.remove('open');
+    nav.setAttribute('inert', '');
+  });
+</script>
+</body>
+</html>

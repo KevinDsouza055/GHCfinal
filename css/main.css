@@ -253,6 +253,7 @@ input, textarea, select { font-family: var(--font-sans); }
   transition: transform var(--transition-fast);
 }
 .nav-link:hover { color: var(--gold); }
+.nav-link.active { color: var(--gold); }
 .nav-link:hover::after { transform: scaleX(1); }
 .nav-icon-btn {
   width: 40px; height: 40px;
@@ -867,6 +868,7 @@ input, textarea, select { font-family: var(--font-sans); }
   background: rgba(26,18,16,0.5);
   z-index: 1200;
   opacity: 0;
+  display: none;
   visibility: hidden;
   transition: var(--transition);
   backdrop-filter: blur(4px);
