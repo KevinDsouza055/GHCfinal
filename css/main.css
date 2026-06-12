@@ -461,14 +461,6 @@ input, textarea, select { font-family: var(--font-sans); }
   overflow: hidden;
   background: var(--cashmere);
 }
-/* Specific ratio and fit for Bubble Candle Collage */
-[data-product-id="bubble-pack"] .product-image-wrap {
-  aspect-ratio: 1 / 1;
-}
-[data-product-id="bubble-pack"] .product-image-wrap img {
-  object-fit: contain !important;
-  padding: 12px;
-}
 .product-image-wrap img {
   width: 100%; height: 100%;
   object-fit: cover !important;
@@ -1734,8 +1726,11 @@ select.form-control { appearance: auto; }
 @media (min-width: 1025px) {
   .hero-visual { transform: translateY(28px); }
   .products-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .nav-main { display: flex; }
-  .nav-link { display: block; }
+  .nav-main { 
+    display: flex; 
+    gap: clamp(28px, 3.5vw, 56px); 
+  }
+  .nav-link { display: block; font-size: 11px; }
   .hamburger { display: none; }
 }
 
