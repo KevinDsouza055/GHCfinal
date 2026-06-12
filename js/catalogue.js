@@ -71,7 +71,7 @@ function renderCatalogue() {
   if (!grid) return;
 
   grid.innerHTML = CATALOGUE_PRODUCTS.map(p => `
-    <article class="product-card">
+    <article class="product-card" data-product-id="${p.id}">
       <div class="product-image-wrap" style="background-color: ${p.bg}">
         <img src="${p.image}" alt="${p.name}" onerror="this.src='assets/strawberrymilk.jpg'" loading="lazy">
         <div class="product-badge"><span class="badge">${p.tag}</span></div>

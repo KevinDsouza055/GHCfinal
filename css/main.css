@@ -1715,6 +1715,12 @@ select.form-control { appearance: auto; }
   border-radius: var(--radius);
 }
 
+/* Specific fit for Bubble Candle collage to prevent cropping */
+[data-product-id="bubble-pack"] .product-image-wrap img {
+  object-fit: contain !important;
+  padding: 15px;
+}
+
 .site-footer {
   background:
     linear-gradient(135deg, var(--espresso), #202632);
@@ -1728,9 +1734,9 @@ select.form-control { appearance: auto; }
   .products-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .nav-main { 
     display: flex; 
-    gap: clamp(28px, 3.5vw, 56px); 
+    gap: clamp(34px, 4.5vw, 68px); 
   }
-  .nav-link { display: block; font-size: 11px; }
+  .nav-link { display: block; font-size: 12px; }
   .hamburger { display: none; }
 }
 
