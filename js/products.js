@@ -162,6 +162,16 @@ const ProductStore = {
         <div>${total} Candles in Collection | ${newArrivals} New Arrivals</div>
       `;
     }
+
+    // Display detailed stats in the collection section
+    const statsEl = document.getElementById('collection-stats');
+    if (statsEl) {
+      const all = this.getAll();
+      const total = all.length;
+      const jars = all.filter(p => p.category === 'jars').length;
+      const moulds = all.filter(p => p.category === 'moulds').length;
+      statsEl.textContent = `${total} Candles · ${jars} Artisan Jars · ${moulds} Sculptural Moulds`;
+    }
   },
 
   getAll()        { return this.products.filter(p => p.is_active).sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },

@@ -1732,6 +1732,8 @@ select.form-control { appearance: auto; }
 @media (min-width: 1025px) {
   .hero-visual { transform: translateY(28px); }
   .products-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .nav-main { display: flex; }
+  .hamburger { display: none; }
 }
 
 @media (max-width: 1024px) {
