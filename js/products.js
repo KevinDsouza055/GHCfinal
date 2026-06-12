@@ -35,7 +35,7 @@ const FALLBACK_PRODUCTS = [
     is_active:true, is_featured:true, sort_order:8 },
 
   { id:'strawberry-milk', name:'Strawberry Milk', type:'single', category:'jars',
-    notes:'Jar Candle (Strawberry Scent)', short_desc:'A sweet, creamy blend of fresh strawberries and cold milk.', family: 'Sweet',
+    notes:'Jar Candle (Strawberry Scent, 1pc)', short_desc:'A sweet, creamy blend of fresh strawberries and cold milk (1pc).', family: 'Sweet',
     original_price:799, sale_price:599, badges:['New Arrival', 'Great Gift'],
     perfect_for: ['Kitchen', 'Cozy Ambience', 'Birthdays'],
     image:'assets/strawberrymilk.jpg',
@@ -67,7 +67,7 @@ const FALLBACK_PRODUCTS = [
 
   { id:'striped-candle', name:'Striped Pillar Candle', type:'single', category:'moulds',
     notes:'20cm Height · 4cm Diameter', short_desc:'Elegant striped pillar for modern decor.', family: 'Modern',
-    original_price:899, sale_price:699, badges:['New'],
+    original_price:699, sale_price:499, badges:['New'],
     image:'assets/stripedcandle.jpg',
     is_active:true, is_featured:true, sort_order:3 },
 
@@ -130,7 +130,7 @@ const FALLBACK_VARIANTS = {
   'teddy-heart-jar': [{id:'v1', variant_name:'Scented', sale_price:699, original_price:899, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:649, original_price:849}],
   'wedding-couple': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:699, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:399, original_price:599}],
   'daisy-bloom': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:799, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:499, original_price:699}],
-  'striped-candle': [{id:'v1', variant_name:'Scented', sale_price:699, original_price:899, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:649, original_price:849}],
+  'striped-candle': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:699, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:449, original_price:649}],
   'teddy-bear': [{id:'v1', variant_name:'Scented', sale_price:299, original_price:499, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:249, original_price:449}],
   'z-shape': [{id:'v1', variant_name:'Scented', sale_price:299, original_price:499, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:249, original_price:449}],
   'bubble-pack': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
