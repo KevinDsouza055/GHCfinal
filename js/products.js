@@ -53,9 +53,9 @@ const FALLBACK_PRODUCTS = [
     image:'assets/weddingcouplerosecandle.jpg',
     is_active:true, is_featured:true, sort_order:12 },
 
-  { id:'coconut-blossom', name:'Coconut Blossom', type:'single', category:'jars',
-    notes:'Coconut Scented Jar', short_desc:'Tropical paradise in a candle.', family: 'Tropical',
-    original_price:899, sale_price:699, badges:['Featured'],
+  { id:'coconut-blossom', name:'Coconut Blossom (Real Shell)', type:'single', category:'jars',
+    notes:'Natural Shell · Coconut Scent', short_desc:'Tropical paradise in a candle.', family: 'Tropical',
+    original_price:899, sale_price:599, badges:['New Arrival', 'Featured'],
     image:'assets/coconutblossom.jpg',
     is_active:true, is_featured:true, sort_order:13 },
 
@@ -73,7 +73,7 @@ const FALLBACK_PRODUCTS = [
 
   { id:'teddy-bear', name:'Teddy Bear Candle', type:'single', category:'moulds',
     notes:'Cute Teddy Sculpture', short_desc:'Playful and aesthetic teddy bear mould.', family: 'Sweet',
-    original_price:499, sale_price:299, badges:['Cute'],
+    original_price:499, sale_price:299, badges:['New Arrival', 'Cute'],
     image:'assets/teddybear.jpg',
     is_active:true, is_featured:true, sort_order:15 },
 
@@ -135,7 +135,8 @@ const FALLBACK_VARIANTS = {
   'z-shape': [{id:'v1', variant_name:'Scented', sale_price:299, original_price:499, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:249, original_price:449}],
   'bubble-pack': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
   'lavender-gradient': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:599, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
-  'lavender-mist': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:699, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:449, original_price:649}]
+  'lavender-mist': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:699, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:449, original_price:649}],
+  'coconut-blossom': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:899, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:549, original_price:849}]
 };
 
 /* ── ProductStore — single source of truth for the frontend ── */
@@ -167,10 +168,13 @@ const ProductStore = {
   getFeatured()   { return this.products.filter(p => p.is_active && p.is_featured).sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
   getBestsellers() { return this.products.filter(p => p.is_active && p.is_bestseller).sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
   getNewArrivals(){ 
-    return this.products.filter(p => 
-      p.is_active && 
-      (p.badges && (p.badges.includes('New Arrival') || p.badges.includes('New')))
-    ).sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); 
+    return this.products.filter(p => {
+      if (!p.is_active || p.id === 'z-shape') return false;
+      const name = p.name.toLowerCase();
+      // Filter for specific categories requested: Coconut, Teddy, and Pillar candles
+      const matchesRequest = name.includes('coconut') || name.includes('teddy') || name.includes('pillar');
+      return matchesRequest;
+    }).sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); 
   },
   getSingles()    { return this.products.filter(p => p.is_active && p.type === 'single').sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
   getBundles()    { return this.products.filter(p => p.is_active && p.type === 'gift_set').sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
@@ -331,7 +335,7 @@ function renderVariantSelector(product, containerId) {
       if (addBtn) {
         addBtn.onclick = () => {
           if (isScented && !selectedScent) {
-            if (typeof Toast !== 'undefined') Toast.show('Please select a fragrance first', 'error');
+            if (typeof toast === 'function') toast('Please select a fragrance first', 'error');
             else alert('Please select a fragrance first');
             return;
           }

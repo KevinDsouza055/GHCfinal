@@ -140,6 +140,22 @@
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 </style>
 
+<!-- ── NEW ARRIVALS SECTION ──────────────────────────── -->
+<section class="section-pad" id="new-arrivals" aria-labelledby="new-arrivals-title">
+  <div class="container">
+    <div class="section-header centered">
+      <p class="overline reveal">Freshly Poured</p>
+      <h2 id="new-arrivals-title" class="display-lg reveal reveal-delay-1">✨ New Arrivals</h2>
+      <div class="divider reveal reveal-delay-2"></div>
+      <p class="body-lg reveal reveal-delay-3">Be the first to discover our latest creations and seasonal scents.</p>
+    </div>
+
+    <div class="horizontal-scroll-grid" id="new-arrivals-grid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
 <!-- ── FEATURED COLLECTION ───────────────────────────── -->
 <section class="section-pad" id="collection" aria-labelledby="collection-title">
   <div class="container">
@@ -514,18 +530,35 @@
   // Render featured products from Supabase (or fallback)
   document.addEventListener('DOMContentLoaded', async () => {
     await ProductStore.load();
+    
+    // 1. Render New Arrivals Scrolling Grid
+    const arrivalsGrid = document.getElementById('new-arrivals-grid');
+    if (arrivalsGrid) {
+      const newArrivals = ProductStore.getNewArrivals();
+      if (newArrivals.length > 0) {
+        arrivalsGrid.innerHTML = newArrivals.map((p, i) => renderProductCard(p, i)).join('');
+      } else {
+        document.getElementById('new-arrivals').style.display = 'none';
+      }
+    }
+
+    // 2. Render Featured Collection
     const grid = document.getElementById('featured-products-grid');
     if (grid) {
       const featured = ProductStore.getFeatured().filter(p => p.type === 'single').slice(0, 6);
       grid.innerHTML = featured.map((p, i) => renderProductCard(p, i)).join('');
-      ScrollReveal.init();
-      grid.querySelectorAll('.product-card').forEach(card => {
-        card.addEventListener('click', e => {
-          if (e.target.closest('button')) return;
-          window.location.href = `pages/product.html?id=${card.dataset.productId}`;
-        });
-      });
     }
+
+    // Initialize interactions for all rendered cards
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('click', e => {
+        if (e.target.closest('button')) return;
+        const isSubPage = window.location.pathname.includes('/pages/');
+        window.location.href = (isSubPage ? '' : 'pages/') + `product.html?id=${card.dataset.productId}`;
+      });
+    });
+
+    ScrollReveal.init();
   });
 </script>
 </body>
