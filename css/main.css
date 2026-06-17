@@ -1622,9 +1622,10 @@ nav,
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
     url("../assets/heroghc.jpg") center/cover no-repeat;
   z-index: 0;
+  filter: brightness(1.1) contrast(1.05);
 }
 .hero-bg::before {
   background: linear-gradient(180deg, rgba(0,0,0,0.4), transparent 50%);
@@ -1860,7 +1861,7 @@ select.form-control { appearance: auto; }
     align-items: flex-end;
   }
   .hero-bg::before {
-    background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+    background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.55) 100%);
   }
   .hero-grid {
     min-height: auto;
