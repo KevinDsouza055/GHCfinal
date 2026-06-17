@@ -591,6 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
   Cart.init();
   CartDrawer.init();
   ScrollReveal.init();
+  Header.init();
   MobileNav.init();
   FAQ.init();
   NewsletterForm.init();
