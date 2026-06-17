@@ -15,7 +15,7 @@ const FALLBACK_PRODUCTS = [
 
   { id:'eternal-embrace', name:'Eternal Embrace', type:'single', category:'moulds',
     notes:'Mould Candle', short_desc:'Timeless sculptural piece for your home.', family: 'Unscented',
-    original_price:599, sale_price:399, badges:['Home Decor', 'Artistic'],
+    original_price:649, sale_price:449, badges:['Home Decor', 'Artistic'],
     perfect_for: ['Living Room', 'Gifting', 'Anniversaries'],
     image:'assets/eternalembrace.jpg',
     is_active:true, is_featured:true, sort_order:6 },
@@ -49,19 +49,19 @@ const FALLBACK_PRODUCTS = [
 
   { id:'wedding-couple', name:'Wedding Couple Rose Candle', type:'single', category:'moulds',
     notes:'Sculptural Rose Candle', short_desc:'The perfect gift for anniversaries and weddings.', family: 'Floral',
-    original_price:699, sale_price:499, badges:['Great Gift', 'Romantic'],
+    original_price:799, sale_price:599, badges:['Great Gift', 'Romantic'],
     image:'assets/weddingcouplerosecandle.jpg',
     is_active:true, is_featured:true, sort_order:12 },
 
   { id:'coconut-blossom', name:'Coconut Blossom (Real Shell)', type:'single', category:'jars',
     notes:'Natural Shell · Coconut Scent', short_desc:'Tropical paradise in a candle.', family: 'Tropical',
-    original_price:899, sale_price:599, badges:['New Arrival', 'Featured'],
+    original_price:899, sale_price:649, badges:['Premium', 'Featured'],
     image:'assets/coconutblossom.jpg',
     is_active:true, is_featured:true, sort_order:13 },
 
   { id:'daisy-bloom', name:'Daisy Bloom Candle', type:'single', category:'moulds',
     notes:'Floral Aesthetic Candle', short_desc:'Delicate daisy design to brighten any space.', family: 'Floral',
-    original_price:799, sale_price:599, badges:['Trending'],
+    original_price:799, sale_price:599, badges:['Premium', 'Trending'],
     image:'assets/daisybloomcandle.jpg',
     is_active:true, is_featured:true, sort_order:14 },
 
@@ -116,19 +116,43 @@ const FALLBACK_PRODUCTS = [
     original_price:699, sale_price:499, badges:['New'],
     perfect_for: ['Spa Day', 'Meditation'],
     image:'assets/lavendermist.jpg',
-    is_active:true, is_featured:true, sort_order:4 }
+    is_active:true, is_featured:true, sort_order:4 },
+
+  { id:'sky-teddy', name:'Sky Teddy', type:'single', category:'moulds',
+    notes:'Mould Candle', short_desc:'Playful teddy sculpture in a serene sky hue.', family: 'Fresh',
+    original_price:649, sale_price:449, badges:['New Arrival'],
+    image:'assets/skyteddy.jpg',
+    is_active:true, is_featured:true, sort_order:17 },
+
+  { id:'heart-bloom', name:'Heart Bloom', type:'single', category:'moulds',
+    notes:'Premium 8-inch Candle', short_desc:'Exquisite premium floral heart sculpture.', family: 'Floral',
+    original_price:1199, sale_price:899, badges:['Premium', 'Featured'],
+    image:'assets/heartbloom.jpg',
+    is_active:true, is_featured:true, sort_order:18 },
+
+  { id:'pure-glow', name:'Pure Glow', type:'single', category:'jars',
+    notes:'Jar Candle (350ml)', short_desc:'Minimalist elegance with a radiant burn.', family: 'Fresh',
+    original_price:749, sale_price:549, badges:['New'],
+    image:'assets/pureglow.jpg',
+    is_active:true, is_featured:true, sort_order:19 },
+
+  { id:'blush-serenity', name:'Blush Serenity', type:'single', category:'jars',
+    notes:'Jar Candle (190ml)', short_desc:'A soft, calming fragrance experience.', family: 'Sweet',
+    original_price:649, sale_price:449, badges:['New'],
+    image:'assets/blushserenity.jpg',
+    is_active:true, is_featured:true, sort_order:20 }
 ];
 
 const SCENT_OPTIONS = ['Lavender', 'Jasmine', 'Rose', 'Vanilla', 'Chocolate', 'Coffee', 'Sandalwood', 'Oud', 'Amber'];
 
 const FALLBACK_VARIANTS = {
   'azure-bloom': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:799, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:549, original_price:749}],
-  'eternal-embrace': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:599, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
+  'eternal-embrace': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:399, original_price:599}],
   'ivory-rose': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:699, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:399, original_price:599}],
   'rose-sculpture': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:599, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
   'blue-blossom': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:799, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:549, original_price:749}],
   'teddy-heart-jar': [{id:'v1', variant_name:'Scented', sale_price:699, original_price:899, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:649, original_price:849}],
-  'wedding-couple': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:699, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:399, original_price:599}],
+  'wedding-couple': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:799, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:499, original_price:699}],
   'daisy-bloom': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:799, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:499, original_price:699}],
   'striped-candle': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:699, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:449, original_price:649}],
   'teddy-bear': [{id:'v1', variant_name:'Scented', sale_price:299, original_price:499, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:249, original_price:449}],
@@ -136,7 +160,11 @@ const FALLBACK_VARIANTS = {
   'bubble-pack': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
   'lavender-gradient': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:599, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
   'lavender-mist': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:699, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:449, original_price:649}],
-  'coconut-blossom': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:899, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:549, original_price:849}]
+  'coconut-blossom': [{id:'v1', variant_name:'Scented', sale_price:649, original_price:899, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:599, original_price:849}],
+  'sky-teddy': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
+  'heart-bloom': [{id:'v1', variant_name:'Scented', sale_price:899, original_price:1199, is_default:true}],
+  'pure-glow': [{id:'v1', variant_name:'Scented', sale_price:549, original_price:749, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:449, original_price:649}],
+  'blush-serenity': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}]
 };
 
 /* ── ProductStore — single source of truth for the frontend ── */
@@ -179,12 +207,11 @@ const ProductStore = {
   getBestsellers() { return this.products.filter(p => p.is_active && p.is_bestseller).sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
   getNewArrivals(){ 
     return this.products.filter(p => {
-      if (!p.is_active || p.id === 'z-shape') return false;
-      const name = p.name.toLowerCase();
-      // Filter for specific categories requested: Coconut, Teddy, and Pillar candles
-      const matchesRequest = name.includes('coconut') || name.includes('teddy') || name.includes('pillar');
-      return matchesRequest;
-    }).sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); 
+      if (!p.is_active) return false;
+      // Dynamically include anything with 'New' or 'New Arrival' in the badges
+      const hasNewBadge = (p.badges || []).some(b => b.toLowerCase().includes('new'));
+      return hasNewBadge;
+    }).sort((a,b) => (b.sort_order || 0) - (a.sort_order || 0)).slice(0, 6); 
   },
   getSingles()    { return this.products.filter(p => p.is_active && p.type === 'single').sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
   getBundles()    { return this.products.filter(p => p.is_active && p.type === 'gift_set').sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
@@ -192,6 +219,10 @@ const ProductStore = {
   getVariants(id) { return (this.variants[id] || []).sort((a,b) => a.sort_order - b.sort_order); },
   getDefaultVariant(id) {
     const vars = this.getVariants(id);
+    // Display non-scented prices by default on cards as requested
+    const nsVariant = vars.find(v => v.variant_name.toLowerCase().includes('non-scented'));
+    if (nsVariant) return nsVariant;
+    
     return vars.find(v => v.is_default) || vars[0] || null;
   },
 
@@ -271,7 +302,7 @@ function renderVariantSelector(product, containerId) {
     return;
   }
 
-  let selectedId = (variants.find(v => v.is_default) || variants[0])?.id;
+  let selectedId = ProductStore.getDefaultVariant(product.id)?.id;
   let selectedScent = "";
 
   function render() {
@@ -361,6 +392,12 @@ function renderVariantSelector(product, containerId) {
           });
         };
         addBtn.querySelector('span').textContent = `Add to Cart — ₹${sel.sale_price.toLocaleString('en-IN')}`;
+      }
+      if (!container.querySelector('.product-offer-hint')) {
+        const hint = document.createElement('div');
+        hint.className = 'product-offer-hint';
+        hint.innerHTML = '✨ Buy 2 & Save 10% • Buy 4 & Save 15%';
+        addBtn.parentNode.appendChild(hint);
       }
     }
   }

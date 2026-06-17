@@ -60,6 +60,11 @@ const CONFIG = {
   WHATSAPP_NUMBER: '917900187209',    // Your WhatsApp Number
   ORDER_EMAIL:   'gracehomecandles@gmail.com',
   ORDER_WHATSAPP:'917900187209',
+  FREE_SHIPPING_THRESHOLD: 1999,
+  OFFER_TIER_1_QTY: 2,
+  OFFER_TIER_1_DISCOUNT: 0.10,
+  OFFER_TIER_2_QTY: 4,
+  OFFER_TIER_2_DISCOUNT: 0.15
 };
 
 /* ── TOAST ─────────────────────────────────────────────────── */
@@ -135,6 +140,30 @@ const Cart = {
     if (typeof CartDrawer !== 'undefined') CartDrawer.render();
   },
   count() { return this.items.reduce((s, i) => s + i.qty, 0); },
+  getSubtotal() { return this.items.reduce((s, i) => s + (i.price * i.qty), 0); },
+  getOfferStats() {
+    const subtotal = this.getSubtotal();
+    const qty = this.count();
+    let discountPct = 0;
+    let nextMilestoneMsg = "";
+
+    if (qty >= CONFIG.OFFER_TIER_2_QTY) {
+      discountPct = CONFIG.OFFER_TIER_2_DISCOUNT;
+      nextMilestoneMsg = "🎉 Congratulations! You qualify for 15% OFF";
+    } else if (qty >= CONFIG.OFFER_TIER_1_QTY) {
+      discountPct = CONFIG.OFFER_TIER_1_DISCOUNT;
+      nextMilestoneMsg = `🎉 Congratulations! You qualify for 10% OFF. Add ${CONFIG.OFFER_TIER_2_QTY - qty} more to unlock 15%!`;
+    } else if (qty > 0) {
+      nextMilestoneMsg = `Add 1 more candle to unlock 10% OFF`;
+    }
+
+    const discountAmount = subtotal * discountPct;
+    const isFreeShipping = subtotal >= CONFIG.FREE_SHIPPING_THRESHOLD;
+    const remainingForFree = CONFIG.FREE_SHIPPING_THRESHOLD - subtotal;
+    const progress = Math.min((subtotal / CONFIG.FREE_SHIPPING_THRESHOLD) * 100, 100);
+
+    return { subtotal, qty, discountPct, discountAmount, isFreeShipping, remainingForFree, progress, nextMilestoneMsg };
+  },
   clear() { this.items = []; this.save(); this.updateUI(); },
   updateUI() {
     const count = this.count();
@@ -183,6 +212,19 @@ const CartDrawer = {
 
     const isSubPage = window.location.pathname.includes('/pages/');
     const fixPath = (p) => (p && !p.startsWith('http') && !p.startsWith('../')) ? (isSubPage ? '../' + p : p) : p;
+    const stats = Cart.getOfferStats();
+
+    let offerHtml = `
+      <div class="cart-offer-container">
+        <div class="cart-offer-msg">${stats.nextMilestoneMsg}</div>
+        <div class="cart-progress-wrap">
+          <div class="cart-progress-fill" style="width: ${stats.progress}%"></div>
+        </div>
+        <div class="cart-progress-label">
+          ${stats.isFreeShipping ? '🚚 Eligible for FREE SHIPPING' : `Add ${formatINR(stats.remainingForFree)} more for FREE SHIPPING`}
+        </div>
+      </div>
+    `;
 
     let html = Cart.items.map(item => `
       <div class="cart-item" style="display:flex;gap:12px;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:12px;align-items:center">
@@ -199,14 +241,19 @@ const CartDrawer = {
         </div>
       </div>`).join('');
 
-    body.innerHTML = html;
+    body.innerHTML = offerHtml + html;
 
     if (footer) {
       footer.innerHTML = `
         <div style="padding-top:10px">
-          <div style="display:flex;justify-content:space-between;margin-bottom:16px;font-family:var(--font-serif)">
-            <span style="font-size:14px;color:var(--muted)">Total Items</span>
-            <span style="font-size:18px;color:var(--espresso)">${Cart.count()}</span>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:16px;font-family:var(--font-serif)">
+            <div style="display:flex;justify-content:space-between;font-size:14px;color:var(--muted)">
+              <span>Subtotal</span><span>${formatINR(stats.subtotal)}</span>
+            </div>
+            ${stats.discountAmount > 0 ? `<div style="display:flex;justify-content:space-between;font-size:14px;color:var(--gold)"><span>Offer (${stats.discountPct * 100}%)</span><span>-${formatINR(stats.discountAmount)}</span></div>` : ''}
+            <div style="display:flex;justify-content:space-between;font-size:18px;color:var(--espresso);margin-top:4px;border-top:1px solid var(--border);padding-top:8px">
+              <span>Estimated Total</span><span>${formatINR(stats.subtotal - stats.discountAmount)}</span>
+            </div>
           </div>
           <div style="background:var(--ivory); padding:10px; border-radius:4px; margin-bottom:15px; border:1px solid var(--border)">
             <p style="font-size:10px; line-height:1.4; color:var(--muted)">
@@ -520,7 +567,9 @@ const WhatsAppOrder = {
   sendInquiryFromCart() {
     if (Cart.items.length === 0) return;
 
+    const stats = Cart.getOfferStats();
     const itemsStr = Cart.items.map(i => `• *${i.name}*${i.notes ? ' [' + i.notes + ']' : ''} (x${i.qty})`).join('\n');
+    const finalTotal = stats.subtotal - stats.discountAmount;
 
     const message = `*✨ NEW ENQUIRY | GRACE HOME ✨*\n\n` +
                     `_Order generated via Website_\n\n` +
@@ -528,6 +577,10 @@ const WhatsAppOrder = {
                     `------------------------------------------\n` +
                     `${itemsStr}\n` +
                     `------------------------------------------\n` +
+                    `*Cart Total:* ${formatINR(stats.subtotal)}\n` +
+                    `*Offer Eligible:* ${stats.discountPct > 0 ? (stats.discountPct * 100) + '% OFF' : 'None'}\n` +
+                    `*Free Shipping Eligible:* ${stats.isFreeShipping ? 'YES' : 'NO'}\n` +
+                    `*Estimated Payable:* ${formatINR(finalTotal)}\n\n` +
                     `*⚠️ UNBOXING POLICY ACKNOWLEDGED*\n` +
                     `_I understand that a continuous unboxing video of the sealed package is mandatory for damage claims._\n\n` +
                     `_Hello Grace Home, I am interested in these candles. Please let me know the availability and total cost for my location._`;

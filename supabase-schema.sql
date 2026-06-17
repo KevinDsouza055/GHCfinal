@@ -271,13 +271,13 @@ INSERT INTO products (id,name,type,category,notes,short_desc,description,fragran
   burn_time,size,original_price,sale_price,badges,image,images,is_active,is_featured,is_bestseller,sort_order)
 VALUES
 ('azure-bloom','Azure Bloom','single','jars','Jar Candle (350ml)','Blue-tinted artisan jar candle.','Stunning blue-tinted candle.',NULL,NULL,NULL,NULL,'350ml',799,599,ARRAY['Best Seller'],'assets/azurebloom.jpg',NULL,TRUE,TRUE,FALSE,5),
-('eternal-embrace','Eternal Embrace','single','moulds','Mould Candle','Timeless sculptural piece.','Artistic sculpture.',NULL,NULL,NULL,NULL,599,399,ARRAY['Artistic'],'assets/eternalembrace.jpg',NULL,TRUE,TRUE,FALSE,6),
+('eternal-embrace','Eternal Embrace','single','moulds','Mould Candle','Timeless sculptural piece.','Artistic sculpture.',NULL,NULL,NULL,NULL,649,449,ARRAY['Artistic'],'assets/eternalembrace.jpg',NULL,TRUE,TRUE,FALSE,6),
 ('ivory-rose','Ivory Rose','single','moulds','Mould Candle','Elegant rose sculpture.','Intricate ivory rose.',NULL,NULL,NULL,NULL,699,499,ARRAY['Hand-crafted'],'assets/ivoryrose.jpg',NULL,TRUE,TRUE,FALSE,7),
 ('rose-sculpture','Rose Sculpture','single','moulds','Mould Candle (1pc)','Intricate floral pillar.','Detailed rose sculpture.',NULL,NULL,NULL,NULL,599,399,ARRAY['Trending'],'assets/rosesculpture.jpg',NULL,TRUE,TRUE,FALSE,8),
 ('strawberry-milk','Strawberry Milk','single','jars','Strawberry Scented Jar (1pc)','Creamy strawberry blend (1pc).','Fresh strawberries and cold milk.',NULL,NULL,NULL,NULL,'220ml',799,599,ARRAY['New Arrival'],'assets/strawberrymilk.jpg',NULL,TRUE,TRUE,FALSE,0),
 ('teddy-heart-jar','Teddy Heart Jar Candle','single','jars','Luxury Jar','Adorable teddy heart design.',NULL,NULL,NULL,NULL,NULL,'190ml',899,699,ARRAY['New Arrival'], 'assets/teddyheartjarcandle.jpg',NULL,TRUE,TRUE,FALSE,1),
-('wedding-couple','Wedding Couple Rose Candle','single','moulds','Sculptural Rose','Anniversary and wedding gift.',NULL,NULL,NULL,NULL,NULL,NULL,699,499,ARRAY['Romantic'], 'assets/weddingcouplerosecandle.jpg',NULL,TRUE,TRUE,FALSE,12),
-('coconut-blossom','Coconut Blossom (Real Shell)','single','jars','Natural Shell · Coconut Scent','Tropical paradise in a candle.',NULL,NULL,NULL,NULL,NULL,'220ml',899,599,ARRAY['New Arrival', 'Featured'], 'assets/coconutblossom.jpg',NULL,TRUE,TRUE,FALSE,13),
+('wedding-couple','Wedding Couple Rose Candle','single','moulds','Sculptural Rose','Anniversary and wedding gift.',NULL,NULL,NULL,NULL,NULL,NULL,799,599,ARRAY['Romantic'], 'assets/weddingcouplerosecandle.jpg',NULL,TRUE,TRUE,FALSE,12),
+('coconut-blossom','Coconut Blossom (Real Shell)','single','jars','Natural Shell · Coconut Scent','Tropical paradise in a candle.',NULL,NULL,NULL,NULL,NULL,'220ml',899,649,ARRAY['New Arrival', 'Featured'], 'assets/coconutblossom.jpg',NULL,TRUE,TRUE,FALSE,13),
 ('daisy-bloom','Daisy Bloom Candle','single','moulds','Floral Aesthetic','Delicate daisy design.',NULL,NULL,NULL,NULL,NULL,NULL,799,599,ARRAY['Trending'], 'assets/daisybloomcandle.jpg',NULL,TRUE,TRUE,FALSE,14),
 ('striped-candle','Striped Pillar Candle','single','moulds','20cm x 4cm','Elegant striped pillar.',NULL,NULL,NULL,NULL,NULL,NULL,699,499,ARRAY['New'], 'assets/stripedcandle.jpg',NULL,TRUE,TRUE,FALSE,3),
 ('teddy-bear','Teddy Bear Candle','single','moulds','Cute Teddy','Playful teddy bear sculpture.',NULL,NULL,NULL,NULL,NULL,NULL,499,299,ARRAY['Cute'], 'assets/teddybear.jpg',NULL,TRUE,TRUE,FALSE,15),
@@ -286,7 +286,11 @@ VALUES
 ('blue-blossom','Blue Blossom','single','jars','Jar Candle (350ml)','Vibrant floral escape.',NULL,NULL,NULL,NULL,NULL,'350ml',799,599,ARRAY['Featured'],'assets/blueblossom.jpg',NULL,TRUE,TRUE,FALSE,9),
 ('bubble-pack','Bubble Candle (Pack of 4)','single','moulds','Scented & Non-Scented','Modern mini-bubbles.',NULL,NULL,NULL,NULL,NULL,NULL,649,449,ARRAY['Bundle Deal'],'assets/bubble.jpg',NULL,TRUE,TRUE,FALSE,10),
 ('lavender-gradient','Lavender Gradient','single','jars','Lavender Scent','Calming lavender fields.',NULL,NULL,NULL,NULL,NULL,'190ml',599,399,ARRAY['Relaxing'],'assets/lavendergradient.jpg',NULL,TRUE,TRUE,FALSE,11),
-('lavender-mist','Lavender Mist','single','jars','Lavender Scent','Refreshing lavender mist.',NULL,NULL,NULL,NULL,NULL,'220ml',699,499,ARRAY['New'],'assets/lavendermist.jpg',NULL,TRUE,TRUE,FALSE,4)
+('lavender-mist','Lavender Mist','single','jars','Lavender Scent','Refreshing lavender mist.',NULL,NULL,NULL,NULL,NULL,'220ml',699,499,ARRAY['New'],'assets/lavendermist.jpg',NULL,TRUE,TRUE,FALSE,4),
+('sky-teddy','Sky Teddy','single','moulds','Mould Candle','Serene sky teddy sculpture.',NULL,NULL,NULL,NULL,NULL,NULL,649,449,ARRAY['New Arrival'],'assets/skyteddy.jpg',NULL,TRUE,TRUE,FALSE,17),
+('heart-bloom','Heart Bloom','single','moulds','8-inch Premium','Premium floral heart.',NULL,NULL,NULL,NULL,NULL,'8inch',1199,899,ARRAY['Premium','Featured'],'assets/heartbloom.jpg',NULL,TRUE,TRUE,FALSE,18),
+('pure-glow','Pure Glow','single','jars','Jar Candle (350ml)','Radiant minimalist glow.',NULL,NULL,NULL,NULL,NULL,'350ml',749,549,ARRAY['New'],'assets/pureglow.jpg',NULL,TRUE,TRUE,FALSE,19),
+('blush-serenity','Blush Serenity','single','jars','Jar Candle (190ml)','Soft calming fragrance.',NULL,NULL,NULL,NULL,NULL,'190ml',649,449,ARRAY['New'],'assets/blushserenity.jpg',NULL,TRUE,TRUE,FALSE,20)
 ON CONFLICT (id) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════════════

@@ -21,7 +21,11 @@ const CATALOGUE_PRODUCTS = [
   { id: 'blue-blossom', name: 'Blue Blossom', description: 'A vibrant floral escape in every burn.', category: 'jar', tag: 'Jar', image: 'assets/blueblossom.jpg', bg: '#eef2f3' },
   { id: 'bubble-pack', name: 'Bubble Candle (Pack of 4)', description: 'Modern aesthetic mini-bubble collection.', category: 'mould', tag: 'Mould', image: 'assets/bubble.jpg', bg: '#ffffff' },
   { id: 'lavender-gradient', name: 'Lavender Gradient', description: 'Beautifully layered lavender scent experience.', category: 'jar', tag: 'Jar', image: 'assets/lavendergradient.jpg', bg: '#f3e5f5' },
-  { id: 'lavender-mist', name: 'Lavender Mist', description: 'A refreshing mist of pure lavender.', category: 'jar', tag: 'Jar', image: 'assets/lavendermist.jpg', bg: '#f3e5f5' }
+  { id: 'lavender-mist', name: 'Lavender Mist', description: 'A refreshing mist of pure lavender.', category: 'jar', tag: 'Jar', image: 'assets/lavendermist.jpg', bg: '#f3e5f5' },
+  { id: 'sky-teddy', name: 'Sky Teddy', description: 'Serene sky teddy sculpture.', category: 'mould', tag: 'Mould', image: 'assets/skyteddy.jpg', bg: '#eef2f3' },
+  { id: 'heart-bloom', name: 'Heart Bloom', description: 'Premium 8-inch floral heart sculpture.', category: 'mould', tag: 'Premium', image: 'assets/heartbloom.jpg', bg: '#fff0f3' },
+  { id: 'pure-glow', name: 'Pure Glow', description: 'Radiant minimalist jar candle (350ml).', category: 'jar', tag: 'Jar', image: 'assets/pureglow.jpg', bg: '#ffffff' },
+  { id: 'blush-serenity', name: 'Blush Serenity', description: 'Soft calming jar candle (190ml).', category: 'jar', tag: 'Jar', image: 'assets/blushserenity.jpg', bg: '#fff0f3' }
 ];
 
 /* --- Modal Logic --- */
