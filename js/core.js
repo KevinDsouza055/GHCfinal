@@ -145,24 +145,33 @@ const Cart = {
     const subtotal = this.getSubtotal();
     const qty = this.count();
     let discountPct = 0;
-    let nextMilestoneMsg = "";
+    let discountLines = [];
 
+    // Discount Logic
     if (qty >= CONFIG.OFFER_TIER_2_QTY) {
       discountPct = CONFIG.OFFER_TIER_2_DISCOUNT;
-      nextMilestoneMsg = "🎉 Congratulations! You qualify for 15% OFF";
+      discountLines.push("🎉 Congratulations! You've unlocked 15% OFF");
     } else if (qty >= CONFIG.OFFER_TIER_1_QTY) {
       discountPct = CONFIG.OFFER_TIER_1_DISCOUNT;
-      nextMilestoneMsg = `🎉 Congratulations! You qualify for 10% OFF. Add ${CONFIG.OFFER_TIER_2_QTY - qty} more to unlock 15%!`;
-    } else if (qty > 0) {
-      nextMilestoneMsg = `Add 1 more candle to unlock 10% OFF`;
+      discountLines.push("🎉 Congratulations! You've unlocked 10% OFF");
+      const diff = CONFIG.OFFER_TIER_2_QTY - qty;
+      discountLines.push(`✨ Add ${diff} more candle${diff > 1 ? 's' : ''} to unlock 15% OFF`);
+    } else if (qty === 1) {
+      discountLines.push("✨ Add 1 more candle and save 10%");
     }
 
-    const discountAmount = subtotal * discountPct;
+    // Shipping Logic
     const isFreeShipping = subtotal >= CONFIG.FREE_SHIPPING_THRESHOLD;
     const remainingForFree = CONFIG.FREE_SHIPPING_THRESHOLD - subtotal;
     const progress = Math.min((subtotal / CONFIG.FREE_SHIPPING_THRESHOLD) * 100, 100);
+    
+    const shippingLine = isFreeShipping 
+      ? "🎉 Your order qualifies for FREE SHIPPING" 
+      : `🚚 You're ${formatINR(remainingForFree)} away from FREE SHIPPING`;
 
-    return { subtotal, qty, discountPct, discountAmount, isFreeShipping, remainingForFree, progress, nextMilestoneMsg };
+    const discountAmount = subtotal * discountPct;
+
+    return { subtotal, qty, discountPct, discountAmount, isFreeShipping, remainingForFree, progress, discountLines, shippingLine };
   },
   clear() { this.items = []; this.save(); this.updateUI(); },
   updateUI() {
@@ -193,12 +202,18 @@ const CartDrawer = {
     this.el.removeAttribute('inert');
     this.overlay?.classList.add('open'); 
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('minimal-nav');
   },
   close() { 
     this.el.classList.remove('open'); 
     this.el.setAttribute('inert', '');
     this.overlay?.classList.remove('open'); 
     document.body.style.overflow = '';
+    // Only remove if we aren't on a checkout/success page
+    const isCheckout = /checkout\.html|order-success\.html|cart\.html/.test(window.location.pathname);
+    if (!isCheckout) {
+      document.body.classList.remove('minimal-nav');
+    }
   },
   render() {
     const body = document.getElementById('cart-body');
@@ -216,12 +231,12 @@ const CartDrawer = {
 
     let offerHtml = `
       <div class="cart-offer-container">
-        <div class="cart-offer-msg">${stats.nextMilestoneMsg}</div>
+        ${stats.discountLines.map(line => `<div class="cart-offer-msg">${line}</div>`).join('')}
         <div class="cart-progress-wrap">
           <div class="cart-progress-fill" style="width: ${stats.progress}%"></div>
         </div>
         <div class="cart-progress-label">
-          ${stats.isFreeShipping ? '🚚 Eligible for FREE SHIPPING' : `Add ${formatINR(stats.remainingForFree)} more for FREE SHIPPING`}
+          ${stats.shippingLine}
         </div>
       </div>
     `;
@@ -619,4 +634,9 @@ document.addEventListener('DOMContentLoaded', () => {
   NewsletterForm.init();
   CustomCandle.init();
   BulkOrder.init();
+
+  // Page specific header state detection
+  if (/checkout\.html|order-success\.html|cart\.html/.test(window.location.pathname)) {
+    document.body.classList.add('minimal-nav');
+  }
 });

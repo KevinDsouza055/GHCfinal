@@ -60,6 +60,7 @@ const CONFIG = {
   WHATSAPP_NUMBER: '917900187209',    // Your WhatsApp Number
   ORDER_EMAIL:   'gracehomecandles@gmail.com',
   ORDER_WHATSAPP:'917900187209',
+  FREE_SHIPPING_THRESHOLD: 1999
 };
 
 /* ── TOAST ─────────────────────────────────────────────────── */

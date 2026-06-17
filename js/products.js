@@ -216,6 +216,13 @@ const ProductStore = {
   getSingles()    { return this.products.filter(p => p.is_active && p.type === 'single').sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
   getBundles()    { return this.products.filter(p => p.is_active && p.type === 'gift_set').sort((a,b) => (a.sort_order || 0) - (b.sort_order || 0)); },
   getById(id)     { return this.products.find(p => p.id === id && p.is_active) || null; },
+  getRelated(id, limit = 4) {
+    const current = this.getById(id);
+    if (!current) return this.getFeatured().slice(0, limit);
+    return this.products
+      .filter(p => p.is_active && p.id !== id && (p.category === current.category || p.family === current.family))
+      .slice(0, limit);
+  },
   getVariants(id) { return (this.variants[id] || []).sort((a,b) => a.sort_order - b.sort_order); },
   getDefaultVariant(id) {
     const vars = this.getVariants(id);
@@ -348,28 +355,23 @@ function renderVariantSelector(product, containerId) {
             </button>`).join('')}
         </div>
         ${scentHtml}
-        ${sel ? `
-        <div style="margin-top:16px;padding:14px 16px;background:var(--cream);border:1px solid var(--border);font-size:12px;color:var(--muted)">
-          <span style="color:var(--espresso);font-weight:400">
-            ₹${sel.sale_price.toLocaleString('en-IN')}
-          </span>
-          ${sel.original_price > sel.sale_price ? `
-            <s style="margin-left:8px;color:var(--sand)">₹${sel.original_price.toLocaleString('en-IN')}</s>
-            <span style="margin-left:8px;color:var(--gold);font-size:10px;letter-spacing:0.08em">
-              Save ₹${(sel.original_price - sel.sale_price).toLocaleString('en-IN')}
-            </span>` : ''}
-          ${sel.quantity > 1 ? `<span style="margin-left:8px;color:var(--muted)">· ${sel.quantity} candles</span>` : ''}
-          ${sel.scent_type === 'unscented' ? `<span style="margin-left:8px;color:var(--muted)">· Unscented</span>` : ''}
-        </div>` : ''}
       </div>`;
 
     // Update page price display
     if (sel) {
       const salePriceEl = document.getElementById('product-price-sale');
       const origPriceEl = document.getElementById('product-price-orig');
+      const savingsEl = document.getElementById('product-price-savings');
+
       if (salePriceEl) salePriceEl.textContent = `₹${sel.sale_price.toLocaleString('en-IN')}`;
       if (origPriceEl) origPriceEl.textContent  = sel.original_price > sel.sale_price
         ? `₹${sel.original_price.toLocaleString('en-IN')}` : '';
+
+      if (savingsEl) {
+        const savings = sel.original_price - sel.sale_price;
+        const pct = savings > 0 ? Math.round((savings / sel.original_price) * 100) : 0;
+        savingsEl.textContent = pct > 0 ? `Save ${pct}%` : '';
+      }
 
       // Update Add to Cart button
       const addBtn = document.getElementById('add-to-cart-btn');
@@ -396,7 +398,7 @@ function renderVariantSelector(product, containerId) {
       if (!container.querySelector('.product-offer-hint')) {
         const hint = document.createElement('div');
         hint.className = 'product-offer-hint';
-        hint.innerHTML = '✨ Buy 2 & Save 10% • Buy 4 & Save 15%';
+        hint.innerHTML = '✨ Buy 2 & Save 10% • Buy 4 & Save 15% <br> <span style="font-size: 0.95em; opacity: 0.8;">Free Shipping on orders above ₹1,999</span>';
         addBtn.parentNode.appendChild(hint);
       }
     }
@@ -417,17 +419,7 @@ function renderVariantSelector(product, containerId) {
 }
 
 function _renderBaseProduct(product, container) {
-  container.innerHTML = `
-    <div style="margin-bottom:24px">
-      <div style="padding:14px 16px;background:var(--cream);border:1px solid var(--border);font-size:12px">
-        <span style="color:var(--espresso);font-weight:500;font-size:18px">
-          ₹${product.sale_price.toLocaleString('en-IN')}
-        </span>
-        ${product.original_price > product.sale_price ? `
-          <s style="margin-left:10px;color:var(--sand)">₹${product.original_price.toLocaleString('en-IN')}</s>
-        ` : ''}
-      </div>
-    </div>`;
+  container.innerHTML = '';
     
   const addBtn = document.getElementById('add-to-cart-btn');
   if (addBtn) {
