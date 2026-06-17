@@ -480,9 +480,9 @@ const MobileNav = {
       this.toggle();
     }));
 
-    if (close)  close.addEventListener('click', shut);
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
+    if (close)  close.addEventListener('click', this.shut);
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', this.shut));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') this.shut(); });
   }
 };
 

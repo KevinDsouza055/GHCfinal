@@ -202,20 +202,12 @@ const CartDrawer = {
     this.el.removeAttribute('inert');
     this.overlay?.classList.add('open'); 
     document.body.style.overflow = 'hidden';
-    document.body.classList.add('minimal-nav');
-    document.body.classList.add('cart-open');
   },
   close() { 
     this.el.classList.remove('open'); 
     this.el.setAttribute('inert', '');
     this.overlay?.classList.remove('open'); 
     document.body.style.overflow = '';
-    document.body.classList.remove('cart-open');
-    // Only remove if we aren't on a checkout/success page
-    const isCheckout = /checkout\.html|order-success\.html|cart\.html/.test(window.location.pathname);
-    if (!isCheckout) {
-      document.body.classList.remove('minimal-nav');
-    }
   },
   render() {
     const body = document.getElementById('cart-body');
@@ -520,32 +512,25 @@ const Header = {
 /* ── MOBILE NAV ────────────────────────────────────────────── */
 const MobileNav = {
   init() {
-    const nav    = document.getElementById('mobile-nav');
-    const toggles = document.querySelectorAll('.hamburger, #bottom-menu-toggle, [data-nav-toggle]');
-    const close  = document.getElementById('mobile-nav-close');
+    const nav = document.getElementById('mobile-nav');
+    const toggles = document.querySelectorAll('.hamburger, [data-nav-toggle], #mobile-nav-toggle');
+    const close = document.getElementById('mobile-nav-close');
     if (!nav) return;
-    this.open  = () => { 
-      nav.classList.add('open'); 
-      nav.removeAttribute('inert');
-      document.body.style.overflow = 'hidden'; 
-      document.body.classList.add('nav-open');
+
+    const open = () => {
+      nav.classList.add('open');
+      document.body.style.overflow = 'hidden';
     };
-    this.shut  = () => { 
-      nav.classList.remove('open'); 
-      nav.setAttribute('inert', '');
-      document.body.style.overflow = ''; 
-      document.body.classList.remove('nav-open');
-    };
-    this.toggle = () => {
-      nav.classList.contains('open') ? this.shut() : this.open();
+    const shut = () => {
+      nav.classList.remove('open');
+      document.body.style.overflow = '';
     };
 
-    toggles.forEach(t => t.addEventListener('click', (e) => {
-      e.preventDefault();
-      this.toggle();
+    toggles.forEach(t => t.addEventListener('click', () => {
+      nav.classList.contains('open') ? shut() : open();
     }));
 
-    if (close)  close.addEventListener('click', shut);
+    if (close) close.addEventListener('click', shut);
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
   }
@@ -669,8 +654,4 @@ document.addEventListener('DOMContentLoaded', () => {
   CustomCandle.init();
   BulkOrder.init();
 
-  // Page specific header state detection
-  if (/checkout\.html|order-success\.html|cart\.html/.test(window.location.pathname)) {
-    document.body.classList.add('minimal-nav');
-  }
 });

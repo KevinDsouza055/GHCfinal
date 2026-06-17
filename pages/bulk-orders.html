@@ -9,21 +9,76 @@
 </head>
 <body>
 
-<!-- Site Header (Simplified) -->
-<header id="site-header" class="scrolled">
+<!-- Cart Overlay -->
+<div id="cart-overlay" class="cart-overlay" aria-hidden="true"></div>
+
+<!-- Cart Drawer -->
+<aside id="cart-drawer" class="cart-drawer" aria-label="Shopping Cart" inert>
+  <div class="cart-header">
+    <h2 class="cart-title">Your Cart</h2>
+    <button class="cart-close" data-cart-close aria-label="Close cart">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="cart-footer" id="cart-footer" style="display:block;padding:20px;border-top:1px solid var(--border)">
+    <!-- Content for cart footer will be dynamically rendered by CartDrawer.render() -->
+    <p style="font-size:11px;color:var(--muted);text-align:center">
+      Your inquiry list. Proceed to details to customize and send via WhatsApp.
+    </p>
+  </div>
+</aside>
+
+<!-- Mobile Navigation -->
+<nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" inert>
+  <button id="mobile-nav-close" class="mobile-nav-close" aria-label="Close menu">✕</button>
+  <a href="../index.html" class="mobile-nav-link">Home</a>
+  <a href="../catalogue.html" class="mobile-nav-link">Catalogue</a>
+  <a href="shop.html" class="mobile-nav-link">Shop</a>
+  <a href="gifting.html" class="mobile-nav-link">Gifting</a>
+  <a href="bulk-orders.html" class="mobile-nav-link">Bulk Orders</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+  <div style="margin-top:20px; display:flex; flex-direction:column; gap:8px">
+    <a href="faq.html" class="mobile-nav-link sub-link">FAQ</a>
+    <a href="shipping-policy.html" class="mobile-nav-link sub-link">Shipping Policy</a>
+    <a href="return-policy.html" class="mobile-nav-link sub-link">Returns</a>
+    <a href="terms.html" class="mobile-nav-link sub-link">Terms & Conditions</a>
+  </div>
+</nav>
+
+<!-- Site Header -->
+<header id="site-header" role="banner">
   <div class="container">
     <div class="header-inner">
-      <a href="../index.html" class="nav-logo">
-        GRACE HOME <span style="font-family:var(--font-sans); font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; vertical-align: middle; margin-left: 4px; color: var(--gold);">Candles</span>
-      </a>
+      <a href="../index.html" class="nav-logo">Grace <span>Home</span></a>
+
+      <nav class="nav-main" aria-label="Main navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../catalogue.html" class="nav-link">Catalogue</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="gifting.html" class="nav-link">Gifting</a>
+        <a href="bulk-orders.html" class="nav-link">Bulk Orders</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
       <div class="nav-right">
-        <a href="shop.html" class="nav-link" style="display:block">Shop</a>
+        <button class="nav-icon-btn" data-cart-open aria-label="Open cart">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/>
+          </svg>
+          <span class="cart-count" aria-label="Cart items"></span>
+        </button>
+        <button class="hamburger" id="mobile-nav-toggle" aria-label="Open navigation menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </div>
 </header>
 
-<main style="padding-top:120px">
+<main style="padding-top:100px"> <!-- Adjusted padding-top for fixed header -->
   <section class="page-banner">
     <div class="container">
       <nav class="breadcrumb"><a href="../index.html">Home</a> <span class="breadcrumb-sep">/</span> <span>Bulk Orders</span></nav>

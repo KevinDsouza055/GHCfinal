@@ -35,34 +35,49 @@
   </div>
 </aside>
 <nav id="mobile-nav" class="mobile-nav"><button id="mobile-nav-close" class="mobile-nav-close">✕</button>
-  <a href="../index.html" class="mobile-nav-link">Home</a><a href="shop.html" class="mobile-nav-link">Shop</a>
-  <a href="about.html" class="mobile-nav-link">Our Story</a><a href="contact.html" class="mobile-nav-link">Contact</a>
+  <a href="../index.html" class="mobile-nav-link">Home</a>
+  <a href="../catalogue.html" class="mobile-nav-link">Catalogue</a>
+  <a href="shop.html" class="mobile-nav-link">Shop</a>
+  <a href="gifting.html" class="mobile-nav-link">Gifting</a>
+  <a href="bulk-orders.html" class="mobile-nav-link">Bulk Orders</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+  <div style="margin-top:20px; display:flex; flex-direction:column; gap:8px">
+    <a href="faq.html" class="mobile-nav-link sub-link">FAQ</a>
+    <a href="shipping-policy.html" class="mobile-nav-link sub-link">Shipping Policy</a>
+    <a href="return-policy.html" class="mobile-nav-link sub-link">Returns</a>
+    <a href="terms.html" class="mobile-nav-link sub-link">Terms & Conditions</a>
+  </div>
 </nav>
 
-<!-- Mobile Bottom Navbar -->
-<nav class="mobile-bottom-nav" aria-label="Mobile Bottom Navigation">
-  <a href="../index.html" class="nav-item" aria-label="Home">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-    </svg>
-  </a>
-  <a href="shop.html" class="nav-item" aria-label="Shop">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-    </svg>
-  </a>
-  <button class="nav-item" data-cart-open aria-label="Open cart">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
-    </svg>
-    <span class="cart-count"></span>
-  </button>
-  <button class="nav-item" id="bottom-menu-toggle" aria-label="Menu">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-    </svg>
-  </button>
-</nav>
+<!-- Site Header -->
+<header id="site-header" role="banner">
+  <div class="container">
+    <div class="header-inner">
+      <a href="../index.html" class="nav-logo">Grace <span>Home</span></a>
+
+      <nav class="nav-main" aria-label="Main navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../catalogue.html" class="nav-link">Catalogue</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="gifting.html" class="nav-link">Gifting</a>
+        <a href="bulk-orders.html" class="nav-link">Bulk Orders</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-right">
+        <button class="nav-icon-btn" data-cart-open aria-label="Open cart">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/>
+          </svg>
+          <span class="cart-count" aria-label="Cart items"></span>
+        </button>
+        <button class="hamburger" id="mobile-nav-toggle" aria-label="Open navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
 
 <!-- Hero -->
 <section style="min-height:70vh;display:flex;align-items:flex-end;background:linear-gradient(160deg,#F5EFE6 0%,#EDE3D3 60%,#E8DBC8 100%);padding-top:80px">

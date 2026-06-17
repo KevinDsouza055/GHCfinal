@@ -12,6 +12,28 @@
 </head>
 <body>
 
+<!-- Cart Overlay -->
+<div id="cart-overlay" class="cart-overlay" aria-hidden="true"></div>
+
+<!-- Cart Drawer -->
+<aside id="cart-drawer" class="cart-drawer" aria-label="Shopping Cart" inert>
+  <div class="cart-header">
+    <h2 class="cart-title">Your Cart</h2>
+    <button class="cart-close" data-cart-close aria-label="Close cart">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  <div class="cart-body" id="cart-body"></div>
+  <div class="cart-footer" id="cart-footer" style="display:block;padding:20px;border-top:1px solid var(--border)">
+    <!-- Content for cart footer will be dynamically rendered by CartDrawer.render() -->
+    <p style="font-size:11px;color:var(--muted);text-align:center">
+      Your inquiry list. Proceed to details to customize and send via WhatsApp.
+    </p>
+  </div>
+</aside>
+
 <!-- Mobile Navigation -->
 <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile navigation" inert>
   <button id="mobile-nav-close" class="mobile-nav-close" aria-label="Close menu">✕</button>
@@ -21,17 +43,23 @@
   <a href="pages/gifting.html" class="mobile-nav-link">Gifting</a>
   <a href="pages/bulk-orders.html" class="mobile-nav-link">Bulk Orders</a>
   <a href="pages/contact.html" class="mobile-nav-link">Contact</a>
+  <div style="margin-top:20px; display:flex; flex-direction:column; gap:8px">
+    <a href="pages/faq.html" class="mobile-nav-link sub-link">FAQ</a>
+    <a href="pages/shipping-policy.html" class="mobile-nav-link sub-link">Shipping Policy</a>
+    <a href="pages/return-policy.html" class="mobile-nav-link sub-link">Returns</a>
+    <a href="pages/terms.html" class="mobile-nav-link sub-link">Terms & Conditions</a>
+  </div>
 </nav>
 
 <!-- Site Header -->
-<header id="site-header" class="scrolled">
+<header id="site-header" role="banner">
   <div class="container">
     <div class="header-inner">
       <a href="index.html" class="nav-logo" aria-label="Grace Home Candles">
         GRACE HOME <span class="logo-accent">Candles</span>
       </a>
       <nav class="nav-main" aria-label="Main navigation">
-        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html" class="nav-link">Home</a> <!-- Corrected path -->
         <a href="catalogue.html" class="nav-link active">Catalogue</a>
         <a href="pages/shop.html" class="nav-link">Shop</a>
         <a href="pages/gifting.html" class="nav-link">Gifting</a>
@@ -39,6 +67,12 @@
         <a href="pages/contact.html" class="nav-link">Contact</a>
       </nav>
       <div class="nav-right">
+        <button class="nav-icon-btn" data-cart-open aria-label="Open cart">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/>
+          </svg>
+          <span class="cart-count" aria-label="Cart items"></span>
+        </button>
         <button class="hamburger" id="mobile-nav-toggle" aria-label="Open navigation menu">
           <span></span><span></span><span></span>
         </button>
@@ -48,7 +82,7 @@
 </header>
 
 <!-- Hero -->
-<section class="page-banner">
+<section class="page-banner" style="padding-top:100px">
   <div class="container">
     <p class="overline">The Art of Fragrance</p>
     <h1 class="display-lg">Our Collection</h1>
@@ -155,20 +189,6 @@
 </footer>
 
 <script src="js/catalogue.js"></script>
-<script>
-  // Simple mobile nav toggle for this page
-  const toggle = document.getElementById('mobile-nav-toggle');
-  const nav = document.getElementById('mobile-nav');
-  const close = document.getElementById('mobile-nav-close');
-  
-  toggle?.addEventListener('click', () => {
-    nav.classList.add('open');
-    nav.removeAttribute('inert');
-  });
-  close?.addEventListener('click', () => {
-    nav.classList.remove('open');
-    nav.setAttribute('inert', '');
-  });
-</script>
+<script src="js/core.js"></script>
 </body>
 </html>

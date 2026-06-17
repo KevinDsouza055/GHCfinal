@@ -62,7 +62,7 @@ document.getElementById('send-whatsapp')?.addEventListener('click', () => {
     return;
   }
 
-  const productName = currentProduct ? currentProduct.name : 'your products';
+  const productName = currentProduct ? currentProduct.name : 'your products (from catalogue)';
   const whatsappMsg = `Hi Grace Home Candles! I'm ${name}. I'm interested in a bulk order for ${productName}. Please contact me on ${phone}.`;
   
   const url = `https://wa.me/${CATALOGUE_CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMsg)}`;

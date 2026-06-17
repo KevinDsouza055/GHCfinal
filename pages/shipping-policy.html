@@ -22,9 +22,21 @@
 <header id="site-header" role="banner">
   <div class="container">
     <div class="header-inner">
-      <nav class="nav-left"><a href="shop.html" class="nav-link">Shop</a><a href="about.html" class="nav-link">Our Story</a><a href="gifting.html" class="nav-link">Gifting</a></nav>
       <a href="../index.html" class="nav-logo">Grace <span>Home</span></a>
-      <div class="nav-right"><a href="contact.html" class="nav-link">Contact</a></div>
+
+      <nav class="nav-main" aria-label="Main navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../catalogue.html" class="nav-link">Catalogue</a>
+        <a href="shop.html" class="nav-link">Shop</a>
+        <a href="gifting.html" class="nav-link">Gifting</a>
+        <a href="bulk-orders.html" class="nav-link">Bulk Orders</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-right">
+        <button class="nav-icon-btn" data-cart-open aria-label="Open cart"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z"/></svg><span class="cart-count"></span></button>
+        <button class="hamburger" id="mobile-nav-toggle" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
+      </div>
     </div>
   </div>
 </header>
@@ -59,7 +71,7 @@
           <p style="font-family:var(--font-serif);font-size:32px;color:var(--espresso);margin-bottom:8px">Free</p>
           <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted)">On Orders ₹999+</p>
         </div>
-      </div>
+      </div> <!-- This section needs to be updated to 1999 -->
 
       <h2>1. Where We Ship</h2>
       <p>We currently ship to all serviceable pin codes across India. We do not offer international shipping at this time. If you are unsure whether we deliver to your pin code, please contact us at <a href="mailto:hello@gracehomecandles.in" style="color:var(--gold)">hello@gracehomecandles.in</a> before placing your order.</p>
@@ -79,8 +91,8 @@
 
       <h2>4. Shipping Charges</h2>
       <ul>
-        <li><strong>Orders above ₹999:</strong> Free shipping</li>
-        <li><strong>Orders below ₹999:</strong> Flat fee of ₹99</li>
+        <li><strong>Orders above ₹1,999:</strong> Free shipping</li>
+        <li><strong>Orders below ₹1,999:</strong> Flat fee of ₹99</li>
       </ul>
       <p>Shipping charges are calculated and displayed at checkout before payment is confirmed.</p>
 
