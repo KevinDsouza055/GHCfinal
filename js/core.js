@@ -203,12 +203,14 @@ const CartDrawer = {
     this.overlay?.classList.add('open'); 
     document.body.style.overflow = 'hidden';
     document.body.classList.add('minimal-nav');
+    document.body.classList.add('cart-open');
   },
   close() { 
     this.el.classList.remove('open'); 
     this.el.setAttribute('inert', '');
     this.overlay?.classList.remove('open'); 
     document.body.style.overflow = '';
+    document.body.classList.remove('cart-open');
     // Only remove if we aren't on a checkout/success page
     const isCheckout = /checkout\.html|order-success\.html|cart\.html/.test(window.location.pathname);
     if (!isCheckout) {
@@ -241,6 +243,14 @@ const CartDrawer = {
       </div>
     `;
 
+    let promoHtml = `
+      <div style="background:var(--espresso); color:var(--ivory); padding:10px; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; text-align:center; margin:-24px -32px 24px -32px; display:flex; justify-content:center; gap:15px; flex-wrap:wrap; border-bottom:1px solid rgba(184,150,90,0.2)">
+        <span>🎁 Buy 2 Save 10%</span>
+        <span>🕯️ Buy 4 Save 15%</span>
+        <span>🚚 Free Shipping ₹1,999+</span>
+      </div>
+    `;
+
     let html = Cart.items.map(item => `
       <div class="cart-item" style="display:flex;gap:12px;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:12px;align-items:center">
         <img src="${fixPath(item.image)}" style="width:60px;height:70px;object-fit:cover;flex-shrink:0">
@@ -256,7 +266,7 @@ const CartDrawer = {
         </div>
       </div>`).join('');
 
-    body.innerHTML = offerHtml + html;
+    body.innerHTML = promoHtml + offerHtml + html;
 
     if (footer) {
       footer.innerHTML = `
@@ -482,10 +492,26 @@ const ScrollReveal = {
 
 /* ── HEADER ────────────────────────────────────────────────── */
 const Header = {
+  lastScrollY: window.scrollY,
   init() {
     const el = document.getElementById('site-header');
     if (!el) return;
-    const update = () => el.classList.toggle('scrolled', window.scrollY > 60);
+    
+    const update = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Background blur/solid state
+      el.classList.toggle('scrolled', currentScrollY > 60);
+
+      // Hide on scroll down, reveal on scroll up
+      if (currentScrollY > this.lastScrollY && currentScrollY > 150) {
+        el.classList.add('header-hidden');
+      } else {
+        el.classList.remove('header-hidden');
+      }
+
+      this.lastScrollY = currentScrollY;
+    };
     update();
     window.addEventListener('scroll', update, { passive: true });
   }
@@ -495,22 +521,30 @@ const Header = {
 const MobileNav = {
   init() {
     const nav    = document.getElementById('mobile-nav');
-    const toggle = document.getElementById('mobile-nav-toggle');
+    const toggles = document.querySelectorAll('.hamburger, #bottom-menu-toggle, [data-nav-toggle]');
     const close  = document.getElementById('mobile-nav-close');
     if (!nav) return;
-    const open  = () => { 
+    this.open  = () => { 
       nav.classList.add('open'); 
       nav.removeAttribute('inert');
       document.body.style.overflow = 'hidden'; 
-      if(toggle) toggle.setAttribute('aria-expanded','true'); 
+      document.body.classList.add('nav-open');
     };
-    const shut  = () => { 
+    this.shut  = () => { 
       nav.classList.remove('open'); 
       nav.setAttribute('inert', '');
       document.body.style.overflow = ''; 
-      if(toggle) toggle.setAttribute('aria-expanded','false'); 
+      document.body.classList.remove('nav-open');
     };
-    if (toggle) toggle.addEventListener('click', open);
+    this.toggle = () => {
+      nav.classList.contains('open') ? this.shut() : this.open();
+    };
+
+    toggles.forEach(t => t.addEventListener('click', (e) => {
+      e.preventDefault();
+      this.toggle();
+    }));
+
     if (close)  close.addEventListener('click', shut);
     nav.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
@@ -628,7 +662,6 @@ document.addEventListener('DOMContentLoaded', () => {
   Cart.init();
   CartDrawer.init();
   ScrollReveal.init();
-  Header.init();
   MobileNav.init();
   FAQ.init();
   NewsletterForm.init();

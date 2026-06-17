@@ -395,7 +395,7 @@ function renderVariantSelector(product, containerId) {
         };
         addBtn.querySelector('span').textContent = `Add to Cart — ₹${sel.sale_price.toLocaleString('en-IN')}`;
       }
-      if (!container.querySelector('.product-offer-hint')) {
+      if (addBtn && !addBtn.parentNode.querySelector('.product-offer-hint')) {
         const hint = document.createElement('div');
         hint.className = 'product-offer-hint';
         hint.innerHTML = '✨ Buy 2 & Save 10% • Buy 4 & Save 15% <br> <span style="font-size: 0.95em; opacity: 0.8;">Free Shipping on orders above ₹1,999</span>';

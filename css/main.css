@@ -80,8 +80,7 @@ input, textarea, select { font-family: var(--font-sans); }
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 2000;
   border-bottom: 1px solid rgba(184,150,90,0.15);
 }
@@ -93,24 +92,20 @@ input, textarea, select { font-family: var(--font-sans); }
 }
 .announcement-item { display: flex; align-items: center; gap: 8px; }
 
-/* Adjust header for sticky bar */
-#site-header { top: 38px; }
-@media (max-width: 768px) { #site-header { top: 56px; } }
-
 /* ── Cart Offer UI ── */
 .cart-offer-container {
   margin-bottom: 24px;
   padding: 22px 18px;
-  background: linear-gradient(to bottom right, #ffffff, var(--ivory));
+  background: var(--espresso);
   border-radius: var(--radius);
-  border: 1px solid var(--gold-light);
+  border: 1px solid var(--gold);
   text-align: center;
   box-shadow: 0 4px 15px rgba(168, 126, 59, 0.08);
   animation: slideDownFade 0.4s ease-out forwards;
 }
 .cart-offer-msg {
   font-size: 14px;
-  color: var(--espresso);
+  color: var(--ivory);
   margin-bottom: 4px;
   font-family: var(--font-serif);
   font-weight: 500;
@@ -380,7 +375,7 @@ input, textarea, select { font-family: var(--font-sans); }
   position: fixed;
   inset: 0;
   background: var(--ivory);
-  z-index: 1100;
+  z-index: 7000;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -980,13 +975,20 @@ input, textarea, select { font-family: var(--font-sans); }
 body.minimal-nav .nav-main,
 body.minimal-nav .nav-left,
 body.minimal-nav .nav-right .nav-link,
-body.minimal-nav .nav-right .nav-icon-btn,
-body.minimal-nav .nav-right .hamburger {
+body.minimal-nav .nav-right .nav-icon-btn {
   display: none !important;
 }
 body.minimal-nav .nav-back {
   display: flex !important;
 }
+
+/* Fix for navbar "coming in between" when drawers are open */
+body.cart-open #site-header,
+body.nav-open #site-header {
+  z-index: 1 !important;
+  pointer-events: none;
+}
+
 .cart-drawer.open { transform: translateX(0); }
 .cart-header {
   padding: 28px 32px;
@@ -1094,7 +1096,7 @@ textarea.form-control { resize: vertical; min-height: 100px; }
 /* ── Page Banner ── */
 .page-banner {
   background: var(--cream);
-  padding: 160px 0 80px;
+  padding: 80px 0 60px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1570,6 +1572,9 @@ nav,
   background: transparent;
   box-shadow: none;
 }
+#site-header.header-hidden {
+  transform: translateY(-200%);
+}
 #site-header.scrolled .header-inner {
   min-height: 60px;
   background: rgba(251,250,246,0.92);
@@ -1605,11 +1610,45 @@ nav,
   background: rgba(255,255,255,0.52);
 }
 
+/* ── Mobile Bottom Nav ── */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 380px;
+  height: 64px;
+  background: var(--ivory);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 32px;
+  z-index: 8000;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+}
+.mobile-bottom-nav .nav-item {
+  color: var(--espresso);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  position: relative;
+  transition: color 0.3s;
+}
+.mobile-bottom-nav .nav-item:hover { color: var(--gold); }
+.mobile-bottom-nav svg { width: 22px; height: 22px; stroke-width: 1.5; }
+
 .mobile-nav {
   position: fixed;
   inset: 0;
   background: var(--ivory);
-  z-index: 2500;
+  z-index: 9000;
   display: none;
   flex-direction: column;
   padding: 100px 40px;
@@ -1940,8 +1979,10 @@ select.form-control { appearance: auto; }
   }
   .nav-icon-btn,
   .hamburger {
-    width: 42px;
-    height: 42px;
+    display: none !important;
+  }
+  .mobile-bottom-nav {
+    display: flex;
   }
   .hero {
     min-height: auto;
@@ -2283,37 +2324,6 @@ select.form-control { appearance: auto; }
   margin-top: 32px;
   padding-top: 32px;
   border-top: 1px solid var(--border);
-}
-
-/* ── WhatsApp Floating Button ── */
-.whatsapp-float {
-  position: fixed;
-  bottom: 30px;
-  left: 30px;
-  width: 60px;
-  height: 60px;
-  background-color: #25d366;
-  color: #FFF;
-  border-radius: 50px;
-  text-align: center;
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.whatsapp-float:hover {
-  transform: scale(1.1);
-  color: #FFF;
-  background-color: #128c7e;
-}
-
-.whatsapp-float svg {
-  width: 32px;
-  height: 32px;
-  fill: currentColor;
 }
 
 /* ── Horizontal Scroll Grid ── */
