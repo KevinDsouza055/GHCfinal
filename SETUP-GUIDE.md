@@ -184,7 +184,7 @@ Shipping is calculated from the customer's pincode prefix:
 | East India | 70x–75x | ₹149 |
 | Remote/Northeast | 78x, 79x, 97x | ₹199 |
 
-Free shipping auto-applies when order ≥ ₹999.
+Free shipping auto-applies when order ≥ ₹1999.
 
 ### To Change Free Shipping Threshold
 `js/core.js` → `CONFIG`:
