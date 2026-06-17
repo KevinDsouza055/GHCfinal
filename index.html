@@ -104,17 +104,17 @@
   </div>
 </header>
 
-<!-- ── ANNOUNCEMENT BAR ────────────────────────────────── -->
-<div class="announcement-bar" style="position: fixed; top: 68px; left: 0; right: 0; z-index: 4999; background: var(--espresso); border-bottom: 1px solid rgba(184,150,90,0.15);">
-  <div class="container">
-    <div class="announcement-item"><span>🎁 Buy 2 Save 10%</span></div>
-    <div class="announcement-item"><span>🕯️ Buy 4 Save 15%</span></div>
-    <div class="announcement-item"><span>🚚 Free Shipping ₹1,999+</span></div>
-  </div>
-</div>
-
 <!-- ── HERO ─────────────────────────────────────────── -->
-<section class="hero" style="min-height: 90vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; background: transparent; margin-top: 60px;">
+<section class="hero" style="min-height: 90vh; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background: transparent;">
+  <!-- ── OFFER SECTION (ABOVE NAVBAR IN HERO) ──────── -->
+  <div class="announcement-bar" style="position: relative; z-index: 20; background: var(--espresso); border-bottom: 1px solid rgba(184,150,90,0.15); width: 100%; margin-bottom: 40px;">
+    <div class="container">
+      <div class="announcement-item"><span>🎁 Buy 2 Save 10%</span></div>
+      <div class="announcement-item"><span>🕯️ Buy 4 Save 15%</span></div>
+      <div class="announcement-item"><span>🚚 Free Shipping ₹1,999+</span></div>
+    </div>
+  </div>
+
   <div class="hero-bg" style="
     position: absolute; 
     inset: 0; 
