@@ -161,7 +161,7 @@ const SCENT_OPTIONS = ['Lavender', 'Jasmine', 'Rose', 'Vanilla', 'Chocolate', 'C
 const FALLBACK_VARIANTS = {
   'azure-bloom': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:799, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:549, original_price:749}],
 
-  'eternal-embrace': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:399, original_price:599}],
+  'eternal-embrace': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:499, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:299, original_price:399}],
 
   'ivory-rose': [{id:'v1', variant_name:'Scented', sale_price:299, original_price:499, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:199, original_price:399}],
 
