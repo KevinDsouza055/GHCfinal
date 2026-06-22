@@ -1598,3 +1598,21 @@ textarea.form-control { resize: vertical; min-height: 100px; }
 .promo-banner.visible { display: block; }
 .promo-banner h3 { font-family: var(--font-serif); font-size: 24px; color: var(--espresso); margin-bottom: 8px; font-weight: 300; }
 .promo-banner p { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); }
+
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 18, 16, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 7000;
+}
+
+.modal {
+  background: var(--ivory);
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 90%;
+}

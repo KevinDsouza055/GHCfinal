@@ -36,7 +36,7 @@ const FALLBACK_PRODUCTS = [
 
   { id:'strawberry-milk', name:'Strawberry Milk', type:'single', category:'jars',
     notes:'Jar Candle (Strawberry Scent, 1pc)', short_desc:'A sweet, creamy blend of fresh strawberries and cold milk (1pc).', family: 'Sweet',
-    original_price:799, sale_price:599, badges:['New Arrival', 'Great Gift'],
+    original_price:699, sale_price:399, badges:['New Arrival', 'Great Gift'],
     perfect_for: ['Kitchen', 'Cozy Ambience', 'Birthdays'],
     image:'assets/strawberrymilk.jpg',
     is_active:true, is_featured:true, sort_order:0 },
@@ -140,7 +140,25 @@ const FALLBACK_PRODUCTS = [
     notes:'Jar Candle (190ml)', short_desc:'A soft, calming fragrance experience.', family: 'Sweet',
     original_price:649, sale_price:449, badges:['New'],
     image:'assets/blushserenity.jpg',
-    is_active:true, is_featured:true, sort_order:20 }
+    is_active:true, is_featured:true, sort_order:20 },
+
+    { id:'rose-petals', name:'Rose Petals', type:'single', category:'moulds',
+    notes:'Mould Candle', short_desc:'Delicate rose design for a romantic ambiance.', family: 'Floral',
+    original_price:149, sale_price:79, badges:['Romantic'],
+    image:'assets/rosepetals.jpg',
+    is_active:true, is_featured:true, sort_order:2 },
+
+  { id:'darkcoffee', name:'Dark Coffee Ice Latte', type:'single', category:'jars',
+    notes:'Jar Candle', short_desc:'Rich and robust coffee scent for a cozy atmosphere.', family: 'Sweet',
+    original_price:699, sale_price:399, badges:['New'],
+    image:'assets/darkcoffee.jpg',
+    is_active:true, is_featured:true, sort_order:3 },
+
+  { id:'matcha', name:'Matcha Ice Latte', type:'single', category:'jars',
+    notes:'Jar Candle', short_desc:'Earthy and refreshing green tea scent.', family: 'Fresh',
+    original_price:699, sale_price:399, badges:['New'],
+    image:'assets/match.jpg',
+    is_active:true, is_featured:true, sort_order:4 }
 ];
 
 const SCENT_OPTIONS = ['Lavender', 'Jasmine', 'Rose', 'Vanilla', 'Chocolate', 'Coffee', 'Sandalwood', 'Oud', 'Amber'];
@@ -164,7 +182,12 @@ const FALLBACK_VARIANTS = {
   'sky-teddy': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
   'heart-bloom': [{id:'v1', variant_name:'Scented', sale_price:899, original_price:1199, is_default:true}],
   'pure-glow': [{id:'v1', variant_name:'Scented', sale_price:549, original_price:749, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:449, original_price:649}],
-  'blush-serenity': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}]
+  'blush-serenity': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
+
+  'rose-petals': [{id:'v1', variant_name:'Scented', sale_price:129, original_price:199, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:79, original_price:149}],
+
+  'darkcoffee': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:699, is_default:true}],
+  'matcha': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:699, is_default:true}]
 };
 
 /* ── ProductStore — single source of truth for the frontend ── */

@@ -25,7 +25,14 @@ const CATALOGUE_PRODUCTS = [
   { id: 'sky-teddy', name: 'Sky Teddy', description: 'Serene sky teddy sculpture.', category: 'mould', tag: 'Mould', image: 'assets/skyteddy.jpg', bg: '#eef2f3' },
   { id: 'heart-bloom', name: 'Heart Bloom', description: 'Premium 8-inch floral heart sculpture.', category: 'mould', tag: 'Premium', image: 'assets/heartbloom.jpg', bg: '#fff0f3' },
   { id: 'pure-glow', name: 'Pure Glow', description: 'Radiant minimalist jar candle (350ml).', category: 'jar', tag: 'Jar', image: 'assets/pureglow.jpg', bg: '#ffffff' },
-  { id: 'blush-serenity', name: 'Blush Serenity', description: 'Soft calming jar candle (190ml).', category: 'jar', tag: 'Jar', image: 'assets/blushserenity.jpg', bg: '#fff0f3' }
+
+  { id: 'blush-serenity', name: 'Blush Serenity', description: 'Soft calming jar candle (190ml).', category: 'jar', tag: 'Jar', image: 'assets/blushserenity.jpg', bg: '#fff0f3' },
+
+  { id: 'rose-petals', name: 'Rose Petals', description: 'Delicate rose design for a romantic ambiance.', category: 'mould', tag: 'Mould', image: 'assets/rosepetals.jpg', bg: '#fff0f3' },
+
+  { id: 'darkcoffee', name: 'Dark Coffee Ice Latte', description: 'Rich and robust coffee scent for a cozy atmosphere.', category: 'jar', tag: 'Jar', image: 'assets/darkcoffee.jpg', bg: '#f5f5f5' },
+
+  { id: 'matcha', name: 'Matcha Ice Latte', description: 'Earthy and refreshing green tea scent.', category: 'jar', tag: 'Jar', image: 'assets/match.jpg', bg: '#f0f0f0' }
 ];
 
 /* --- Modal Logic --- */
