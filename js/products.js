@@ -22,7 +22,7 @@ const FALLBACK_PRODUCTS = [
 
   { id:'ivory-rose', name:'Ivory Rose', type:'single', category:'moulds',
     notes:'Mould Candle (1pc)', short_desc:'Elegant rose sculpture in pure soy-coconut wax.', family: 'Floral',
-    original_price:699, sale_price:499, badges:['Romantic', 'Hand-crafted'],
+    original_price:499, sale_price:299, badges:['Romantic', 'Hand-crafted'],
     perfect_for: ['Bedroom', 'Valentine\'s Day', 'Proposal Gifts'],
     image:'assets/ivoryrose.jpg',
     is_active:true, is_featured:true, sort_order:7 },
@@ -63,7 +63,7 @@ const FALLBACK_PRODUCTS = [
     notes:'Floral Aesthetic Candle', short_desc:'Delicate daisy design to brighten any space.', family: 'Floral',
     original_price:799, sale_price:599, badges:['Premium', 'Trending'],
     image:'assets/daisybloomcandle.jpg',
-    is_active:true, is_featured:true, sort_order:14 },
+    is_active:true, is_featured:true, sort_order:0 },
 
   { id:'striped-candle', name:'Striped Pillar Candle', type:'single', category:'moulds',
     notes:'20cm Height · 4cm Diameter', short_desc:'Elegant striped pillar for modern decor.', family: 'Modern',
@@ -81,14 +81,9 @@ const FALLBACK_PRODUCTS = [
     notes:'Geometric Design', short_desc:'Unique Z-shaped sculptural candle.', family: 'Modern',
     original_price:499, sale_price:299, badges:['Artistic'],
     image:'assets/aurawave.jpg', // Placeholder for zshape if image missing
-    is_active:true, is_featured:true, sort_order:16 },
+    is_active:true, is_featured:true, sort_order:24 },
 
-  { id:'aura-wave', name:'Aura Wave', type:'single', category:'moulds',
-    notes:'Mould Candle', short_desc:'Rhythmic patterns of light and scent.', family: 'Fresh',
-    original_price:499, sale_price:299, badges:['New Arrival'],
-    perfect_for: ['Study Room', 'Modern Interiors'],
-    image:'assets/aurawave.jpg',
-    is_active:true, is_featured:true, sort_order:2 },
+  
 
   { id:'blue-blossom', name:'Blue Blossom', type:'single', category:'jars',
     notes:'Jar Candle (350ml)', short_desc:'A vibrant floral escape in every burn.', family: 'Floral',
@@ -122,13 +117,13 @@ const FALLBACK_PRODUCTS = [
     notes:'Mould Candle', short_desc:'Playful teddy sculpture in a serene sky hue.', family: 'Fresh',
     original_price:649, sale_price:449, badges:['New Arrival'],
     image:'assets/skyteddy.jpg',
-    is_active:true, is_featured:true, sort_order:17 },
+    is_active:true, is_featured:true, sort_order:4 },
 
   { id:'heart-bloom', name:'Heart Bloom', type:'single', category:'moulds',
     notes:'Premium 8-inch Candle', short_desc:'Exquisite premium floral heart sculpture.', family: 'Floral',
     original_price:1199, sale_price:899, badges:['Premium', 'Featured'],
     image:'assets/heartbloom.jpg',
-    is_active:true, is_featured:true, sort_order:18 },
+    is_active:true, is_featured:true, sort_order:5 },
 
   { id:'pure-glow', name:'Pure Glow', type:'single', category:'jars',
     notes:'Jar Candle (350ml)', short_desc:'Minimalist elegance with a radiant burn.', family: 'Fresh',
@@ -165,23 +160,40 @@ const SCENT_OPTIONS = ['Lavender', 'Jasmine', 'Rose', 'Vanilla', 'Chocolate', 'C
 
 const FALLBACK_VARIANTS = {
   'azure-bloom': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:799, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:549, original_price:749}],
+
   'eternal-embrace': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:399, original_price:599}],
-  'ivory-rose': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:699, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:399, original_price:599}],
-  'rose-sculpture': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:599, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
+
+  'ivory-rose': [{id:'v1', variant_name:'Scented', sale_price:299, original_price:499, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:199, original_price:399}],
+
+  'rose-sculpture': [{id:'v1', variant_name:'Scented', sale_price:299, original_price:499, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:199, original_price:449}],
+
   'blue-blossom': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:799, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:549, original_price:749}],
-  'teddy-heart-jar': [{id:'v1', variant_name:'Scented', sale_price:699, original_price:899, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:649, original_price:849}],
-  'wedding-couple': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:799, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:499, original_price:699}],
-  'daisy-bloom': [{id:'v1', variant_name:'Scented', sale_price:599, original_price:799, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:499, original_price:699}],
+
+  'teddy-heart-jar': [{id:'v1', variant_name:'Scented', sale_price:549, original_price:799, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:499, original_price:699}],
+
+  'wedding-couple': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:599, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:299, original_price:499}],
+
+  'daisy-bloom': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:599, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:399, original_price:499}],
+
   'striped-candle': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:699, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:449, original_price:649}],
-  'teddy-bear': [{id:'v1', variant_name:'Scented', sale_price:299, original_price:499, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:249, original_price:449}],
+
+  'teddy-bear': [{id:'v1', variant_name:'Scented', sale_price:199, original_price:299, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:149, original_price:249}],
+
   'z-shape': [{id:'v1', variant_name:'Scented', sale_price:299, original_price:499, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:249, original_price:449}],
+
   'bubble-pack': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
+
   'lavender-gradient': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:599, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
+
   'lavender-mist': [{id:'v1', variant_name:'Scented', sale_price:499, original_price:699, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:449, original_price:649}],
+
   'coconut-blossom': [{id:'v1', variant_name:'Scented', sale_price:649, original_price:899, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:599, original_price:849}],
+
   'sky-teddy': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
+
   'heart-bloom': [{id:'v1', variant_name:'Scented', sale_price:899, original_price:1199, is_default:true}],
   'pure-glow': [{id:'v1', variant_name:'Scented', sale_price:549, original_price:749, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:449, original_price:649}],
+
   'blush-serenity': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
 
   'rose-petals': [{id:'v1', variant_name:'Scented', sale_price:129, original_price:199, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:79, original_price:149}],
