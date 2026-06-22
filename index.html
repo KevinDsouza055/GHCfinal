@@ -198,152 +198,9 @@
   </div>
 </section>
 
-<!-- ── PERSONALISATION SUITE ────────────────────────── -->
-<section class="section-pad" id="custom-candle" aria-labelledby="custom-title" style="background:var(--ivory)">
-  <div class="container">
-    <div class="section-header centered">
-      <p class="overline reveal">Personalisation</p>
-      <h2 id="custom-title" class="display-lg reveal reveal-delay-1">✨ Create Your Custom Candle</h2>
-      <div class="divider reveal reveal-delay-2"></div>
-      <p class="body-lg reveal reveal-delay-3">Design a candle that's uniquely yours. Choose your jar, fragrance, color, and style, then send us your requirements on WhatsApp.</p>
-    </div>
 
-    <div class="custom-grid">
-      <!-- Form -->
-      <div class="custom-form-wrap reveal">
-        <form id="custom-candle-form">
-          <!-- 1. Base Choice: Jar or Mould -->
-          <div class="custom-field">
-            <label class="custom-label">1. Choose Candle Type</label>
-            <div class="size-selector">
-              <label class="size-card">
-                <input type="radio" name="baseType" value="Jar" checked onchange="CustomCandle.toggleBaseType('Jar')">
-                <span>Jar Candle</span>
-              </label>
-              <label class="size-card">
-                <input type="radio" name="baseType" value="Mould" onchange="CustomCandle.toggleBaseType('Mould')">
-                <span>Mould Candle</span>
-              </label>
-              <label class="size-card">
-                <input type="radio" name="baseType" value="Glass" onchange="CustomCandle.toggleBaseType('Glass')">
-                <span>Glass Candle</span>
-              </label>
-            </div>
-          </div>
+          
 
-          <!-- 2. Conditional: Jar Size -->
-          <div class="custom-field" id="jar-size-field">
-            <label class="custom-label">2. Select Jar Size</label>
-            <div class="size-selector">
-              <label class="size-card"><input type="radio" name="jarSize" value="190ml" checked><span>190ml</span></label>
-              <label class="size-card"><input type="radio" name="jarSize" value="220ml"><span>220ml</span></label>
-              <label class="size-card"><input type="radio" name="jarSize" value="350ml"><span>350ml</span></label>
-            </div>
-          </div>
-
-          <!-- 2. Conditional: Glass Size -->
-          <div class="custom-field" id="glass-size-field" style="display:none">
-            <label class="custom-label">2. Select Glass Size</label>
-            <div class="size-selector">
-              <label class="size-card"><input type="radio" name="glassSize" value="150ml" checked><span>150ml</span></label>
-              <label class="size-card"><input type="radio" name="glassSize" value="235ml"><span>235ml</span></label>
-            </div>
-          </div>
-
-          <!-- 2. Conditional: Mould Style -->
-          <div class="custom-field" id="mould-style-field" style="display:none">
-            <label class="custom-label" for="candleType">2. Select Mould Style</label>
-            <select id="candleType" name="candleType" class="form-control">
-              <option value="" disabled selected>Choose a mould...</option>
-            </select>
-          </div>
-
-          <!-- 3. Fragrance -->
-          <div class="custom-field">
-            <label class="custom-label" for="fragrance">3. Fragrance Selection</label>
-            <select id="fragrance" name="fragrance" class="form-control" required>
-              <option value="" disabled selected>Choose a scent...</option>
-              <option value="Lavender">Lavender</option><option value="Jasmine">Jasmine</option>
-              <option value="Rose">Rose</option><option value="Vanilla">Vanilla</option>
-              <option value="Chocolate">Chocolate</option><option value="Coffee">Coffee</option>
-              <option value="Sandalwood">Sandalwood</option><option value="Oud">Oud</option>
-              <option value="Amber">Amber</option><option value="Custom">Other (Specify in message)</option>
-            </select>
-          </div>
-
-          <!-- 4. Color -->
-          <div class="custom-field">
-            <label class="custom-label">4. Candle Color</label>
-            <div class="color-selector" id="color-swatches"></div>
-            <input type="hidden" name="color" id="selected-color" value="White">
-          </div>
-          <div id="custom-color-input" style="display:none; margin-top:-10px; margin-bottom:28px">
-            <label class="form-label">Specify Your Color</label>
-            <input type="text" name="customColor" class="form-control" placeholder="e.g. Sage Green, Pastel Blue">
-          </div>
-
-          <!-- 5. Quantity -->
-          <div class="custom-field">
-            <label class="custom-label">5. Quantity</label>
-            <div class="qty-selector">
-              <button type="button" onclick="changeQty(-1)">−</button>
-              <input type="number" name="quantity" id="custom-qty" value="1" min="1" readonly>
-              <button type="button" onclick="changeQty(1)">+</button>
-            </div>
-          </div>
-
-          <!-- 6. Message -->
-          <div class="custom-field">
-            <label class="custom-label" for="customMessage">6. Requirements / Custom Message</label>
-            <textarea id="customMessage" name="customMessage" class="form-control" placeholder="e.g. Gift packaging required, Wedding favors, Add name engraving..."></textarea>
-          </div>
-
-          <!-- 7. Details -->
-          <div class="custom-details-row">
-            <div class="form-group">
-              <label class="form-label">Full Name</label>
-              <input type="text" name="customerName" class="form-control" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Phone Number</label>
-              <input type="tel" name="customerPhone" class="form-control" placeholder="98XXXXXXXX" required maxlength="10">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Email (Optional)</label>
-            <input type="email" name="customerEmail" class="form-control" placeholder="your@email.com">
-          </div>
-
-          <!-- Damaged Product Policy Notice -->
-          <div class="policy-notice-box">
-            <h4>📦 Damaged Product Claim Policy</h4>
-            <p>To claim any replacement or refund for products damaged during transit, a <strong>complete unboxing video is mandatory</strong>.</p>
-            <ul style="list-style: disc; margin-top: 8px;">
-              <li>Video must show the <strong>sealed package and shipping label</strong> before opening.</li>
-              <li>Must be a single continuous shot without cuts or edits.</li>
-              <li>Claims must be reported within <strong>24 hours</strong> of delivery.</li>
-            </ul>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-full btn-lg" style="margin-top:20px; background:#25D366; border-color:#25D366">
-            <span>Send Custom Candle Inquiry</span>
-          </button>
-        </form>
-      </div>
-
-      <!-- Floating Bulk Order Badge -->
-      <div class="reveal reveal-delay-4" style="text-align:center; margin-top:40px;">
-        <a href="pages/bulk-orders.html" style="display:inline-flex; align-items:center; gap:12px; background:var(--gold); color:white; padding:14px 28px; border-radius:99px; text-decoration:none; box-shadow:var(--shadow-md); transition:transform 0.3s ease;">
-          <span style="font-size:20px;">📦</span>
-          <div style="text-align:left;">
-            <div style="font-size:9px; letter-spacing:0.15em; text-transform:uppercase; opacity:0.9;">Interested in Bulk?</div>
-            <div style="font-size:13px; font-weight:500;">Special pricing for events & gifting →</div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
 <!-- ── BRAND ATTRIBUTES ──────────────────────────────── -->
 <section style="background:var(--cream);padding:80px 0" aria-labelledby="features-title">
   <div class="container">
@@ -389,50 +246,7 @@
   </div>
 </section>
 
-<!-- ── TESTIMONIALS ──────────────────────────────────── -->
-<section class="testimonials-wrap" aria-labelledby="testimonials-title">
-  <div class="container">
-    <div class="section-header centered" style="margin-bottom:52px">
-      <p class="overline reveal" style="color:var(--gold-light)">What They Say</p>
-      <h2 id="testimonials-title" class="display-lg reveal reveal-delay-1" style="color:var(--ivory)">Loved by many</h2>
-    </div>
-    <div class="testimonials-grid">
-      <article class="testimonial-item reveal">
-        <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
-        <p class="testimonial-text">"Velvet Vanilla is unlike anything I've burned before. The throw is extraordinary — my entire apartment smells like luxury. I've already ordered three more."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" aria-hidden="true" style="background:var(--sand)"></div>
-          <div>
-            <p class="testimonial-name">Priya S.</p>
-            <p class="testimonial-loc">Mumbai, Maharashtra</p>
-          </div>
-        </div>
-      </article>
-      <article class="testimonial-item reveal reveal-delay-1">
-        <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
-        <p class="testimonial-text">"Gifted Midnight Oud to my mother and she called me the moment she lit it. The packaging alone felt like unwrapping a luxury gift. Truly exceptional quality."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" aria-hidden="true" style="background:var(--bronze)"></div>
-          <div>
-            <p class="testimonial-name">Arjun M.</p>
-            <p class="testimonial-loc">Bengaluru, Karnataka</p>
-          </div>
-        </div>
-      </article>
-      <article class="testimonial-item reveal reveal-delay-2">
-        <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
-        <p class="testimonial-text">"Cashmere Rose is my daily ritual now. The burn is incredibly even and the fragrance is so authentic — not synthetic at all. Grace Home has spoiled me for all other candles."</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar" aria-hidden="true" style="background:var(--champagne)"></div>
-          <div>
-            <p class="testimonial-name">Ananya K.</p>
-            <p class="testimonial-loc">Delhi, NCR</p>
-          </div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
+
 <!-- ── INSTAGRAM GALLERY ─────────────────────────────── -->
 <section class="section-pad-sm" aria-labelledby="instagram-title">
   <div class="container">
@@ -536,13 +350,6 @@
 
 <!-- Toast Container -->
 <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
-
-<!-- Floating WhatsApp -->
-<a href="https://wa.me/917900187209" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </svg>
-</a>
 
 <!-- Scripts -->
 <script src="js/products.js"></script>

@@ -519,20 +519,36 @@ const MobileNav = {
 
     const open = () => {
       nav.classList.add('open');
+      nav.removeAttribute('inert');
       document.body.style.overflow = 'hidden';
     };
     const shut = () => {
       nav.classList.remove('open');
+      nav.setAttribute('inert', '');
       document.body.style.overflow = '';
     };
 
-    toggles.forEach(t => t.addEventListener('click', () => {
+    toggles.forEach(t => t.addEventListener('click', (e) => {
+      e.stopPropagation();
       nav.classList.contains('open') ? shut() : open();
     }));
 
-    if (close) close.addEventListener('click', shut);
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', shut));
+    if (close) close.addEventListener('click', (e) => {
+      e.stopPropagation();
+      shut();
+    });
+    
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', (e) => {
+      e.stopPropagation();
+      shut();
+    }));
+    
     document.addEventListener('keydown', e => { if (e.key === 'Escape') shut(); });
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !document.querySelector('.hamburger').contains(e.target) && nav.classList.contains('open')) {
+        shut();
+      }
+    });
   }
 };
 
