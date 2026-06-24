@@ -149,6 +149,13 @@ const FALLBACK_PRODUCTS = [
     image:'assets/darkcoffee.jpg',
     is_active:true, is_featured:true, sort_order:3 },
 
+    { id:'blushingromance', name:'Blushing Romance', type:'single', category:'jars',
+    notes:'Jar Candle', short_desc:'A delightful blend of floral and fruity notes.', family: 'Sweet',
+    original_price:699, sale_price:399, badges:['New'],
+    image:'assets/blushingromance.jpg',
+    is_active:true, is_featured:true, sort_order:3 },
+
+
   { id:'matcha', name:'Matcha Ice Latte', type:'single', category:'jars',
     notes:'Jar Candle', short_desc:'Earthy and refreshing green tea scent.', family: 'Fresh',
     original_price:699, sale_price:399, badges:['New'],
@@ -196,10 +203,14 @@ const FALLBACK_VARIANTS = {
 
   'blush-serenity': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
 
+  'blushingromance': [{id:'v1', variant_name:'Scented', sale_price:349, original_price:449, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:299, original_price:399}],
+
   'rose-petals': [{id:'v1', variant_name:'Scented', sale_price:149, original_price:199, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:99, original_price:149}],
 
   'darkcoffee': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:699, is_default:true}],
-  'matcha': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:699, is_default:true}]
+  'matcha': [{id:'v1', variant_name:'Scented', sale_price:399, original_price:699, is_default:true}],
+
+  
 };
 
 /* ── ProductStore — single source of truth for the frontend ── */

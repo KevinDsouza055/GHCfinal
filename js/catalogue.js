@@ -32,7 +32,9 @@ const CATALOGUE_PRODUCTS = [
 
   { id: 'darkcoffee', name: 'Dark Coffee Ice Latte', description: 'Rich and robust coffee scent for a cozy atmosphere.', category: 'jar', tag: 'Jar', image: 'assets/darkcoffee.jpg', bg: '#f5f5f5' },
 
-  { id: 'matcha', name: 'Matcha Ice Latte', description: 'Earthy and refreshing green tea scent.', category: 'jar', tag: 'Jar', image: 'assets/match.jpg', bg: '#f0f0f0' }
+  { id: 'matcha', name: 'Matcha Ice Latte', description: 'Earthy and refreshing green tea scent.', category: 'jar', tag: 'Jar', image: 'assets/match.jpg', bg: '#f0f0f0' },
+
+  { id: 'blushingromance', name: 'Blushing Romance', description: 'A delightful blend of floral and fruity notes.', category: 'jar', tag: 'Jar', image: 'assets/blushingromance.jpg', bg: '#fff0f3' }
 ];
 
 /* --- Modal Logic --- */
