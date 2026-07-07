@@ -99,6 +99,13 @@ const FALLBACK_PRODUCTS = [
     image:'assets/bubble.jpg',
     is_active:true, is_featured:true, sort_order:10 },
 
+    { id:'daisypetals', name:'Daisy Petals (Pack of 6)', type:'single', category:'moulds',
+    notes:'Mould Candle (Scented & Non-Scented)', short_desc:'Modern aesthetic mini-bubble collection.', family: 'Unscented',
+    original_price:249, sale_price:100, badges:['Bundle Deal'],
+    perfect_for: ['Decor', 'Small Gifts'],
+    image:'assets/daisypetals.jpg',
+    is_active:true, is_featured:true, sort_order:1 },
+
   { id:'lavender-gradient', name:'Lavender Gradient', type:'single', category:'jars',
     notes:'Jar Candle (190ml)', short_desc:'Beautifully layered lavender scent experience.', family: 'Floral',
     original_price:599, sale_price:399, badges:['Relaxing'],
@@ -187,6 +194,8 @@ const FALLBACK_VARIANTS = {
   'teddy-bear': [{id:'v1', variant_name:'Scented', sale_price:199, original_price:299, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:149, original_price:249}],
 
   'z-shape': [{id:'v1', variant_name:'Scented', sale_price:299, original_price:499, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:249, original_price:449}],
+
+  'daisypetals': [{id:'v1', variant_name:'Scented', sale_price:199, original_price:249, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:149, original_price:199}],
 
   'bubble-pack': [{id:'v1', variant_name:'Scented', sale_price:449, original_price:649, is_default:true}, {id:'v2', variant_name:'Non-Scented', sale_price:349, original_price:549}],
 

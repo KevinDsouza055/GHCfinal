@@ -34,6 +34,8 @@ const CATALOGUE_PRODUCTS = [
 
   { id: 'matcha', name: 'Matcha Ice Latte', description: 'Earthy and refreshing green tea scent.', category: 'jar', tag: 'Jar', image: 'assets/match.jpg', bg: '#f0f0f0' },
 
+  { id: 'daisypetals', name: 'Daisy Petals', description: 'A fresh and uplifting floral scent.', category: 'mould', tag: 'Mould', image: 'assets/daisypetals.jpg', bg: '#fff0f3' },
+
   { id: 'blushingromance', name: 'Blushing Romance', description: 'A delightful blend of floral and fruity notes.', category: 'jar', tag: 'Jar', image: 'assets/blushingromance.jpg', bg: '#fff0f3' }
 ];
 
