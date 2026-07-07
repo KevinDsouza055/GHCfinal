@@ -100,7 +100,7 @@ const FALLBACK_PRODUCTS = [
     is_active:true, is_featured:true, sort_order:10 },
 
     { id:'daisypetals', name:'Daisy Petals (Pack of 6)', type:'single', category:'moulds',
-    notes:'Mould Candle (Scented & Non-Scented)', short_desc:'Modern aesthetic mini-bubble collection.', family: 'Unscented',
+    notes:'Mould Candle (Scented & Non-Scented)', short_desc:'A fresh and uplifting floral scent.', family: 'Unscented',
     original_price:249, sale_price:100, badges:['Bundle Deal'],
     perfect_for: ['Decor', 'Small Gifts'],
     image:'assets/daisypetals.jpg',
