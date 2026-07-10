@@ -509,6 +509,31 @@ const Header = {
   }
 };
 
+const AnnouncementBar = {
+  init() {
+    const bar = document.getElementById('announcement-bar');
+    if (!bar) return;
+
+    const updateHeaderOffset = () => {
+      const height = bar.classList.contains('hidden') ? 0 : bar.offsetHeight;
+      document.documentElement.style.setProperty('--announcement-height', `${height}px`);
+    };
+
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        bar.classList.add('hidden');
+      } else {
+        bar.classList.remove('hidden');
+      }
+      updateHeaderOffset();
+    };
+
+    updateHeaderOffset();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', updateHeaderOffset, { passive: true });
+  }
+};
+
 /* ── MOBILE NAV ────────────────────────────────────────────── */
 const MobileNav = {
   init() {
@@ -664,6 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
   CartDrawer.init();
   ScrollReveal.init();
   Header.init();
+  AnnouncementBar.init();
   MobileNav.init();
   FAQ.init();
   NewsletterForm.init();

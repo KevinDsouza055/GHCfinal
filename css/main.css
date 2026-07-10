@@ -28,6 +28,7 @@
   --transition-fast: 0.22s cubic-bezier(0.25,0.46,0.45,0.94);
   --max-w:        1320px;
   --radius:       16px;
+  --announcement-height: 0px;
 }
 
 /* ── Reset ── */
@@ -73,28 +74,46 @@ input, textarea, select { font-family: var(--font-sans); }
 
 /* ── Announcement Bar ── */
 .announcement-bar {
-  background: rgba(26, 18, 16, 0.95);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 6000;
+  min-height: 48px;
+  padding: 12px 18px;
+  background: rgba(26, 18, 16, 0.97);
   color: var(--ivory);
-  padding: 16px 24px;
-  text-align: center;
-  font-size: 9px;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(184, 150, 90, 0.18);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  transition: transform 0.28s ease, opacity 0.28s ease;
+}
+.announcement-bar.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.announcement-track {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(48px, 10vw, 96px);
+  white-space: nowrap;
+  animation: marquee 16s linear infinite;
+  will-change: transform;
+}
+.announcement-item {
+  display: inline-flex;
+  align-items: center;
+  color: var(--ivory);
+  font-size: 11px;
   font-weight: 400;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  position: relative;
-  z-index: 2000;
-  border: 1px solid rgba(184,150,90,0.2);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
 }
-.announcement-bar .container {
-  display: flex;
-  justify-content: center;
-  gap: clamp(20px, 5vw, 56px);
-  flex-wrap: wrap;
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
-.announcement-item { display: flex; align-items: center; gap: 8px; }
 
 /* ── Cart Offer UI ── */
 .cart-offer-container {
@@ -281,14 +300,15 @@ input, textarea, select { font-family: var(--font-sans); }
 #site-header {
   display: block !important;
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: var(--announcement-height, 0);
+  left: 0; right: 0;
   z-index: 5000;
   padding: 12px 0;
   background: rgba(251, 250, 246, 0.8);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(184, 150, 90, 0.15);
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, box-shadow 0.3s ease;
+  transition: top 0.28s ease, transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, box-shadow 0.3s ease;
   pointer-events: auto;
 }
 #site-header.scrolled {
