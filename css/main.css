@@ -40,7 +40,7 @@ html {
   scrollbar-width: none !important; 
   -ms-overflow-style: none !important; 
   overflow-x: hidden;
-  scroll-padding-top: 68px;
+  scroll-padding-top: calc(68px + var(--announcement-height, 0px));
 }
 *::-webkit-scrollbar { display: none !important; }
 * { scrollbar-width: none !important; -ms-overflow-style: none !important; }

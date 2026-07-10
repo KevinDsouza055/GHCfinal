@@ -528,9 +528,9 @@ const AnnouncementBar = {
       updateHeaderOffset();
     };
 
-    updateHeaderOffset();
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', updateHeaderOffset, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
   }
 };
 
